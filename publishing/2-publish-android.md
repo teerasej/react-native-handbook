@@ -1,5 +1,5 @@
 
-# Export for Android
+# 2. Export for Android
 
 > [App Signing for Android](https://docs.expo.io/versions/latest/distribution/app-signing/)
 

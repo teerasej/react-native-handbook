@@ -38,3 +38,9 @@
 12. [เขียน test ให้ Saga](12-0-saga-test.md)
 13. [สร้าง และใช้งาน Saga](13-signin-saga.md)
 14. [ควบคุม Navigation จาก Saga](14-control-nav-from-saga.md)
+
+## Publishing 
+
+1. [ตั้งค่าโปรเจค](publishing/1-prepare-publish.md)
+2. [Export for Android](publishing/2-publish-android.md)
+3. [Export for iOS](publishing/3-publish-ios.md)
