@@ -1,5 +1,7 @@
 # 12. สร้าง และใช้งาน Saga
 
+- [Redux saga](https://github.com/redux-saga/redux-saga)
+
 ## 1. สร้าง action เพื่อเริ่ม flow ของการ login
 
 ```js

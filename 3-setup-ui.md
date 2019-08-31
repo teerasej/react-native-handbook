@@ -1,6 +1,8 @@
 
 # 3. ติดตั้ง UI Framework
 
+- [Nativebase UI](https://docs.nativebase.io/Components.html#Components)
+
 ## 1. ติดตั้ง VSCode Extension
 
 - [nativebase snippet](https://marketplace.visualstudio.com/items?itemName=GeekyAnts.nativebase-snippets)

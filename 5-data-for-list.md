@@ -3,6 +3,9 @@
 
 ## 1. กำหนดค่า PropTypes และ defaultProps และข้อมูลเพื่อใช้งาน
 
+- [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
+- [Default Props](https://blog.logrocket.com/a-complete-guide-to-default-props-in-react-984ea8e6972d/)
+
 เตรียมข้อมูลสำหรับ List ก่อน แสดงผลลัพธ์
 
 ```js

@@ -1,6 +1,8 @@
 
 # 8. ติดตั้งใช้งาน react-navigation
 
+- [React Navigation](https://reactnavigation.org/)
+
 ## 1. ติดตั้ง navigation สำหรับ expo
 
 รันคำสั่งด้านล่าง ใน Terminal

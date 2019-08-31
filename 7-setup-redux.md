@@ -1,6 +1,8 @@
 
 # 7. Setup Redux
 
+- [Redux for React](https://redux.js.org/basics/usage-with-react)
+
 ## 1. สร้าง store และ reducer
 
 เริ่มจาก note reducer สำหรับจัดการข้อมูลที่เป็น note
