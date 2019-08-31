@@ -4,7 +4,7 @@
 ## 1. Setup & Start
 
 1. [Setup Project](1-setup-expo.md)
-2. [รันแอพพลิเคชั่น](2-quickstart.md)]
+2. [รันแอพพลิเคชั่น](2-quickstart.md)
 
 ## React Native UI
 
@@ -30,10 +30,11 @@
 
 ## Redux in Action
 
-10. [สร้างกลไกการ save note ](10-action-new-note.md)
+10. [สร้างกลไกการ save note](10-action-new-note.md)
 
 ## Redux Saga
 
-11. [สร้างและจัดการ Login Page ](11-login-page.md)
-12. [สร้าง และใช้งาน Saga](12-signin-saga.md)
-13. [ควบคุม Navigation จาก Saga](13-control-nav-from-saga.md)
+11. [สร้างและจัดการ Login Page](11-login-page.md)
+12. [เขียน test ให้ Saga](12-0-saga-test.md)
+13. [สร้าง และใช้งาน Saga](13-signin-saga.md)
+14. [ควบคุม Navigation จาก Saga](14-control-nav-from-saga.md)

@@ -143,7 +143,7 @@ export default function configureStore() {
 
 import { takeEvery, put, call } from "redux-saga/effects";
 import actions from "../actions";
-
+import "isomorphic-fetch";
 
 function* signInWatch() {
     console.log('catching')
@@ -196,4 +196,26 @@ export default function* rootSaga() {
         signIn()
     ])
 } 
+```
+
+## 7. สร้าง app.reducer.js 
+
+```js
+import actions from "../actions";
+
+const initialState = {
+    token: ''
+}
+
+export default (state = initialState, { type, payload }) => {
+    switch (type) {
+
+    case actions.ActionTypes.SIGN_IN_SUCCESS:
+        return { ...state, token: payload.token }
+
+    default:
+        return state
+    }
+}
+
 ```

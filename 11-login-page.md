@@ -1,6 +1,47 @@
 # 11. สร้างและจัดการ Login Page 
 
-## 1. สร้าง LoginPage 
+
+## 1. Setup Test Environment
+
+- [ทำการติดตั้ง Test Environment](test/1-setup.md)
+
+
+## 2. สร้าง Test UI ของ LoginPage
+
+```js
+// สร้างไฟล์ pages/login-page/LoginPage.test.js
+
+import React from 'react';
+import { LoginPage } from './LoginPage';
+import { Provider } from "react-redux";
+import configureStore from "./../../redux/store";
+import renderer from 'react-test-renderer';
+
+import Enzyme, { shallow, mount } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+Enzyme.configure({ adapter: new Adapter() })
+
+const store = configureStore();
+
+describe('Name of the group', () => {
+
+    it('renders without crashing', () => {
+        const component = shallow(<LoginPage />);
+    });
+
+    test('snapshot', () => {
+        const component = renderer.create(
+            <Provider store={store}>
+                <LoginPage />
+            </Provider>
+        ).toJSON();
+        expect(component).toMatchSnapshot()
+    });
+
+});
+```
+
+## 3. สร้าง LoginPage 
 
 ```jsx
 // pages/login-page/LoginPage.js
@@ -38,7 +79,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
 ```
 
-## 2. เชื่อม Login Page เข้ากับ Navigation
+## 4. เชื่อม Login Page เข้ากับ Navigation
 
 โดยเราสามารถกำหนดหน้าเริ่มต้นด้วย config property ที่ชื่อ `initialRouteName`
 
@@ -60,7 +101,7 @@ const AppNavigator = createStackNavigator({
     });
 ```
 
-## 3. สร้าง Login Form 
+## 5. สร้าง Login Form 
 
 ```js
 // pages/login-page/LoginForm.js
@@ -145,7 +186,7 @@ export default LoginForm
 
 ```
 
-## 4. นำ Login Form มาใช้ใน Login Page
+## 6. นำ Login Form มาใช้ใน Login Page
 
 ```jsx
 // pages/login-page/LoginPage.js
@@ -166,7 +207,7 @@ render() {
 }
 ```
 
-## 4.A ไฟล์เต็ม `pages/login-page/LoginPage.js`
+## 6.A ไฟล์เต็ม `pages/login-page/LoginPage.js`
 
 ```jsx
 import React, { Component } from 'react'
