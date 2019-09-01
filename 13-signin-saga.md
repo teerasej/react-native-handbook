@@ -200,6 +200,8 @@ export default function* rootSaga() {
 
 ## 7. สร้าง app.reducer.js 
 
+สร้างไฟล์ `redux/reducers/app.reducer.js`
+
 ```js
 import actions from "../actions";
 
