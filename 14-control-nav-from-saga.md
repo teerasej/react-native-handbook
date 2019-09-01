@@ -44,7 +44,7 @@ class NavigationActionsClass {
     }
 }
 
-export let NavigationActions = new NavigationActionsClass() 
+export default let NavigationActions = new NavigationActionsClass() 
 ```
 
 ## 3. ส่งผ่าน Navigation ให้ service class
