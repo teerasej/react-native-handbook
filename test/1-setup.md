@@ -27,6 +27,7 @@ yarn add enzyme enzyme-adapter-react-16 jest-expo enzyme-react-16-adapter-setup 
     "react-test-renderer": "16.8.3"
 }
 ```
+บันทึกไฟล์ และรันคำสั่ง `yarn install` 
 
 ไม่งั้นอาจจะเจออาการแบบนี้ตอน run ตัวเทส 
 
