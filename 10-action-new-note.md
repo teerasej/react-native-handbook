@@ -84,6 +84,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(NewNotePage)
 
 ## 3. เขียน Test Unit ให้กับ note.reducer.js
 
+### Setup Test Environment
+
+- [ทำการติดตั้ง Test Environment](test/1-setup.md)
+
+
 สร้างไฟล​์​ `redux/reducers/note.reducer.test.js`
 
 ```js
