@@ -139,3 +139,15 @@ export function* doSignIn(action) {
 export default signInWatch;
 
 ```
+
+## ทดสอบ Saga กับ Web API
+
+1. [ดาวน์โหลดโปรเจค node web api project จากที่นี่](https://www.dropbox.com/s/bglkcul22zu4rnv/web-api-branch-service.zip?dl=0)
+2. แตก zip 
+3. เปิด Terminal ขึ้นมาในโฟลเดอร์โปรเจค
+4. รันคำสั่ง `npm i` เพื่อติดตั้ง node module
+5. รันคำสั่ง `node index` เพื่อรัน web server
+6. ทดสอบใช้งาน login ด้วยข้อมูลต่อไปนี้
+
+- username: a
+- password: pass

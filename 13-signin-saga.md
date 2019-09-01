@@ -222,7 +222,7 @@ export default (state = initialState, { type, payload }) => {
 
 ```
 
-## 8. ทดสอบ Saga กับ Web API
+## ทดสอบ Saga กับ Web API
 
 1. [ดาวน์โหลดโปรเจค node web api project จากที่นี่](https://www.dropbox.com/s/bglkcul22zu4rnv/web-api-branch-service.zip?dl=0)
 2. แตก zip 
