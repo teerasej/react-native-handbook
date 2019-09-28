@@ -36,7 +36,6 @@ Command `link` unrecognized. Make sure that you have run `npm install` and that 
 import React from 'react';
 import { AppLoading } from 'expo';
 import { View } from 'react-native';
-import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
