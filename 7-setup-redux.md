@@ -71,7 +71,7 @@ export default function configureStore() {
 
 ```jsx
 // App.js
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from "./redux/store";
 
 const store = configureStore();
@@ -96,7 +96,7 @@ import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from "./redux/store";
 
 const store = configureStore();
