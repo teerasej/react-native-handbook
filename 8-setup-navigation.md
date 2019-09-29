@@ -11,6 +11,19 @@
 expo install react-native-gesture-handler react-native-reanimated
 ```
 
+### ถ้าเจอปัญหาเกี่ยวกับ react-native-gesture-handler
+
+ให้ลองไปใช้เวอร์ชั่นล่าสุด ([ดูจากที่นี่](https://github.com/kmagiera/react-native-gesture-handler/releases))
+
+เช่น เวอร์ชั่นล่าสุดเป็น 1.4.1 ให้ไปแก้ในไฟล์ **package.json**
+
+```json
+\\ package.json
+"dependencies": {
+    "react-native-gesture-handler": "1.4.1",
+}
+```
+
 ## 2. เพิ่มข้อมูลสำหรับ Navigation เข้าไปในแต่ละเพจ
 
 ```js
