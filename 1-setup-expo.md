@@ -16,7 +16,7 @@ expo init nextflow-note-mobile-app
 ## 3. ติดตั้ง Module 
 
 ```bash
-yarn add redux react-redux redux-saga redux-form react-navigation redux-logger
+yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
 ```
 
 
