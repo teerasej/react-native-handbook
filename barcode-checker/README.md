@@ -5,7 +5,7 @@
 
 1. [สร้างโปรเจค](1-create-project.md)
 2. [ติดตั้ง package](2-setup-package.md)
-3. [ทดสอบรันโปรเจคใน Simulator และ Device](../2-quickstart.md)
+3. [ทดสอบรันโปรเจคใน Simulator และ Device](../note-app/2-quickstart.md)
 
 ส่วนติดต่อผู้ใช้ (User Interface)
 
