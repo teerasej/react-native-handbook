@@ -1,35 +1,15 @@
 
-# 3. ติดตั้ง UI Framework
+# 4. ปรับใช้ Expo Loading
 
-- [Nativebase UI](https://docs.nativebase.io/Components.html#Components)
+## 1. ติดตั้ง Expo Font 
 
-## 1. ติดตั้ง VSCode Extension
-
-- [nativebase snippet](https://marketplace.visualstudio.com/items?itemName=GeekyAnts.nativebase-snippets)
-
-## 2. ติดตั้ง Nativebase
-
-```bash
-yarn add native-base --save
-```
-
-เสร็จแล้วรันคำสั่ง 
+รันคำสั่ง ติดตั้ง Expo Font ใน Terminal 
 
 ```bash
 expo install expo-font
 ```
 
-## 3. ติดตั้ง 
-
-### วิธีแก้ปัญหา `Command `link` unrecognized.`
-
-ถ้าเจอ Error แบบด้านล่าง ให้รันคำสั่ง `npm install` อีก 1 ครั้ง
-
-```bash
-Command `link` unrecognized. Make sure that you have run `npm install` and that you are inside a react-native project.
-```
-
-## 4. เขียน Logic ให้แน่ใจว่าตัว App โหลด font ของ Native base UI พร้อมใช้งานได้แน่นอน
+## 2. เขียน Logic ให้แน่ใจว่าตัว App โหลด font ของ Native base UI พร้อมใช้งานได้แน่นอน
 
 ```jsx
 // App.js
@@ -90,20 +70,3 @@ export default class App extends React.Component {
 ```
 
 
-### วิธีแก้ปัญหา `Cannot find module metro-react-native-babel-transformer`
-
-หากอัพเดตโค้ดแล้วเจอปัญหา แบบด้านล่าง
-
-```bash
-node_modules/expo/AppEntry.js: Cannot find module 'APP_FOLDER/node_modules/@react-native-community/cli/node_modules/metro-react-native-babel-transformer/src/index.js’
-Cannot read property ‘status’ of undefined
-```
-
-ให้ถอด expo-cli ออก และลงใหม่ ส่วนใหญ่จะแก้ปัญหานี้ได้
-
-```bash
-npm remove -g expo-cli
-npm i -g expo-cli
-```
-
-อ้างอิง - [Expo Forum](https://forums.expo.io/t/upgrade-expo-to-v33/23568)

@@ -1,40 +1,26 @@
 
-# 4. สร้าง และใช้งานหน้า HomePage
+# 5. สร้าง และใช้งานหน้า HomePage
 
 ## 1. สร้าง HomePage.js
 
-> ใช้ snippet rnredux ได้
+> ใช้ snippet rnce ได้
 
 ```jsx
 // pages/home-page/HomePage.js
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { Text, View } from 'react-native'
 
 export class HomePage extends Component {
-    static propTypes = {
-
-    }
-
     render() {
         return (
             <View>
-                <Text> prop </Text>
+                <Text> textInComponent </Text>
             </View>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default HomePage
 ```
 
 ## 2. นำมาใช้ใน App.js
@@ -76,21 +62,11 @@ import { Container, Header, Title, Content, List, ListItem, Text, Body  } from '
             <Container>
                 <Header>
                     <Body>
-                      <Title>Note</Title>
+                      <Title>Home</Title>
                     </Body>
                 </Header>
                 <Content>
-                    <List>
-                        <ListItem>
-                            <Text>Simon Mignolet</Text>
-                        </ListItem>
-                        <ListItem>
-                            <Text>Nathaniel Clyne</Text>
-                        </ListItem>
-                        <ListItem>
-                            <Text>Dejan Lovren</Text>
-                        </ListItem>
-                    </List>
+                    
                 </Content>
             </Container>
 
@@ -154,50 +130,25 @@ export default class App extends React.Component {
 ```jsx
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Container, Header, Title, Content, List, ListItem, Text, Body  } from 'native-base';
 
 export class HomePage extends Component {
-    static propTypes = {
-       
-    }
 
     render() {
         return (
             <Container>
                 <Header>
                     <Body>
-                      <Title>Note</Title>
+                      <Title>Home</Title>
                     </Body>
                 </Header>
-            
                 <Content>
-                <List>
-                  <ListItem>
-                    <Text>Simon Mignolet</Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text>Nathaniel Clyne</Text>
-                  </ListItem>
-                  <ListItem>
-                    <Text>Dejan Lovren</Text>
-                  </ListItem>
-                </List>
+                    
                 </Content>
             </Container>
-            
+
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
 ```
