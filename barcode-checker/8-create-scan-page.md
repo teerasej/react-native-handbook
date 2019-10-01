@@ -91,6 +91,48 @@ const RootNavigator = createStackNavigator(
 const AppContainer = createAppContainer(RootNavigator);
 ```
 
+## 4. ทำปุ่มปิดหน้า Scan 
+
+เปิดไฟล์ `pages/scan-page/ScanPage.js`
+
+```js
+// import component ที่จำเป็น 
+import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
+
+export class ScanPage extends Component {
+
+    // สร้าง function สำหรับย้อนกลับไปหน้าที่เปิด popup ต้นทาง
+    closePopUp = () => {
+        this.props.navigation.goBack();
+    }
+
+
+    render() {
+        return (
+            <Container>
+                <Header>
+                    <Left>
+
+                    </Left>
+                    <Body>
+                        <Title>Scanner</Title>
+                    </Body>
+                    <Right>
+                        {/* เรียกใช้ function เมื่อกดปุ่ม */}
+                        <Button transparent onPress={this.closePopUp}>
+                            <Icon name='close' />
+                        </Button>
+                    </Right>
+                </Header>
+                <Content>
+
+                </Content>
+            </Container>
+        )
+    }
+}
+```
+
 ## A. ไฟล์เต็ม App.js
 
 ```js
@@ -128,7 +170,8 @@ const RootNavigator = createStackNavigator(
   {
     mode: 'modal',
     headerMode: 'none',
-  });
+  }
+);
 
 
 const AppContainer = createAppContainer(RootNavigator);
@@ -163,4 +206,45 @@ export default class App extends React.Component {
     );
   }
 }
+```
+
+## B. ไฟล์เต็ม `pages/scan-page/ScanPage.js`
+
+```js
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
+
+
+export class ScanPage extends Component {
+
+    closePopUp = () => {
+        this.props.navigation.goBack();
+    }
+
+
+    render() {
+        return (
+            <Container>
+                <Header>
+                    <Left>
+
+                    </Left>
+                    <Body>
+                        <Title>Scanner</Title>
+                    </Body>
+                    <Right>
+                        <Button transparent onPress={this.closePopUp}>
+                            <Icon name='close' />
+                        </Button>
+                    </Right>
+                </Header>
+                <Content>
+
+                </Content>
+            </Container>
+        )
+    }
+}
+
 ```
