@@ -20,8 +20,9 @@
 
 ## Plugin: Barcode Scanner
 
-1. สร้างระบบ Scan Barcode
-2. แสดงข้อมูลที่แสกนได้ 
+9. [สร้างระบบ Scan Barcode](9-barcode-scanner-implementation.md)
+10. [ส่งข้อมูล Barcode ได้เข้า Redux store](10-send-barcode-data-to-redux-store.md)
+11. แสดงข้อมูล Barcode ในหน้า Home จาก Redux store
 
 ## Plugin: Storage
 
