@@ -116,3 +116,50 @@ const mapStateToProps = (state) => {
 
 ทดสอบ Scan barcode ดู
 
+## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
+
+```js
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Content, List, ListItem, Text, Body, Button, Icon } from 'native-base';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+export class HomePage extends Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: <Text>Home</Text>,
+            headerRight: (
+                <Button transparent
+                    onPress={() => navigation.navigate('ScanPopup')}
+                >
+                    <Icon name='barcode' />
+                </Button>
+            )
+        }
+    };
+
+    render() {
+
+        const { barcodeData } = this.props;
+
+        return (
+
+            <Content>
+                <Text>{barcodeData}</Text>
+            </Content>
+
+        )
+    }
+}
+
+const mapStateToProps = (state) => ({
+    barcodeData: state.app.scannedBarcode
+})
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+```
