@@ -2,6 +2,8 @@
 
 ## 1. สร้าง action และ dispatch note ใหม่เข้า store
 
+Redux Action ส่วนใหญ่จะถูกส่งจาก Component มายัง reducer
+
 สร้างไฟล์​
 
 ```js
@@ -23,6 +25,15 @@ export default {
     saveNewNote
 } 
 ```
+
+### Action
+
+_เปรียบได้คล้ายๆ กับ Event ใน MVC แต่ Action จะวิ่งระหว่างส่วนต่างๆ ของ Redux_
+
+ไฟล์กลุ่มแรกคือ **Actions** จะมีส่วนประกอบใหญ่ๆ อยู่ 2 ส่วนคือ 
+
+1. **Action Type** เป็นประเภทของ Action คล้ายๆ ค่า Enum เอาไว้อ้างอิงในส่วนอื่นๆ ของ Redux
+2. **Action Object** ทำหน้าที่คล้ายๆ พัศดุที่เก็บข้อมูล (ข้อมูลส่วนนี้ เรียกทั่วไปว่า payload) ตัว Action Object มักจะถูกส่งจาก Component เพื่อเดินทางไปยัง Reducer
 
 ## 2. เรียกใช้ Action ใน dispatch ของ NewNotePage 
 
