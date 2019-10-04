@@ -20,7 +20,7 @@ export class HomePage extends Component {
 }
 ```
 
-## สร้างระบบ Navigation 
+## 2. สร้างระบบ Navigation 
 
 เปิดไฟล์ `App.js`
 
@@ -37,8 +37,9 @@ const AppContainer = createAppContainer(AppNavigator);
 
 **AppContainer** คือระบบที่เราสามารถเอาไปใช้กับ Redux Provider ได้ 
 
+## 3. ถ้ามีการเอา AppContainer ไปใช้ตอนนี้... จะ error 
 
-จากนั้นเราจะใช้ `AppContainer` ใส่ลงไปใน `<Provider>` แทน
+ถ้าใช้ `AppContainer` ใส่ลงไปใน `<HomePage>` แทนแบบนี้
 
 ```jsx
 render() {
