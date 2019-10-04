@@ -10,7 +10,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
-export class HomePage extends Component {
+export default class HomePage extends Component {
     render() {
         return (
             <View>
@@ -150,5 +150,5 @@ export class HomePage extends Component {
         )
     }
 }
-
+export default HomePage;
 ```
