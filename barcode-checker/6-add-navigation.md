@@ -1,6 +1,14 @@
 
 # 6. เพิ่มระบบ Navigation
 
+## ติดตั้ง navigation สำหรับ expo
+
+รันคำสั่งด้านล่าง ใน Terminal
+
+```bash
+expo install react-native-gesture-handler react-native-reanimated
+```
+
 ## 1. กำหนดข้อมูลให้หน้า Home Page
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
