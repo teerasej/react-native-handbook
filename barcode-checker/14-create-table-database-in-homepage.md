@@ -46,11 +46,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import ScanPage from './pages/scan-page/ScanPage';
 import DBService from './services/db.service';
-import DetailPage from './pages/detail-page/DetailPage';
 
 const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage },
-  Detail: { screen: DetailPage }
+  Home: { screen: HomePage }
 });
 
 const RootNavigator = createStackNavigator(

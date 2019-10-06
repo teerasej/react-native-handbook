@@ -1,7 +1,7 @@
 
 # 8. ทำหน้า Scan PopUp
 
-## 1. ใส่ปุ่มแสกนเข้าไปที่ส่วนหัวด้านขวา 
+## 1. ใส่ปุ่มแสกนเข้าไปที่ส่วนหัวด้านขวา ของ HomePage
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
@@ -13,7 +13,7 @@ export class HomePage extends Component {
             headerTitle: <Text>Home</Text>,
             headerRight: (
                 <Button transparent
-                    onPress={() => alert('open scan page')}
+                    onPress={() => navigation.navigate('ScanPopup')}
                 >
                     <Icon name='barcode' />
                 </Button>
@@ -43,9 +43,12 @@ export default class ScanPage extends Component {
                       <Title>Scanner</Title>
                     </Body>
                 </Header>
-                <Content>
+                <View
+                    style={{
+                        flex: 1
+                    }}>
                     
-                </Content>
+                </View>
             </Container>
         )
     }
