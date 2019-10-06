@@ -46,3 +46,59 @@ expo install react-native-maps
   }
 }
 ```
+
+## 3. แสดงแผนที่
+
+เปิดไฟล์ `pages/home-page/HomePage.js`
+
+```js
+import MapView from 'react-native-maps'
+
+render() {
+        return (
+            <MapView style={{flex: 1}} />
+        )
+}
+
+```
+
+
+## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
+
+```js
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Content, List, ListItem, Text, Body, Button, Icon } from 'native-base';
+import { connect } from 'react-redux'
+import actions from '../../redux/actions';
+import MapView from 'react-native-maps'
+
+export class HomePage extends Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Home'
+        }
+    };
+
+    componentDidMount() {
+       
+    }
+
+    render() {
+        return (
+            <MapView style={{flex: 1}} />
+        )
+    }
+}
+
+const mapStateToProps = (state) => ({
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+```

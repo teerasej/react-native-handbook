@@ -1,6 +1,9 @@
 
 # 8. ทำหน้า Scan PopUp
 
+- [ดาวน์โหลดโปรเจคเริ่มต้น](https://www.dropbox.com/s/rgmdzn0wup7ck3u/react-native-barcode-checker-ban-pu-starter.zip?dl=0)
+- [ดาวน์โหลดโปรเจคสมบูรณ์](react-native-barcode-checker-ban-pu-finisher.zip)
+
 ## 1. ใส่ปุ่มแสกนเข้าไปที่ส่วนหัวด้านขวา ของ HomePage
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
