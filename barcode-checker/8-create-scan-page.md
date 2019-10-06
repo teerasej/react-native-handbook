@@ -1,6 +1,5 @@
 
-# 8. 
-
+# 8. ทำหน้า Scan PopUp
 
 ## 1. ใส่ปุ่มแสกนเข้าไปที่ส่วนหัวด้านขวา 
 
@@ -34,7 +33,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Container, Header, Title, Content, List, ListItem, Text, Body  } from 'native-base';
 
-export class ScanPage extends Component {
+export default class ScanPage extends Component {
 
     render() {
         return (
@@ -99,7 +98,7 @@ const AppContainer = createAppContainer(RootNavigator);
 // import component ที่จำเป็น 
 import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
 
-export class ScanPage extends Component {
+export default class ScanPage extends Component {
 
     // สร้าง function สำหรับย้อนกลับไปหน้าที่เปิด popup ต้นทาง
     closePopUp = () => {
@@ -216,7 +215,7 @@ import { View } from 'react-native'
 import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
 
 
-export class ScanPage extends Component {
+export default class ScanPage extends Component {
 
     closePopUp = () => {
         this.props.navigation.goBack();
@@ -243,6 +242,40 @@ export class ScanPage extends Component {
 
                 </Content>
             </Container>
+        )
+    }
+}
+
+```
+
+## C. ไฟล์เต็ม HomePage.js
+
+```js
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Content, List, ListItem, Text, Body  } from 'native-base';
+
+export default class HomePage extends Component {
+
+     static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: <Text>Home</Text>,
+            headerRight: (
+                <Button transparent
+                    onPress={() => alert('open scan page')}
+                >
+                    <Icon name='barcode' />
+                </Button>
+            )
+        }
+    };
+
+    render() {
+        return (
+            
+                <Content>
+                </Content>
+            
         )
     }
 }

@@ -9,7 +9,7 @@
 
 ```js
 
-export class HomePage extends Component {
+export default class HomePage extends Component {
 
     static navigationOptions = {
         // กำหนด title ของส่วนนี้เป็น Home
@@ -53,3 +53,29 @@ render() {
 ```
 
 ดังนั้นตอนนี้ถ้าเจอ Error ก็ไม่ใช่เรื่องผิดปกติอะไร เพราะปกติ **AppContainer** ต้องเอาไปใช้กับ Redux Provider นั่นเอง
+
+
+## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
+
+```js
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Content, List, ListItem, Text, Body  } from 'native-base';
+
+export default class HomePage extends Component {
+    static navigationOptions = {
+        title: 'Home'
+    };
+
+    render() {
+        return (
+            
+                <Content>
+                </Content>
+            
+        )
+    }
+}
+
+```
+

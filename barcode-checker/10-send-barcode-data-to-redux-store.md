@@ -3,7 +3,7 @@
 
 ## 1. สร้าง Action ที่ใช้ในระบบ
 
-สร้างไฟล์ 
+สร้างไฟล์ `redux/actions.js`
 
 ```js
 
@@ -105,8 +105,7 @@ import actions from '../../redux/actions';
 export class ScanPage extends Component {
 
     state = {
-        hasCameraPermission: null,
-        scanned: false,
+        hasCameraPermission: null
     };
 
     closePopUp = () => {

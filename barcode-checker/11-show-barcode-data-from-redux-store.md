@@ -3,7 +3,7 @@
 
 ## 1. กำหนด Action และ state ใหม่ที่ได้จาก action ดังกล่าว ใน reducer 
 
-สร้างไฟล์ `redux/actions.js`
+เปิดไฟล์ `redux/reducers/app.reducer.js`
 
 ```js
 import actions from "../actions"

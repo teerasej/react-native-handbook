@@ -132,7 +132,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Container, Header, Title, Content, List, ListItem, Text, Body  } from 'native-base';
 
-export class HomePage extends Component {
+export default class HomePage extends Component {
 
     render() {
         return (

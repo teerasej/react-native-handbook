@@ -138,3 +138,79 @@ handleBarCodeScanned = ({ type, data }) => {
         style={StyleSheet.absoluteFillObject}
     />
 ```
+
+## A. ไฟล์เต็ม `pages/scan-page/ScanPage.js`
+
+```js
+import React, { Component } from 'react'
+import { View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
+
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as Permissions from 'expo-permissions';
+import actions from '../../redux/actions';
+
+export class ScanPage extends Component {
+
+    state = {
+        hasCameraPermission: null,
+    };
+
+    closePopUp = () => {
+        this.props.navigation.goBack();
+    }
+
+    async componentDidMount() {
+        this.getPermissionsAsync();
+    }
+
+    getPermissionsAsync = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
+    };
+
+    handleBarCodeScanned = ({ type, data }) => {
+        console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
+
+    render() {
+
+        const { hasCameraPermission, scanned } = this.state;
+
+        if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>;
+        }
+
+        return (
+
+            <Container>
+                <Header>
+                    <Left>
+
+                    </Left>
+                    <Body>
+                        <Title>Scanner</Title>
+                    </Body>
+                    <Right>
+                        <Button transparent onPress={this.closePopUp}>
+                            <Icon name='close' />
+                        </Button>
+                    </Right>
+                </Header>
+
+                <View
+                    style={{
+                        flex: 1
+                    }}>
+                    <BarCodeScanner
+                        onBarCodeScanned={this.handleBarCodeScanned}
+                        style={StyleSheet.absoluteFillObject}
+                    />
+                </View>
+            </Container>
+        )
+    }
+}
+
+```
