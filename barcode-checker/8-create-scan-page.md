@@ -13,7 +13,7 @@ export class HomePage extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <Text>Home</Text>,
+            title: 'Home',
             headerRight: (
                 <Button transparent
                     onPress={() => navigation.navigate('ScanPopup')}
@@ -265,7 +265,7 @@ export default class HomePage extends Component {
 
      static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <Text>Home</Text>,
+            title: 'Home',
             headerRight: (
                 <Button transparent
                     onPress={() => alert('open scan page')}
