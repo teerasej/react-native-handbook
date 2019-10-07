@@ -189,7 +189,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        barcodeScanned: (barcodeData) => actions.barcodeScanned(dispatch, barcodeData)
+        barcodeScanned: (barcodeData) => dispatch(actions.barcodeScanned( barcodeData))
     }
 }
 
