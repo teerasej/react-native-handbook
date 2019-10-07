@@ -139,6 +139,65 @@ handleBarCodeScanned = ({ type, data }) => {
     />
 ```
 
+## 8. สร้างค่ากันไม่ให้ตัวแสกน แสกนรัว (แสกนครั้งเดียวต่อการอ่าน 1 รอบ)
+
+```js
+export default class ScanPage extends Component {
+
+    // ค่าเริ่มต้น บ่งบอกถึงการไม่ได้แสกน
+    state = {
+        //...
+        scanned: false,
+    };
+
+    handleBarCodeScanned = ({ type, data }) => {
+
+        // เมื่อเกิดการแสกน ให้กำหนดค่านี้เป็น true ทันที
+        this.setState({
+            scanned: true
+        });
+
+        console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
+        this.closePopUp();
+    };
+
+    render() {
+
+        const { hasCameraPermission, scanned } = this.state;
+        let scanPad;
+
+        if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>;
+        }
+
+        // เช็คจากค่า state เพื่อแสดง หรือไม่แสดงตัวแสกน
+        if(!scanned){
+            scanPad = (
+                <BarCodeScanner
+                    onBarCodeScanned={this.handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}
+                />
+            )
+        } else {
+            scanPad = <View></View>
+        }
+
+        return (
+
+            <Container>
+                ...
+
+                <View
+                    style={{
+                        flex: 1
+                    }}>
+                        {scanPad}
+                </View>
+            </Container>
+        )
+    }
+```
+
 ## A. ไฟล์เต็ม `pages/scan-page/ScanPage.js`
 
 ```js
@@ -151,10 +210,11 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
 import actions from '../../redux/actions';
 
-export class ScanPage extends Component {
+export default class ScanPage extends Component {
 
     state = {
         hasCameraPermission: null,
+        scanned: false,
     };
 
     closePopUp = () => {
@@ -163,6 +223,8 @@ export class ScanPage extends Component {
 
     async componentDidMount() {
         this.getPermissionsAsync();
+        // this.props.barcodeScanned('1234567');
+        // this.closePopUp();
     }
 
     getPermissionsAsync = async () => {
@@ -171,15 +233,33 @@ export class ScanPage extends Component {
     };
 
     handleBarCodeScanned = ({ type, data }) => {
+
+        this.setState({
+            scanned: true
+        });
+
         console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
+        this.closePopUp();
     };
 
     render() {
 
         const { hasCameraPermission, scanned } = this.state;
+        let scanPad;
 
         if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
+        }
+
+        if(!scanned){
+            scanPad = (
+                <BarCodeScanner
+                    onBarCodeScanned={this.handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}
+                />
+            )
+        } else {
+            scanPad = <View></View>
         }
 
         return (
@@ -203,14 +283,12 @@ export class ScanPage extends Component {
                     style={{
                         flex: 1
                     }}>
-                    <BarCodeScanner
-                        onBarCodeScanned={this.handleBarCodeScanned}
-                        style={StyleSheet.absoluteFillObject}
-                    />
+                        {scanPad}
                 </View>
             </Container>
         )
     }
 }
+
 
 ```

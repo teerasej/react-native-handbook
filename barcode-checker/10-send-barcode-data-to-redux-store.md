@@ -105,7 +105,8 @@ import actions from '../../redux/actions';
 export class ScanPage extends Component {
 
     state = {
-        hasCameraPermission: null
+        hasCameraPermission: null,
+        scanned: false,
     };
 
     closePopUp = () => {
@@ -114,6 +115,8 @@ export class ScanPage extends Component {
 
     async componentDidMount() {
         this.getPermissionsAsync();
+        // this.props.barcodeScanned('1234567');
+        // this.closePopUp();
     }
 
     getPermissionsAsync = async () => {
@@ -122,6 +125,11 @@ export class ScanPage extends Component {
     };
 
     handleBarCodeScanned = ({ type, data }) => {
+
+        this.setState({
+            scanned: true
+        });
+
         console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
         this.props.barcodeScanned(data);
         this.closePopUp();
@@ -130,9 +138,21 @@ export class ScanPage extends Component {
     render() {
 
         const { hasCameraPermission, scanned } = this.state;
+        let scanPad;
 
         if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>;
+        }
+
+        if(!scanned){
+            scanPad = (
+                <BarCodeScanner
+                    onBarCodeScanned={this.handleBarCodeScanned}
+                    style={StyleSheet.absoluteFillObject}
+                />
+            )
+        } else {
+            scanPad = <View></View>
         }
 
         return (
@@ -156,10 +176,7 @@ export class ScanPage extends Component {
                     style={{
                         flex: 1
                     }}>
-                    <BarCodeScanner
-                        onBarCodeScanned={this.handleBarCodeScanned}
-                        style={StyleSheet.absoluteFillObject}
-                    />
+                        {scanPad}
                 </View>
             </Container>
         )
@@ -172,11 +189,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        barcodeScanned: (barcodeData) => dispatch(actions.barcodeScanned(barcodeData))
+        barcodeScanned: (barcodeData) => actions.barcodeScanned(dispatch, barcodeData)
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScanPage)
+
 
 ```
 

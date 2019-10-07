@@ -11,3 +11,12 @@
 8. [สร้าง Sign In Action](8-add-signin-action.md)
 9. [สร้าง Action โหลดข้อมูลสาขา](9-add-load-branches-action.md)
 10. [ปักหมุดสาขาในแผนที่](10-pin-marker-in-map.md)
+
+## Testing the Module
+
+1. [Setup Test](A1-setup-test.md)
+2. [Test store](A2-test-store.md)
+3. [Test action type](A3-test-action-type.md)
+4. [Test root reducer](A4-test-root-reducer.md)
+5. [Test app reducer](A5-test-app-reducer.md)
+6. [Test with sinon](A6-test-sinon.md)
