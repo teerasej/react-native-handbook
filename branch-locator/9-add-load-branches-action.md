@@ -96,6 +96,10 @@ const startSignIn = async (dispatch, navigation, username, password) => {
     if (response && response.status === 200) {
         const json = await response.json();
         console.log('Token:', json.token);
+        
+        token = json.token;
+        
+   
         dispatch({
             type: Types.SIGN_IN_SUCCESS,
             payload: json.token

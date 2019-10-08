@@ -27,10 +27,10 @@
 
 ## Plugin: Storage
 
-13. [ติดตั้ง SQLite plugin](12-install-sqlite.md)
-14. [สร้าง Service เพื่อจัดการส่วนของ Database](13-db-service.md)
-15. [สร้าง table ใน database เมื่อหน้า HomePage แสดงขึ้นมา](14-create-table-database-in-homepage.md)
-16. [บันทึกข้อมูลเมื่อมีการแสกน Barcode](barcode-checker/15-save-barcode-when-scanned.md) 
+12. [ติดตั้ง SQLite plugin](12-install-sqlite.md)
+13. [สร้าง Service เพื่อจัดการส่วนของ Database](13-db-service.md)
+14. [สร้าง table ใน database เมื่อหน้า HomePage แสดงขึ้นมา](14-create-table-database-in-homepage.md)
+15. [บันทึกข้อมูลเมื่อมีการแสกน Barcode](15-save-barcode-when-scanned.md) 
 
 
 
