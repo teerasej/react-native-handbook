@@ -20,24 +20,6 @@ npm i -g create-react-native
 npm i -g react-native-cli
 ```
 
-## 2. สร้างโปรเจค 
+## 2. ถ้าใช้ Visual Studio Code ให้ลง Snippet 
 
-```bash
-expo init nextflow-note-app
-```
-
-## 3. ติดตั้ง Module 
-
-```bash
-npm install redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
-```
-
-หรือ
-
-```bash
-yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
-```
-
-
-
-
+- [ES7 React/Redux/GraphQL/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)

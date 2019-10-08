@@ -10,7 +10,13 @@
 ## 2. ติดตั้ง Nativebase
 
 ```bash
-yarn add native-base --save
+npm install native-base
+```
+
+หรือ
+
+```bash
+yarn add native-base
 ```
 
 เสร็จแล้วรันคำสั่ง 
