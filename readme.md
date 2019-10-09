@@ -6,6 +6,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 # Fundamental
 
 - [React Fundamental](react-concept/README.md)
+- [React Navigation & Redux](react-nav-redux/README.md)
 
 # Workshop 
 
