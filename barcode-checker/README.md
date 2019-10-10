@@ -27,6 +27,8 @@
 
 ## Plugin: Storage
 
+> [Expo SQLite](https://docs.expo.io/versions/latest/sdk/sqlite)
+
 12. [ติดตั้ง SQLite plugin](12-install-sqlite.md)
 13. [สร้าง Service เพื่อจัดการส่วนของ Database](13-db-service.md)
 14. [สร้าง table ใน database เมื่อหน้า HomePage แสดงขึ้นมา](14-create-table-database-in-homepage.md)
