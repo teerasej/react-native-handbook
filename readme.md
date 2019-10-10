@@ -5,8 +5,9 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 # Fundamental
 
-- [React Fundamental](react-concept/README.md)
-- [React Navigation & Redux](react-nav-redux/README.md)
+1. [React Fundamental](react-concept/README.md)
+2. [User Interface Module](note-app/3-setup-ui.md)
+3. [React Navigation & Redux](react-nav-redux/README.md)
 
 # Workshop 
 
