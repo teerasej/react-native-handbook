@@ -28,3 +28,9 @@ npm i -g react-native-cli
 
 - Android 
 - iOS
+
+## A. ถ้าต้องการใช้ Yarn ในการทำงาน
+
+[กดดูวิธี/ดาวน์โหลดตัวติดตั้ง Yarn ได้จากที่นี่](https://yarnpkg.com/lang/en/docs/install/) 
+
+**หลังติดตั้งแล้ว** ให้ปิด Powershell/Terminal/Command Prompt รวมถึง Visual Studio Code ลงทั้งหมดก่อน ค่อยเปิดใช้งานใหม่
