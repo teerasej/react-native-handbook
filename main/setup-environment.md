@@ -23,3 +23,8 @@ npm i -g react-native-cli
 ## 2. ถ้าใช้ Visual Studio Code ให้ลง Snippet 
 
 - [ES7 React/Redux/GraphQL/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+
+## 3. ดาวน์โหลด Expo Mobile App
+
+- Android 
+- iOS
