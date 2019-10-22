@@ -1,7 +1,7 @@
 
 # React Fundamental 
 
-1. [Setup Environment](../main/setup-environment.md)
+1. [Setup Environment](../../main/setup-environment.md)
 2. [New Project](1-new-project.md)
 3. [รันแอพพลิเคชั่น](../main/run-application.md)
 4. [กำหนดส่วนของ UI ด้วย JSX](jsx.md)
