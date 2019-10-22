@@ -3,7 +3,7 @@
 
 1. [Setup Environment](../../main/setup-environment.md)
 2. [New Project](1-new-project.md)
-3. [รันแอพพลิเคชั่น](../main/run-application.md)
+3. [รันแอพพลิเคชั่น](../../main/run-application.md)
 4. [กำหนดส่วนของ UI ด้วย JSX](jsx.md)
 5. [การสร้าง Component แบบ Function (Function Component)](function-component.md)
 6. [การสร้าง Component แบบ Class Component](class-component.md)
