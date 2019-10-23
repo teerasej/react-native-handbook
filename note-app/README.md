@@ -25,23 +25,20 @@
 
 9. [ติดตั้งใช้งาน react-navigation](8-setup-navigation.md)
 
-## Redux Form Ep.2
-
-10. [สร้าง validate function และเอาไปใช้กับ redux form](9-validate-form.md)
 
 ## Redux in Action
 
-11. [สร้างกลไกการ save note](10-action-new-note.md)
+10. [สร้างกลไกการ save note](10-action-new-note.md)
 
 ## Redux Saga
 
-12. [สร้างและจัดการ Login Page](11-login-page.md)
-13. [เขียน test ให้ Saga](12-0-saga-test.md)
-14. [สร้าง และใช้งาน Saga](13-signin-saga.md)
-15. [ควบคุม Navigation จาก Saga](14-control-nav-from-saga.md)
+11. [สร้างและจัดการ Login Page](11-login-page.md)
+12. [เขียน test ให้ Saga](12-0-saga-test.md)
+13. [สร้าง และใช้งาน Saga](13-signin-saga.md)
+14. [ควบคุม Navigation จาก Saga](14-control-nav-from-saga.md)
 
 ## Publishing 
 
-1. [ตั้งค่าโปรเจค](publishing/1-prepare-publish.md)
-2. [Export for Android](publishing/2-publish-android.md)
-3. [Export for iOS](publishing/3-publish-ios.md)
+15. [ตั้งค่าโปรเจค](publishing/1-prepare-publish.md)
+16. [Export for Android](publishing/2-publish-android.md)
+17. [Export for iOS](publishing/3-publish-ios.md)

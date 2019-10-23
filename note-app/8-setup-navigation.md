@@ -1,5 +1,5 @@
 
-# 8. ติดตั้งใช้งาน react-navigation
+# 9. ติดตั้งใช้งาน react-navigation
 
 - [React Navigation](https://reactnavigation.org/)
 

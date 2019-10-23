@@ -1,5 +1,5 @@
 
-# 9. สร้าง validate function และเอาไปใช้กับ redux form
+# 10. สร้าง validate function และเอาไปใช้กับ redux form
 
 - [Redux Form](https://redux-form.com/)
 

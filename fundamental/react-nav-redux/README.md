@@ -8,7 +8,7 @@
 
 ## Redux
 
-- [Redux for React](https://redux.js.org/basics/usage-with-react)
+> ดูเพิ่มเติม [Redux for React](https://redux.js.org/basics/usage-with-react)
 
 Redux ประกอบไปด้วย 3 ส่วนที่ต้องสร้างขึ้นมา เพื่อให้ทำงานสอดประสานกันเป็นหนึ่งเดียว เหมือนทีมฟุตบอล หรือทีมเกมส์​ MOBA ต้องมีทั้งรุก รับ support มีฝ่ายใดฝ่ายหนึ่งไม่ได้ 
 

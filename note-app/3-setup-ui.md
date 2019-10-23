@@ -1,27 +1,27 @@
 
-# 3. ติดตั้ง UI Framework
+# 4. ติดตั้ง UI Framework
 
-- [Nativebase UI](https://docs.nativebase.io/Components.html#Components)
+- [ดูเพิ่มเติมเกี่ยวกับ Nativebase UI](https://docs.nativebase.io/Components.html#Components)
 
 ## 1. ติดตั้ง VSCode Extension
 
-- [nativebase snippet](https://marketplace.visualstudio.com/items?itemName=GeekyAnts.nativebase-snippets)
+- [Nativebase snippet](https://marketplace.visualstudio.com/items?itemName=GeekyAnts.nativebase-snippets)
 
-## 2. ติดตั้ง Nativebase
+## 2. สร้างโปรเจค และติดตั้ง Nativebase
 
 ```bash
+expo init nextflow-note
+cd nextflow-note
 npm install native-base
+expo install expo-font
 ```
 
 หรือ
 
 ```bash
+expo init nextflow-note
+cd nextflow-note
 yarn add native-base
-```
-
-เสร็จแล้วรันคำสั่ง 
-
-```bash
 expo install expo-font
 ```
 

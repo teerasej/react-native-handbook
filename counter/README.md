@@ -1,12 +1,21 @@
 
 # Counter Application
 
+![2019-10-23_10-11-17](https://user-images.githubusercontent.com/85179/67353820-bb15dc80-f57d-11e9-805e-b73b00a24397.gif)
+
+
 ## 1. Download Project
 
 - [โปรเจค Starter](https://www.dropbox.com/s/fkr0h7v3qzcim4r/counter-starter.zip?dl=0)
 - [โปรเจค Finish](https://www.dropbox.com/s/rxf2o45vidmturb/counter-finish.zip?dl=0)
 
-## 2. กำหนด StyleSheet property สำหรับ Text component
+## 2. เปิดโฟลเดอร์โปรเจคแล้วรันคำสั่งติดตั้ง node modules
+
+```bash
+npm install 
+```
+
+## 3. กำหนด StyleSheet property สำหรับ Text component
 
 ```js
 const styles = StyleSheet.create({
@@ -44,7 +53,7 @@ export default class App extends React.Component {
 }
 ```
 
-## 3. ทำการ import Button component จาก react-native module มาใช้งาน
+## 4. ทำการ import Button component จาก react-native module มาใช้งาน
 
 ```jsx
 import { StyleSheet, Text, View, Button } from 'react-native';
@@ -70,7 +79,7 @@ export default class App extends React.Component {
 
 
 
-## 4. สร้าง function และใช้กับ event `onPress` props ของ Button
+## 5. สร้าง function และใช้กับ event `onPress` props ของ Button
 
 ```jsx
 export default class App extends React.Component {
@@ -96,7 +105,7 @@ export default class App extends React.Component {
   }
 ```
 
-## 5. กำหนดค่าใน State เริ่มต้น และเอามาใช้ใน JSX
+## 6. กำหนดค่าใน State เริ่มต้น และเอามาใช้ใน JSX
 
 ```jsx
 export default class App extends React.Component {
@@ -127,7 +136,7 @@ render() {
   }
 ```
 
-## 6. กำหนดค่าให้ state ใหม่ เพื่อให้เกิดการ render App Component อีกครั้ง
+## 7. กำหนดค่าให้ state ใหม่ เพื่อให้เกิดการ render App Component อีกครั้ง
 
 ```jsx
 increaseNumber = () => {
