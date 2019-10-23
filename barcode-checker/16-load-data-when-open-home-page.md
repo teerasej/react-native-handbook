@@ -1,5 +1,5 @@
 
-# 16. โหลดข้อมูลเก่า เมื่อเปิดหน้า Home Page
+# 16. โหลดข้อมูลที่มีอยู่ใน SQLite Database เมื่อเปิดหน้า Home Page
 
 ## 1. สร้าง method `loadBarcode()` ใน DB Service 
 
@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => {
 
 ```js
 componentDidMount() {
-        this.props.loadExistBarcodeData();
+    this.props.loadExistBarcodeData();
 }
 ```
 
