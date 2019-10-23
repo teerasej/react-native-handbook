@@ -1,5 +1,5 @@
 
-# 7. Setup Redux
+# 8. Setup Redux
 
 - [Redux for React](https://redux.js.org/basics/usage-with-react)
 
