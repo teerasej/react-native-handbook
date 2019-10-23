@@ -11,6 +11,17 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 4. [Connect Web API](fundamental/react-web-api/README.md)
 5. [SQLite](fundamental/react-sqlite/README.md)
 
+# Example part
+
+## SQLite Database 
+
+- [บันทึกข้อมูล](example-part/save-data-sqlite.md)
+
+## Map & JWT 
+
+- [Login with JWT](example-part/login-with-jwt.md)
+- [Pin Marker on Map](example-part/pin-marker-on-map.md)
+
 # + Workshop 
 
 - [Counter](counter/README.md)
