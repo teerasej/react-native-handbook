@@ -1,6 +1,9 @@
 
 # Counter Application
 
+![2019-10-23_10-11-17](https://user-images.githubusercontent.com/85179/67353820-bb15dc80-f57d-11e9-805e-b73b00a24397.gif)
+
+
 ## 1. Download Project
 
 - [โปรเจค Starter](https://www.dropbox.com/s/fkr0h7v3qzcim4r/counter-starter.zip?dl=0)
