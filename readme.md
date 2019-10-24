@@ -13,18 +13,10 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 # Example part
 
-## Web API 
-
-- [ดึงข้อมูลจาก Web API](example-part/web-api.md)
-
-## SQLite Database 
-
-- [บันทึกข้อมูล](example-part/save-data-sqlite.md)
-
-## Map & JWT 
-
-- [Login with JWT](example-part/login-with-jwt.md)
-- [Pin Marker on Map](example-part/pin-marker-on-map.md)
+- **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api.md)
+- **SQLite Database:** [บันทึกข้อมูล](example-part/save-data-sqlite.md)
+- **JWT Sign in:** [Login with JWT](example-part/login-with-jwt.md)
+- **Google Map:** [Pin Marker on Map](example-part/pin-marker-on-map.md)
 
 # + Workshop 
 
