@@ -15,7 +15,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 ## Web API 
 
-- [ดึงข้อมูลจาก Web API]()
+- [ดึงข้อมูลจาก Web API](example-part/web-api.md)
 
 ## SQLite Database 
 
