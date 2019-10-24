@@ -3,6 +3,24 @@
 
 > [ดูการใช้งาน React Navigation เพิ่มเติมได้จากที่นี่ ](https://reactnavigation.org/)
 
+ถ้ายังไม่ได้ติดตั้ง module `react-navigation` และ `react-navigation-stack`
+
+ให้รันคำสั่งติดตั้ง 
+
+```bash
+npm install react-navigation react-navigation-stack
+```
+หรือ
+```bash
+yarn add react-navigation react-navigation-stack
+```
+
+และสุดท้ายอย่าลืม
+
+```bash
+expo install react-native-gesture-handler react-native-reanimated
+```
+
 ## 1. import function มาจาก 2 module ของ React Navigation
 
 เปิดไฟล์ `App.js`
