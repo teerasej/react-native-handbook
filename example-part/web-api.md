@@ -4,7 +4,13 @@
 - [Download Starter Project](https://www.dropbox.com/s/ds8gjpq7q1jheit/nextflow-contact-app-start-call-api.zip?dl=0)
 - [Download Finish Project](https://www.dropbox.com/s/ujtx2gewv7phbxx/nextflow-contact-app-finish.zip?dl=0)
 
+ในที่นี้ตัวโปรเจคจะมีส่วนที่ส่ง request ไปที่ Web API เพื่อนำข้อมูล User มาแสดงในแอพพลิเคชั่น และขั้นตอนทั้งหมดจะใช้ Redux ในการจัดการข้อมูลให้กับ Component ทั้งหมด
+
+
+
 ## 1. เขียน function สำหรับเรียกใช้ใน component
+
+เราจะเริ่มจากการสร้าง function ที่ใช้ในการส่ง action object เข้า Redux store ด้วยวิธีนี้ จะทำให้เราสามารถส่ง action จาก component ไหนก็ได้ เพียงแค่ import function ของเราเข้าไปใช้งาน
 
 เปิดไฟล์ `redux/actions.js` 
 
@@ -13,6 +19,7 @@ const startGetUser = async (dispatch) => {
 
     const url = 'https://randomuser.me/api/?results=50';
 
+    
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -40,10 +47,14 @@ const startGetUser = async (dispatch) => {
 
 ## 2. สร้าง props method โดยการกำหนดค่าใน `mapDispatchToProps`
 
-กำหนด method ชื่อ `selectUser` 
+หลังจากเราสร้าง function สำหรับส่ง action object แล้ว ในที่นี้เราจะนำมาใช้ใน HomePage Component 
+
+เปิดไฟล์ `pages/home-page/HomePage.js` 
+สร้าง method ชื่อ `startGetUser` ใน `mapDispatchToProps` 
 
 ```js
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
+    // สังเกตว่าในที่นี้ เราส่ง dispatch เข้าไปใช้ใน function โดยตรง
     startGetUser: () => actions.startGetUser(dispatch),
     selectUser: (user) => dispatch(actions.selectUser(user))
 })
