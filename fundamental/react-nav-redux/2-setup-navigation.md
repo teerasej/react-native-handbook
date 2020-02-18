@@ -18,7 +18,7 @@ yarn add react-navigation react-navigation-stack
 และสุดท้ายอย่าลืม
 
 ```bash
-expo install react-native-gesture-handler react-native-reanimated
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 ## 1. import function มาจาก 2 module ของ React Navigation
