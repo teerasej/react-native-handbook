@@ -16,6 +16,18 @@ npm install
 yarn install 
 ```
 
+## หรือติดตั้ง module ด้วยตัวเองในโปรเจค
+
+```bash
+npm install redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+```
+
+หรือ 
+
+```bash
+yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+```
+
 ## โปรเจคสมบูรณ์
 
 - [ดาวน์โหลดไฟล์ zip ของโปรเจคที่เสร็จแล้ว](https://www.dropbox.com/s/sqxpmk7ubxxtjpy/nextflow-note-app-finish.zip?dl=0)
