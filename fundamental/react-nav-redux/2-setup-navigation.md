@@ -3,16 +3,16 @@
 
 > [ดูการใช้งาน React Navigation เพิ่มเติมได้จากที่นี่ ](https://reactnavigation.org/)
 
-ถ้ายังไม่ได้ติดตั้ง module `react-navigation` และ `react-navigation-stack`
+ถ้ายังไม่ได้ติดตั้ง module `@react-navigation/native`
 
 ให้รันคำสั่งติดตั้ง 
 
 ```bash
-npm install react-navigation react-navigation-stack
+npm install @react-navigation/native @react-navigation/stack
 ```
 หรือ
 ```bash
-yarn add react-navigation react-navigation-stack
+yarn add @react-navigation/native @react-navigation/stack
 ```
 
 และสุดท้ายอย่าลืม
@@ -21,97 +21,110 @@ yarn add react-navigation react-navigation-stack
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
-## 1. import function มาจาก 2 module ของ React Navigation
+## 1. import `react-native-gesture-handler`
+
+เปิดไฟล์ `App.js` และใช้คำสั่ง import `react-native-gesture-handler` เพื่อป้องกันแอพพัง ([อ้างอิงจาก React Navigation 5](https://reactnavigation.org/docs/en/getting-started.html#installing-dependencies-into-a-bare-react-native-project)) 
+
+```js
+import 'react-native-gesture-handler';
+```
+ 
+## 2. import `NavigationContainer` และใช้กำหนด Route ของแอพพลิเคชั่น
 
 เปิดไฟล์ `App.js`
- 
-เราจะ import 2 function มาจาก module ชื่อ `react-navigation` และ `react-navigation-stack`
+
+import module สำหรับการทำ Navigation 
 
 ```js
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 ```
 
-## 2. ตั้งค่า navigator, app container และเอามาใช้ใน JSX
-
-เราจะกำหนดค่า Page Home และ CreateNote ด้วย component ที่เราเตรียมไว้
+จากนั้นสร้าง component จาก `createStackNavigator` function 
 
 ```js
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-
-// กำหนดชื่อ Home ด้วย HomePage Component
-// และกำหนดชื่อ CreateNote ด้วย NewNotePage component
-const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage },
-  CreateNote: { screen: NewNotePage }
-})
-
-// นำ AppNavigator ที่ config พร้อมแล้วมาสร้างเป็น AppContainer
-const AppContainer = createAppContainer(AppNavigator);
+const Stack = createStackNavigator();
 ```
 
-และนำมาใช้ใน `render()` ของ App component 
+ในส่วนของ App component เราจะกำหนดใช้ `<NavigationContainer>` ใน JSX
 
 ```jsx
-export default class App extends React.Component {
-
-    //...
-
-    return (
-      <AppContainer/>
-    );
+return (
+    <NavigationContainer>
+      {/* กำหนด Stack */}
+      <Stack.Navigator>
+        {/* กำหนดหน้าแอพแรก ชื่อว่า Home และเลือก component HomePage เป็นตัว User Interface */}
+        <Stack.Screen name="Home" component={HomePage} />
+      </Stack.Navigator>
+    </NavigationContainer>
+);
 ```
 
-## 3. กำหนดส่วน Title ของ HomePage และ NewNotePage
+## 3. ปรับแต่ง Screen แต่ละหน้าด้วย props `option` ของ Stack.Screen
 
-เปิดไฟล์ `pages/home-page/HomePage.js`
+> ดูเพิ่มเติมได้ที่ [Configuring Header bar](https://reactnavigation.org/docs/en/headers.html)
 
-เราจะเพิ่ม property ชื่อ `navigationOptions` และกำหนดค่า `title`
+เราสามารถกำหนดส่วน Header โดยใช้ `option` prop ของ Stack.Screen 
 
-```js
-export class HomePage extends Component {
-
-    static navigationOptions = {
-        title: 'Home'
-    };
-
-```
-
-เปิดไฟล์ `pages/new-note-page/NewNotePage.js`
-
-เราจะเพิ่ม property ชื่อ `navigationOptions` และกำหนดค่า `title`
-
-```js
-export class NewNotePage extends Component {
-
-  static navigationOptions = {
-    title: 'New Note'
-  };
-
-```
-
-
-## 4. เพิ่มปุ่มเปิดหน้า Create Note ใน header ของ Home Page
-
-เปิดไฟล์ `pages/home-page/HomePage.js`
-
+เช่น การกำหนด title ของ header
 
 ```jsx
-export class HomePage extends Component {
+<Stack.Navigator>
+  <Stack.Screen 
+    name="Home" 
+    component={HomePage} 
+    options={{ title: 'หน้าแรก' }}
+  />
+  <Stack.Screen name="CreateNote" component={NewNotePage} 
+    options={{ title: 'New Note' }}
+    />
+</Stack.Navigator>
+```
 
-    static navigationOptions = ({ navigation }) => {
+## 4. กำหนดปุ่มใน header ผ่าน props `options` ของ Stack.Screen
+
+เรายังสามารถกำหนด function ที่ return ค่าเป็น object ที่มีค่าต่างๆ สำหรับ Stack.Screen ได้ด้วย
+
+```jsx
+<Stack.Navigator>
+    <Stack.Screen name="Home" component={HomePage}
+      options={{
+          headerTitle: <Text>Home</Text>,
+          headerRight: () => (
+            <Button transparent>
+              <Icon name='add' />
+            </Button>
+          ),
+        }}
+    />
+  <Stack.Screen name="CreateNote" component={NewNotePage} 
+    options={{ title: 'New Note' }}
+    />
+</Stack.Navigator>
+```
+
+และยังสามารถส่งผ่าน props ที่มี navigation มาเพื่อใช้ในปุ่มของ header ได้ด้วย
+
+```jsx
+<Stack.Navigator>
+    <Stack.Screen name="Home" component={HomePage}
+      options={(props) => {
         return {
-            title: 'Home',
-            headerRight: (
-                <Button transparent
-                    onPress={() => navigation.navigate('CreateNote')}
-                >
-                    <Icon name='add' />
-                </Button>
-            )
+          headerTitle: <Text>Home</Text>,
+          headerRight: () => (
+            <Button transparent
+              onPress={() => props.navigation.navigate('CreateNote')}
+            >
+              <Icon name='add' />
+            </Button>
+          ),
         }
-    };
+      }}
+    />
+  <Stack.Screen name="CreateNote" component={NewNotePage} 
+    options={{ title: 'New Note' }}
+    />
+</Stack.Navigator>
 ```
 
 ตอนนี้ถ้ามี error อย่าเพิ่งตกใจ เราต้อง setup redux ขึ้นมาในระบบก่อน
@@ -120,22 +133,18 @@ export class HomePage extends Component {
 
 ```jsx
 import React from 'react';
+import 'react-native-gesture-handler';
 import { AppLoading } from 'expo';
-import { Container, Text } from 'native-base';
+import { Container, Text, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage },
-  CreateNote: { screen: NewNotePage }
-})
-
-const AppContainer = createAppContainer(AppNavigator);
+const Stack = createStackNavigator();
 
 
 export default class App extends React.Component {
@@ -161,87 +170,31 @@ export default class App extends React.Component {
     }
 
     return (
-      <AppContainer/>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomePage}
+            options={(props) => {
+              return {
+                headerTitle: <Text>Home</Text>,
+                headerRight: () => (
+                  <Button transparent
+                    onPress={() => props.navigation.navigate('CreateNote')}
+                  >
+                    <Icon name='add' />
+                  </Button>
+                ),
+              }
+            }}
+          />
+          <Stack.Screen name="CreateNote" component={NewNotePage} 
+            options={{
+              title: 'New Note'
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }
 ```
 
-
-## B. ไฟล์เต็ม `pages/home-page/HomePage.js`
-
-```jsx
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { Container, Header, Title, Content, List, ListItem, Text, Left, Right, Body, Button, Icon } from 'native-base';
-
-export class HomePage extends Component {
-
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: 'Home',
-            headerRight: (
-                <Button transparent
-                    onPress={() => navigation.navigate('CreateNote')}
-                >
-                    <Icon name='add' />
-                </Button>
-            )
-        }
-    };
-
-    render() {
-        return (
-
-            <Content>
-                <List>
-                    <ListItem>
-                        <Text>A</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>B</Text>
-                    </ListItem>
-                </List>
-            </Content>
-
-        )
-    }
-}
-
-
-export default HomePage
-```
-
-## C. ไฟล์เต็ม `pages/new-note-page/NewNotePage.js`
-
-```jsx
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { Container, Header, Title, Content, List, ListItem, Text, Left, Right, Body, Button, Item, Input, Label } from 'native-base';
-
-import NewNoteForm from './NewNoteForm';
-
-export class NewNotePage extends Component {
-  
-  static navigationOptions = {
-    title: 'New Note'
-  };
-
-  onFormSave = (values) => {
-    console.log(values);
-  }
-
-
-  render() {
-    return (
-      <Content padder>
-        <NewNoteForm onSubmit={this.onFormSave}/>
-      </Content>
-    )
-  }
-}
-
-export default NewNotePage
-```

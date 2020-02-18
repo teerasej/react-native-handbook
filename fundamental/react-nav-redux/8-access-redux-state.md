@@ -72,21 +72,6 @@ import { Container, Header, Title, Content, List, ListItem, Text, Left, Right, B
 
 export class HomePage extends Component {
 
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: 'Home',
-            headerRight: (
-                <Button transparent
-                    onPress={() => navigation.navigate('CreateNote')}
-                >
-                    <Icon name='add' />
-                </Button>
-            )
-        }
-    };
-
-
-
     render() {
         return (
 
