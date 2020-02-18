@@ -48,6 +48,10 @@ const startSignIn = async (dispatch, navigation, username, password) => {
         const json = await response.json();
         // ดึงค่า token ที่ server ส่งมา 
         console.log('Token:', json.token);
+
+        // เก็บ token ไว้ใช้ใน function อื่น
+        token = json.token;
+
         // เอาเข้า action เพื่อส่งเข้า redux
         dispatch({
             type: Types.SIGN_IN_SUCCESS,
