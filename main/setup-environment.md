@@ -15,19 +15,16 @@
 
 ```bash
 npm i -g expo-cli
-npm i -g exp
-npm i -g create-react-native
-npm i -g react-native-cli
 ```
 
 ## 2. ถ้าใช้ Visual Studio Code ให้ลง Snippet 
 
-- [ES7 React/Redux/GraphQL/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+- [Nextflow React Native Extension Pack](https://marketplace.visualstudio.com/items?itemName=teerasej.nextflow-react-native-pack)
 
 ## 3. ดาวน์โหลด Expo Mobile App
 
-- Android 
-- iOS
+- [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) 
+- [iOS](https://itunes.apple.com/app/apple-store/id982107779)
 
 ## A. ถ้าต้องการใช้ Yarn ในการทำงาน
 
