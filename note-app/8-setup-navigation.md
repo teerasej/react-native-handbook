@@ -3,6 +3,11 @@
 
 - [React Navigation](https://reactnavigation.org/)
 
+React Navigation เป็น module ด้าน UI ตัวหนึ่ง ที่ทำให้เรานำ Component ต่างๆ ที่เราสร้างขึ้น มาเชื่อมต่อ และเปิดไปมาเหมือนเป็นแอพเดียวกันได้ 
+
+![Paper React_React_Native 84](https://user-images.githubusercontent.com/85179/98916673-05a62600-24fe-11eb-9600-a825a51f314e.png)
+
+
 ## 1. ติดตั้ง navigation สำหรับ expo
 
 รันคำสั่งด้านล่าง ใน Terminal
