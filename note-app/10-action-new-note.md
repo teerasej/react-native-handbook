@@ -99,7 +99,7 @@ import actions from "../actions";
 
 const initialState = {
     notes: []
-        }
+}
 
 
 export default (state = initialState, { type, payload }) => {
@@ -116,6 +116,19 @@ export default (state = initialState, { type, payload }) => {
 
 
 ## 4. และ นำมาใช้ใน HomePage
+
+```js
+// pages/home-page/HomePage.js
+
+const mapStateToProps = (state) => {
+    return {
+      notes: state.note.notes
+    }
+}
+
+```
+
+หรือจะเขียนในรูปแบบย่อแบบด้านล่างก็ได้ 
 
 ```js
 // pages/home-page/HomePage.js
