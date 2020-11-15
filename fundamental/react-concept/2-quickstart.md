@@ -3,7 +3,7 @@
 
 ## 1. ทดสอบรันโปรเจค 
 
-1. เปิดโปรเจคขึ้นมาบน Terminal 
+1. เปิดโปรเจคขึ้นมาบน Terminal หรือ Command Prompt
 2. รันคำสั่งด้านล่าง เพื่อรัน Expo Server
 
 ```bash
@@ -13,7 +13,7 @@ yarn start
 ```
 
 3. รอจนระบบพร้อมทำงาน
-4. ทดสอบรันแอพผ่านคำสั่ง **Run on iOS simulator**
+4. ทดสอบรันแอพผ่านคำสั่ง **Run on iOS simulator** (ทำได้บนเครื่อง MacOS ที่ติดตั้งโปรแกรมเรียบร้อยแล้วเท่านั้น)
 5. ทดสอบรันแอพผ่านคำสั่ง **Run on Android Device/Emulator** (ต้องรัน Emulator จากโปรแกรม Android Studio > AVD Manager)
 
 ## 2. ทดสอบรันโปรเจคบนอุปกรณ์จริง

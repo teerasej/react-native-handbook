@@ -12,6 +12,11 @@
 ```bash
 expo init nextflow-note
 cd nextflow-note
+```
+
+## 3. ติดตั้ง Nativebase
+
+```bash
 npm install native-base
 expo install expo-font
 ```

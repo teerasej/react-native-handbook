@@ -8,6 +8,8 @@
 
 ```bash
 expo start
+หรือ
+yarn start
 ```
 
 3. รอจนระบบพร้อมทำงาน
