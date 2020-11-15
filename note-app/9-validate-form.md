@@ -32,26 +32,4 @@ const validate = values => {
 NewNoteForm = reduxForm({ form: 'newNote', validate })(NewNoteForm)
 ```
 
-## 2. ใช้ Alert ในการแจ้งเตือนในกรณีที่เกิด Error
 
-```jsx
-import { View, Alert } from 'react-native'
-
-renderInput({ input, label, type, meta: { touched, error, warning } }) {
-        var hasError = false;
-
-        // ถ้า function ได้รับ error ก็จะแสดง pop up ขึ้นมา
-        if (error !== undefined && touched) {
-            hasError = true;
-            Alert.alert(
-                'Opps',
-                error
-            );
-        }
-        return (
-                <Item error={hasError}>
-                    <Input {...input} />
-                </Item>
-        )
-    }
-```
