@@ -156,7 +156,9 @@ export class NewNotePage extends Component {
                     </Body>
                 </Header>
                 <Content padder>
+                     {/*
                     <NewNoteForm onSubmit={this.onFormSave}/>
+                    */}
                 </Content>
             </Container>
       
@@ -181,10 +183,6 @@ export class NewNotePage extends Component {
 
   }
 
-  static navigationOptions = {
-    title: 'New Note'
-  };
-
   onFormSave = (values) => {
     console.log(values);
   }
@@ -199,7 +197,9 @@ export class NewNotePage extends Component {
                     </Body>
                 </Header>
                 <Content padder>
+                 {/*
                     <NewNoteForm onSubmit={this.onFormSave}/>
+                    */}
                 </Content>
             </Container>
       
