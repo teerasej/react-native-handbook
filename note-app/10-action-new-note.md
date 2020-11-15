@@ -93,64 +93,22 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(NewNotePage)
 ```
 
-## 3. เขียน Test Unit ให้กับ note.reducer.js
+## (Optional) เขียน Test Unit ให้กับ Reducer
 
-### Setup Test Environment
+[ดูเพิ่มเติมได้ที่นี่](10-1-test-note-reducer.md)
 
-- [ทำการติดตั้ง Test Environment](test/1-setup.md)
-
-
-สร้างไฟล​์​ `redux/reducers/note.reducer.test.js`
-
-```js
-
-import reducer from "./note.reducer";
-import actions from "./../actions";
-
-describe('Note Reducer', () => {
-    
-    it('Initial Note should be empty', () => {
-        expect(reducer(undefined, {}).notes).toEqual([]);
-    });
-
-    it('Notes should have new item', () => {
-        const action = {
-            type: actions.ActionTypes.SAVE_NEW_NOTE,
-            payload: 'hello'
-        }
-
-        const notes = reducer(undefined, action).notes;
-
-        expect(notes.length).toBe(1);
-        expect(notes[0]).toStrictEqual({ title: 'hello'});
-    });
-
-    it('Notes should have 2 new item', () => {
-        const action1 = {
-            type: actions.ActionTypes.SAVE_NEW_NOTE,
-            payload: 'hello'
-        }
-
-        const action2 = {
-            type: actions.ActionTypes.SAVE_NEW_NOTE,
-            payload: 'test'
-        }
-
-        const state = reducer(undefined, action1);
-        const finalState = reducer(state, action2);
-
-        expect(finalState.notes.length).toBe(2);
-        expect(finalState.notes[0]).toStrictEqual({ title: 'hello'});
-        expect(finalState.notes[1]).toStrictEqual({ title: 'test'});
-    });
-
-});
-```
 
 ## 3. นำ Note ใหม่ใส่เข้า state ของ reducer
 
+ข้อแม้ของการที่ Redux component จะ setState ตัวเองใหม่จากการได้รับ Props ก็คือตัว props นั้นต้องเป็น reference หรือ object ใหม่ทั้งหมด 
+
 ```js
 import actions from "../actions";
+
+const initialState = {
+    notes: []
+        }
+
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
