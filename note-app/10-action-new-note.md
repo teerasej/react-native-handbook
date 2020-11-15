@@ -13,16 +13,8 @@ const ActionTypes = {
     SAVE_NEW_NOTE: 'SAVE_NEW_NOTE'
 }
 
-const saveNewNote = (message) => (
-    {
-        type: ActionTypes.SAVE_NEW_NOTE,
-        payload: message
-    }
-)
-
 export default {
-    ActionTypes,
-    saveNewNote
+    ActionTypes
 } 
 ```
 
@@ -84,7 +76,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveNewNote: (message) => dispatch(actions.saveNewNote(message))
+    saveNewNote: (message) => dispatch({ type: actions.ActionTypes.SAVE_NEW_NOTE, payload: message })
   }
 }
 
