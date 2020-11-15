@@ -31,6 +31,14 @@ export class HomePage extends Component {
 
 ```jsx
 // pages/home-page/HomePage.js
+render() {
+        return (
+            <Container>
+                <Header>
+                    <Body>
+                      <Title>Note</Title>
+                    </Body>
+                </Header>
                 <Content>
                     <List>
                         {
@@ -44,6 +52,10 @@ export class HomePage extends Component {
                         }
                     </List>
                 </Content>
+            </Container>
+        )
+}
+
 ```
 
 ## ไฟล์เต็ม `pages/home-page/HomePage.js`
