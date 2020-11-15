@@ -1,5 +1,5 @@
 
-# 9. ติดตั้งใช้งาน react-navigation
+# 8. ติดตั้งใช้งาน react-navigation
 
 - [React Navigation](https://reactnavigation.org/)
 
@@ -13,7 +13,7 @@ React Navigation เป็น module ด้าน UI ตัวหนึ่ง �
 รันคำสั่งด้านล่าง ใน Terminal
 
 ```bash
-expo install react-native-gesture-handler react-native-reanimated
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
 ### ถ้าเจอปัญหาเกี่ยวกับ react-native-gesture-handler
@@ -29,50 +29,32 @@ expo install react-native-gesture-handler react-native-reanimated
 }
 ```
 
-## 2. เพิ่มข้อมูลสำหรับ Navigation เข้าไปในแต่ละเพจ
 
-```js
-// pages/home-page/HomePage.js
-
-export class HomePage extends Component {
-
-    static navigationOptions = {
-        title: 'Home'
-    };
-
-}
-```
-
-```js
-// pages/new-note-page/NewNotePage.js
-
-export class NewNotePage extends Component {
-
-    static navigationOptions = {
-        title: 'New Note'
-    };
-
-}
-```
-
-## 3. กำหนด Page Component ลง Navigation
+## 2. กำหนด Page Component ลง Navigation
 
 เปิดไฟล์ `App.js`
 
 เราจะทำการสร้าง Navigator ขึ้นมา โดยตั้งชื่อให้กับ Page Component ต่างๆ ไว้
 
 ```js
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-
-const AppNavigator = createStackNavigator({
-  Home: {screen: HomePage},
-  CreateNote: {screen: NewNotePage }
-});
-
-const AppContainer = createAppContainer(AppNavigator);
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 ```
 
-จากนั้นเราจะใช้ `AppContainer` ใส่ลงไปใน `<Provider>` แทน
+จากนั้นเราจะใช้ `NavigationContainer` ใส่ลงไปใน `<Provider>` แทน
+
+เราสามารถตั้งค่าผ่าน JSX ชื่อ `<Stack.Navigator>` 
+
+เช่น 
+
+```jsx
+<NavigationContainer>
+  <Stack.Navigator>
+    <Stack.Screen name="New Note Page" component={NewNotePage} />
+  </Stack.Navigator>
+</NavigationContainer>
+```
 
 ```jsx
 render() {
@@ -82,13 +64,17 @@ render() {
 
     return (
         <Provider store={store}>
-            <AppContainer />
+            <NavigationContainer>
+              <Stack.Navigator>
+                <Stack.Screen name="New Note Page" component={NewNotePage} />
+              </Stack.Navigator>
+            </NavigationContainer>
         </Provider>
     );
   }
 ```
 
-## 3.A ไฟล์เต็ม App.js
+## 2.A ไฟล์เต็ม App.js
 
 ```jsx
 import React from 'react';
@@ -102,16 +88,13 @@ import NewNotePage from './pages/new-note-page/NewNotePage';
 import { Provider } from 'react-redux'
 import configureStore from "./redux/store";
 
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 const store = configureStore();
 
-const AppNavigator = createStackNavigator({
-  Home: {screen: HomePage},
-  CreateNote: {screen: NewNotePage }
-});
 
-const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   constructor(props) {
@@ -136,9 +119,14 @@ export default class App extends React.Component {
     }
 
     return (
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
+        <Provider store={store}>
+            <NavigationContainer>
+              <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomePage} />
+                <Stack.Screen name="New Note Page" component={NewNotePage} />
+              </Stack.Navigator>
+            </NavigationContainer>
+        </Provider>
     );
   }
 }
@@ -152,7 +140,7 @@ export default class App extends React.Component {
 // pages/home-page/HomePage.js จะเหลือแค่นี้
 render() {
         return (
-           
+           <Container>
                 <Content>
                     <List>
                         {
@@ -166,7 +154,7 @@ render() {
                         }
                     </List>
                 </Content>
-           
+           </Container>
         )
     }
 ```
@@ -175,78 +163,66 @@ render() {
 // pages/new-note-page/NewNotePage.js จะเหลือแค่นี้
 render() {
         return (
-           
+           <Container>
                 <Content padder>
-                    <Item inlineLabel >
-                        <Label>Message: </Label>
-                    <Field name="message" component={this.renderInput} />
-                    </Item>
-                    <Button block primary >
-                        <Text>Save</Text>
-                    </Button>
+                    <NewNoteForm onSubmit={this.onFormSave}/>
                 </Content>
-        
+            </Container>
         )
 }
 ```
 
 ## 5. ปรับให้ header มีปุ่มด้านขวาผ่าน navigationOptions
 
-เริ่มจากนำ component ที่ต้องใช้เข้ามา
+เริ่มจากนำ component ที่ต้องใช้ในการสร้างปุ่มเข้ามาในไฟล์ `pages/home-page/HomePage.js`
 
 ```jsx
 // pages/home-page/HomePage.js
 
-import { Container, Header, Title, Content,  Text, Button, Icon } from 'native-base';
+import { Container, Header, Title, Content, List, ListItem, Text, Body, Button, Icon} from 'native-base';
 
 ```
 
-และเปลี่ยนจาก 
-
-```js
-static navigationOptions = {
-    title: 'Home'
-};
-```
-
-เป็น 
+และเพิ่ม `componentDidMount()` เพื่อทำการ set ค่าให้ header ของหน้า home page
 
 ```jsx
-// pages/home-page/HomePage.js
-
-static navigationOptions = ({ navigation }) => {
-        return {
-          headerTitle: <Text>Home</Text>,
-          headerRight: (
-            <Button transparent>
-              <Icon name='add' />
-            </Button>
-          ),
-        };
-      };
-
+componentDidMount() {
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <Button transparent>
+                  <Icon name='add'/>
+                </Button>
+              ),
+        });
+    }
 ```
+
+
 
 ## 6. ใส่ function สำหรับเปิดไปหน้า new note
 
+หลังจากเราเพิ่มปุ่มเข้าไปใน header ของหน้า HomePage ได้แล้ว ก็จะมาใส่ event `onPress` ให้ปุ่มกัน
+
 ```jsx
 // pages/home-page/HomePage.js
 
-static navigationOptions = ({ navigation }) => {
-        return {
-          headerTitle: <Text>Home</Text>,
-          headerRight: (
-            <Button transparent onPress={() => {
-                console.log('ok')
-                navigation.navigate('CreateNote')
-            }}>
-              <Icon name='add'/>
-            </Button>
-          ),
-        };
-      };
-
+componentDidMount() {
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <Button transparent 
+                onPress={() => {
+                    console.log('ok')
+                    this.props.navigation.navigate('New Note Page')
+                }}>
+                  <Icon name='add'/>
+                </Button>
+              ),
+        });
+    }
 ```
+
+ให้สังเกตว่า เราเข้าถึง `navigation` ผ่าน `this.props.navigation` แบบเดียวกับการเข้าถึง props อื่นๆ 
+
 
 ## 6.A ไฟล์เต็ม `pages/home-page/HomePage.js`
 
@@ -255,26 +231,27 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Container, Header, Title, Content, List, ListItem, Text, Left, Right, Body, Button, Icon } from 'native-base';
+import { Container, Header, Title, Content, List, ListItem, Text, Body, Button, Icon} from 'native-base';
 
 export class HomePage extends Component {
+
+    componentDidMount() {
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <Button transparent onPress={() => {
+                    console.log('ok')
+                    this.props.navigation.navigate('New Note Page')
+                }}>
+                  <Icon name='add'/>
+                </Button>
+              ),
+        });
+    }
+
+
     static propTypes = {
         notes: PropTypes.array
     }
-
-    static navigationOptions = ({ navigation }) => {
-        return {
-          headerTitle: <Text>Home</Text>,
-          headerRight: (
-            <Button transparent onPress={() => {
-                console.log('ok')
-                navigation.navigate('CreateNote')
-            }}>
-              <Icon name='add'/>
-            </Button>
-          ),
-        };
-      };
 
     static defaultProps = {
         notes: [
@@ -284,10 +261,9 @@ export class HomePage extends Component {
         ]
     }
 
-
     render() {
         return (
-           
+            <Container>
                 <Content>
                     <List>
                         {
@@ -301,20 +277,21 @@ export class HomePage extends Component {
                         }
                     </List>
                 </Content>
-           
+            </Container>
         )
-    }
+}
 }
 
 const mapStateToProps = (state) => ({
-
+    
 })
 
 const mapDispatchToProps = {
-
+    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+
 ```
 
 ## 7. ถ้ากดปุ่ม save ใน NewNoteForm จะเป็นการบันทึกและเปิดกลับไปหน้าแรก
