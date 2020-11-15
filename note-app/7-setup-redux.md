@@ -128,6 +128,22 @@ return (
     );
 ```
 
+## 4. เปิดใช้งาน NewNoteForm หลังจาก Setup redux-form ใน Store เสร็จแล้ว
+
+```jsx
+// pages/new-note-page/NewNotePage.js
+<Container>
+  <Header>
+      <Body>
+          <Title>New Note</Title>
+      </Body>
+  </Header>
+  <Content padder>
+      <NewNoteForm onSubmit={this.onFormSave}/>
+  </Content>
+</Container>
+```
+
 ## A. ไฟล์เต็ม App.js 
 
 ```jsx
