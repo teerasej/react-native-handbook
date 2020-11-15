@@ -1,5 +1,5 @@
 
-# 4. ติดตั้ง UI Framework
+# 3. ติดตั้ง UI Framework
 
 - [ดูเพิ่มเติมเกี่ยวกับ Nativebase UI](https://docs.nativebase.io/Components.html#Components)
 
@@ -7,7 +7,7 @@
 
 - [Nativebase snippet](https://marketplace.visualstudio.com/items?itemName=GeekyAnts.nativebase-snippets)
 
-## 2. สร้างโปรเจค และติดตั้ง Nativebase
+## 2. สร้างโปรเจค (ถ้ายังไม่มี)
 
 ```bash
 expo init nextflow-note
@@ -19,13 +19,11 @@ expo install expo-font
 หรือ
 
 ```bash
-expo init nextflow-note
-cd nextflow-note
 yarn add native-base
 expo install expo-font
 ```
 
-## 3. ติดตั้ง 
+## 4. ติดตั้ง 
 
 ### วิธีแก้ปัญหา `Command `link` unrecognized.`
 

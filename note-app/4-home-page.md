@@ -1,5 +1,5 @@
 
-# 5. สร้าง และใช้งานหน้า HomePage
+# 4. สร้าง และใช้งานหน้า HomePage
 
 ## 1. สร้าง HomePage.js
 
@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 
 export class HomePage extends Component {
     static propTypes = {
-
+      // ลบส่วนนี้ออกจาก snippet ถ้ายังไม่ใช้
     }
 
     render() {

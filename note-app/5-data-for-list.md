@@ -1,5 +1,5 @@
 
-# 6. กำหนดค่าเพื่อใช้แสดงผลใน List
+# 5. กำหนดค่าเพื่อใช้แสดงผลใน List
 
 ## 1. กำหนดค่า PropTypes และ defaultProps และข้อมูลเพื่อใช้งาน
 
@@ -31,19 +31,19 @@ export class HomePage extends Component {
 
 ```jsx
 // pages/home-page/HomePage.js
-<Content>
-    <List>
-        {
-            this.props.notes.map((item, index) => {
-                return (
-                    <ListItem key={index}>
-                        <Text>{item.title}</Text>
-                    </ListItem>
-                )
-            })
-        }
-    </List>
-</Content>
+                <Content>
+                    <List>
+                        {
+                            this.props.notes.map((item, index) => {
+                                return (
+                                    <ListItem key={index}>
+                                        <Text>{item.title}</Text>
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </List>
+                </Content>
 ```
 
 ## ไฟล์เต็ม `pages/home-page/HomePage.js`
