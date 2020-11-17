@@ -10,4 +10,4 @@
 7. [เข้าถึงค่าที่ส่งเข้ามาใน Component ด้วย Props](props.md)
 8. [Event ใน Function component](event-function-component.md) 
 9. [Event ใน Class component](event-class-component.md)
-10. [อัพเดตส่วนของ User Interface ด้วย State](state.md)
+10. [อัพเดตส่วนของ User Interface ด้วย State แบบ class](state.md) และ[แบบ React Hook](state-react-hook.md)
