@@ -6,8 +6,11 @@
 
 ## 1. Download Project
 
-- [โปรเจค Starter](https://www.dropbox.com/s/fkr0h7v3qzcim4r/counter-starter.zip?dl=0)
-- [โปรเจค Finish](https://www.dropbox.com/s/rxf2o45vidmturb/counter-finish.zip?dl=0)
+- [โปรเจค Starter](https://www.dropbox.com/s/nsuhrm9scjkwi4y/counter-starter.zip?dl=0)
+- [โปรเจค Finish](https://www.dropbox.com/s/4i9np244ltgk2xc/counter-finish.zip?dl=0)
+
+- [โปรเจค Starter แบบ Function component](https://www.dropbox.com/s/u9z7ozz5i9b0oak/counter-function-component-start.zip?dl=0)
+- [โปรเจค Finish แบบ Function component](https://www.dropbox.com/s/8ewhtp3zqtce6r2/counter-function-component-finish.zip?dl=0)
 
 ## 2. เปิดโฟลเดอร์โปรเจคแล้วรันคำสั่งติดตั้ง node modules
 
