@@ -70,6 +70,10 @@ componentDidMount() {
 }
 ```
 
+## การใช้งาน Axios ใน Redux
+
+[ดูเพิ่มเติม](web-api-axios.md)
+
 
 
 ## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
