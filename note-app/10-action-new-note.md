@@ -1,5 +1,11 @@
 # 10. สร้างกลไกการ save note 
 
+สามารถ clone โปรเจคมาเริ่มทำขั้นตอนนี้ได้จากคำสั่ง git ด้านล่าง
+
+```bash
+git clone -b start-for-redux-dispatch https://github.com/teerasej/react-native-note-app-with-redux
+```
+
 ## 1. สร้าง action และ dispatch note ใหม่เข้า store
 
 Redux Action ส่วนใหญ่จะถูกส่งจาก Component มายัง reducer
@@ -25,7 +31,7 @@ _เปรียบได้คล้ายๆ กับ Event ใน MVC แต
 ไฟล์กลุ่มแรกคือ **Actions** จะมีส่วนประกอบใหญ่ๆ อยู่ 2 ส่วนคือ 
 
 1. **Action Type** เป็นประเภทของ Action คล้ายๆ ค่า Enum เอาไว้อ้างอิงในส่วนอื่นๆ ของ Redux
-2. **Action Object** ทำหน้าที่คล้ายๆ พัศดุที่เก็บข้อมูล (ข้อมูลส่วนนี้ เรียกทั่วไปว่า payload) ตัว Action Object มักจะถูกส่งจาก Component เพื่อเดินทางไปยัง Reducer
+2. **Action Payload** ทำหน้าที่คล้ายๆ พัศดุที่เก็บข้อมูล (ข้อมูลส่วนนี้ เรียกทั่วไปว่า payload) ตัว Action Object มักจะถูกส่งจาก Component เพื่อเดินทางไปยัง Reducer
 
 ## 2. เรียกใช้ Action ใน dispatch ของ NewNotePage 
 
@@ -52,7 +58,10 @@ export class NewNotePage extends Component {
 
   onFormSave = (values) => {
     console.log(values);
+    
+    // เรียกใช้ dispatch function ของ props
     this.props.saveNewNote(values.message);
+    
     this.props.navigation.goBack();
   }
 
@@ -74,6 +83,8 @@ const mapStateToProps = (state) => ({
   
 })
 
+// สร้าง dispatch property ในรูปแบบของ function ที่ส่ง object dispatch ได้
+// { type: 'action name', payload: any }
 const mapDispatchToProps = dispatch => {
   return {
     saveNewNote: (message) => dispatch({ type: actions.ActionTypes.SAVE_NEW_NOTE, payload: message })
