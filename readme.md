@@ -30,4 +30,12 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - [การ Publish Application File](publishing/readme.md)
 
+# Performance 
+
+- [Slide](https://www.dropbox.com/s/s2fjkiadto2az9o/Performance%20in%20React.pdf?dl=0)
+
+
+# Security 
+
+- [Slide](https://www.dropbox.com/s/ayj0tqpxea1dphw/Security%20in%20React%20Native.pdf?dl=0)
 
