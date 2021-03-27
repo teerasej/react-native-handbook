@@ -41,7 +41,7 @@ yarn add redux react-redux redux-logger formik @react-navigation/native @react-n
 ## 3. ติดตั้ง Module สำหรับระบบ Navigation 
 
 ```bash
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view expo-font expo-app-loading
 ```
 
 

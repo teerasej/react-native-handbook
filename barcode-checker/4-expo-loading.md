@@ -14,7 +14,7 @@ expo install expo-font
 ```jsx
 // App.js
 import React from 'react';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { View, Text } from 'react-native';
 
 // import Font มาจาก package expo-font

@@ -43,7 +43,7 @@ Command `link` unrecognized. Make sure that you have run `npm install` and that 
 ```jsx
 // App.js
 import React from 'react';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { View, Text } from 'react-native';
 
 // import Font มาจาก package expo-font
@@ -89,8 +89,10 @@ export default class App extends React.Component {
     // แสดง User Interface ที่แท้จริงของแอพ
     return (
       <View>
-        <Text>
-            Woohoooo...
+        <Text style={{
+          textAlign: 'center',
+          }}>
+            test...
         </Text>
       </View>
     );

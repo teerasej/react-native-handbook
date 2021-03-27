@@ -29,7 +29,7 @@ export default class App extends React.Component {
 
 ```js
 import React from 'react';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { View } from 'react-native';
 import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';

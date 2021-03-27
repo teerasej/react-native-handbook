@@ -134,7 +134,7 @@ return (
 ```jsx
 import React from 'react';
 import 'react-native-gesture-handler';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { Container, Text, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
