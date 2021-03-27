@@ -24,7 +24,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - [Counter](counter/README.md)
 - [Counter + Redux](counter-redux/readme.md)
-- [Note Application](note-app/README.md)
+- Note Application: [Function component](note-app-function/README.md) | [Class Component](note-app/README.md)
 - [Barcode Checker](barcode-checker/README.md)
 - [Branch Locator](branch-locator/README.md)
 
