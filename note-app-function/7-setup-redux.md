@@ -3,7 +3,7 @@
 
 - [Redux for React](https://redux.js.org/basics/usage-with-react)
 
-Redux ประกอบไปด้วย 3 ส่วนที่ต้องสร้างขึ้นมา เพื่อให้ทำงานสอดประสานกันเป็นหนึ่งเดียว เหมือนทีมฟุตบอล หรือทีมเกมส์​ MOBA ต้องมีทั้งรุก รับ support มีฝ่ายใดฝ่ายหนึ่งไม่ได้ 
+> Redux ประกอบไปด้วย 3 ส่วนที่ต้องสร้างขึ้นมา เพื่อให้ทำงานสอดประสานกันเป็นหนึ่งเดียว เหมือนทีมฟุตบอล หรือทีมเกมส์​ MOBA ต้องมีทั้งรุก รับ support มีฝ่ายใดฝ่ายหนึ่งไม่ได้ 
 
 3 ฝ่ายหลักคือ 
 1. กลุ่ม Actions (type และ action object)
@@ -12,7 +12,22 @@ Redux ประกอบไปด้วย 3 ส่วนที่ต้อง�
 
 ![Paper React   React Native 27](https://user-images.githubusercontent.com/85179/63178797-f921ec00-c074-11e9-9781-48541785d151.png)
 
-## 1. สร้าง store และ reducer
+
+## 1. สร้าง Action 
+
+```js
+// redux/actions.js
+
+const type = {
+    SAVE_NEW_NOTE: 'SAVE_NEW_NOTE'
+}
+
+export default type
+```
+
+
+
+## 2. สร้าง Reducer
 
 ### Reducer
 
@@ -33,10 +48,14 @@ reducer ต้องการ ข้อมูลเริ่มต้น สำ�
 _ใช่้ snippet `rxreducer` ได้_
 
 เริ่มจาก note reducer สำหรับจัดการข้อมูลที่เป็น note
+สังเกตว่า เราเอา parameter ชื่อ type มาเทียบชื่อ action เพื่อจัดการข้อมูลที่มากับ Action ได้
 
 ```jsx
-// redux/reducers/note.reducer.js
+// redux/reducer.js
 
+import actions from './actions'
+
+// ค่าเริ่มต้นของ redux state ที่ส่งให้ component ใช้งานตอนเริ่มต้นโปรเจค
 const initialState = {
     notes: []
 }
@@ -44,7 +63,8 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
     switch (type) {
 
-    case 'typeName':
+      // นำชื่อ action มาเทียบ กับ type ของ action ที่จะถูกส่งมาจาก component
+    case actions.SAVE_NEW_NOTE:
         return { ...state, ...payload }
 
     default:
@@ -53,24 +73,8 @@ export default (state = initialState, { type, payload }) => {
 }
 ```
 
-ส่วนต่อไปเราจะสร้าง Root Reducer สำหรับการรวม Reducer ต่างๆ เข้าด้วยกัน
 
-จะเห็นว่าในที่นี้เรามี Form Reducer ที่เอาไว้จัดการข้อมูลจาก Form ด้วย
-
-```jsx
-// redux/reducers/root.reducer.js
-
-import { combineReducers } from 'redux'
-import noteReducer from './note.reducer';
-import { reducer as formReducer } from 'redux-form';
-
-export default () => combineReducers({
-  note: noteReducer,
-  form: formReducer
-})  
-```
-
-## 2. สร้าง Redux Store
+## 3. สร้าง Store
 
 ### Redux Store
 
@@ -85,28 +89,27 @@ export default () => combineReducers({
 ```jsx
 // redux/store.js
 
-import { createStore, applyMiddleware, compose } from 'redux';
-// import { logger } from 'redux-logger';
 
-import createRootReducer from "./reducers/root.reducer";
+import { createStore } from 'redux'
+import reducer from './reducer'
 
+// สร้าง function ที่เตรียม store object ไว้ไปใช้กับ component ในไฟล์อื่น
 export default function configureStore() {
-    const store = createStore(
-        createRootReducer(),
-        // compose(
-        //     applyMiddleware(
-        //         logger
-        //     ),
-        // ),
-    );
-
-    return store;
-} 
+    
+    // ใช้ function createStore() สร้าง store object โดยกำหนด reducer ที่เราสร้างไว้ลงไป
+    // ในที่นี้ store จะสามารถใช้ state object จาก reducer ได้ และสามารถส่ง action ให้ reducer ได้เช่นกัน
+    let store = createStore(reducer)
+    return store
+}
 ```
 
-## 3. นำ store ที่สร้างไว้ ในกำหนดให้กับ Provider component ที่จะส่งผ่าน store ให้กับทุก component ที่อยู่ด้านใน
+## 3. นำ store ที่สร้างไว้ มากำหนดให้กับ Provider component 
 
 ![Paper React   React Native 29](https://user-images.githubusercontent.com/85179/63178875-1b1b6e80-c075-11e9-82a6-d187cfcc7606.png)
+
+- Provider Component เป็น JSX Component ตัวหนึ่ง
+- จุดประสงค์เพื่อเชื่อม Component อื่นๆ เข้ากับ Redux store
+- ดังนั้นมักจะเห็นการใช้ Provider component ครอบด้านนอกสุดของทุก Component เพื่อให้สามารถเข้าถึง Component อื่นๆ ภายในตัวมันได้
 
 เริ่มจาก import `Provider` component จาก `react-redux` และตัว store ที่เราสร้างไว้ 
 
@@ -128,28 +131,16 @@ return (
     );
 ```
 
-## 4. เปิดใช้งาน NewNoteForm หลังจาก Setup redux-form ใน Store เสร็จแล้ว
-
-```jsx
-// pages/new-note-page/NewNotePage.js
-<Container>
-  <Header>
-      <Body>
-          <Title>New Note</Title>
-      </Body>
-  </Header>
-  <Content padder>
-      <NewNoteForm onSubmit={this.onFormSave}/>
-  </Content>
-</Container>
-```
 
 ## A. ไฟล์เต็ม App.js 
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { Container, Text } from 'native-base';
+import { View, Text } from 'react-native';
+import {useEffectAsync} from 'useeffectasync'
+
+
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
@@ -157,29 +148,30 @@ import NewNotePage from './pages/new-note-page/NewNotePage';
 
 import { Provider } from 'react-redux';
 import configureStore from "./redux/store";
-
 const store = configureStore();
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+export default function App() {
 
-  async componentDidMount() {
+  const [isReady, setIsReady] = useState(false)
+
+  
+  useEffectAsync( async () => {
+   
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
       ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
+    })
 
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
+  
+    setIsReady(true)
+  }, [])
+
+
+   
+    if (!isReady) {
+      return <View></View>;
+
     }
 
     return (
@@ -187,6 +179,6 @@ export default class App extends React.Component {
         <NewNotePage/>
       </Provider>
     );
-  }
+  
 }
 ```
