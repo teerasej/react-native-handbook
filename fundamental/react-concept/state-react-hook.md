@@ -1,15 +1,42 @@
 
 # อัพเดตส่วนของ User Interface ด้วย State และ React Hook
 
-สามารถใช้คำสั่ง clone โปรเจคมาทำตามได้จากที่นี่ ถ้าต้องการ
 
-```bash
-git clone -b starter https://github.com/teerasej/react-native-simple-with-react-hook.git
+## 1. สร้างไฟล์ `CounterView.js`
+
+สร้างไฟล์ `CounterView.js` ตามด้านล่าง และเอามาวางใน `App.js`
+
+```jsx
+// CounterView.js
+
+import React from 'react'
+import { View, Text, Button } from 'react-native'
+
+export default function CounterView() {
+
+    let count = 0
+
+    const increase = () => {
+        count++
+        console.log('count:', count)
+    }
+
+    return (
+        <View>
+            <Text>{count}</Text>
+            <Button title="เพิ่ม" onPress={increase}></Button>
+        </View>
+    )
+}
+
 ```
 
-จากนั้นเปิดไฟล์ App.js เพื่อเริ่มการทำงาน
+- ทดสอบกดปุ่ม จะเห็นว่า ค่าตัวแปร count ถูกบวกเพิ่มขึ้นทุกครั้งที่กดปุ่ม แต่หน้าแอพยังเป็นเลข 0 อยู่
+- เป็นเพราะว่า โดยปกติ Component จะ render เพียงครั้งเดียวเท่านั้น
+- การควบคุมให้ Component render ตัวเองใหม่ จะใช้แนวคิดที่เรียกว่า **state**
 
-## 1. import react hook `useState`
+
+## 2. import react hook `useState`
 
 react hook เป็น module หนึ่งที่ติดมากับ react 16.8 เป็นต้นมา เราสามารถนำ react hook ที่ต้องการมาใช้ได้ผ่านคำสั่ง import 
 
@@ -27,202 +54,65 @@ useState สามารถใช้สร้าง **ตัวแปร** แ�
 const [ชื่อตัวแปร, function ที่ใช้อัพเดตตัวแปร] = useState(ค่าเริ่มต้นของตัวแปร);
 ```
 
-ในที่นี้เราจะประกาศ ตัวแปร state ขึ้นมา 2 ตัว นั่นคือ `isFirstTime` และ `isSignedIn`
-
-```js
-export default function App() {
-
-  const [isFirstTime, setFirstTime] = useState(true);
-  const [isSignedIn, setSignIn] = useState(false);
-```
 
 ## 3. เรียกใช้งาน function เพื่ออัพเดตค่าในตัวแปร state
 
 ดังนั้นหากต้องการ อัพเดตค่าให้ตัวแปร state เราจะทำผ่าน function ที่สร้างขึ้นมาโดยเฉพาะ
 
-เช่นเราจะมีการอัพเดตค่าใน `setSignIn()` function และ `setFirstTime()` ที่ถูกสร้างขึ้นมา
+เช่น
 
 ```js
-let signIn = () => {
-    setFirstTime(false);
-    setSignIn(true);
-}
+export default function CounterView() {
 
-let signOut = () => {
-    setSignIn(false);
-}
-```
+    // ในที่นี้เราจะประกาศ ตัวแปร state ขึ้นมา นั่นคือ `counter` และกำหนดค่าเริ่มต้นเป็น 0
+    const [counter, setCounter] = useState(0)
 
-## 4. ตัวแปร State ที่เปลี่ยนไป จะทำให้ function component ทำงานไม่เหมือนเดิม
+    // ไม่ใช้แล้ว เราจะใช้ตัวแปร state ที่ชื่อ counter แทน
+    // let count = 0
 
-การใช้ function อัพเดตค่าตัวแปร state จะทำให้ function component render ตัวเองใหม่ ซึ่งการเอาตัวแปร state มาใช้กำหนดเงื่อนไขการทำงานของ component จะทำให้เราควบคุมการแสดงผลของ component ได้
+    const increase = () => {
 
-เช่น ในทีนี้ เราใช้ตัวแปร `isFirstTime` และ `isSignedIn` ในการกำหนดหน้าตาให้ได้ตามเงื่อนไข
-
-```jsx
-if (isFirstTime) {
-      buttonComponent = (
-        <Button
-          title="ลงชื่อเข้าใช้"
-          onPress={signIn}
-        />
-      )
-    } else {
-      if (isSignedIn) {
-        buttonComponent = (
-          <Button
-            title="ออกจากระบบ"
-            onPress={signOut}
-          />
-        )
-        wordComponent = (
-          <Hello name="พล" website="nextflow.in.th" />
-        )
-      } else {
-        buttonComponent = (
-          <Button
-            title="ลงชื่อเข้าใช้"
-            onPress={signIn}
-          />
-        )
-        wordComponent = (
-          <Goodbye name="พล" website="nextflow.in.th" />
-        )
-      }
-    }
-```
-
-# ไฟล์เต็ม App.js 
-
-```jsx
-import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import Goodbye from './Goodbye';
-import Hello from './Hello';
-
-export default function App() {
-
-  const [isFirstTime, setFirstTime] = useState(true);
-  const [isSignedIn, setSignIn] = useState(false);
-  
-  let popUpAlert = () => {
-    Alert.alert('oops...', 'you do something');
-  }
-
-  let signIn = () => {
-    setFirstTime(false);
-    setSignIn(true);
-  }
-
-  let signOut = () => {
-    setSignIn(false);
-  }
-
- 
-    let username = 'พล';
-    let website = 'nextflow.in.th'
-
-    let buttonComponent;
-    let wordComponent;
-
-
-    if (isFirstTime) {
-      buttonComponent = (
-        <Button
-          title="ลงชื่อเข้าใช้"
-          onPress={signIn}
-        />
-      )
-    } else {
-      if (isSignedIn) {
-        buttonComponent = (
-          <Button
-            title="ออกจากระบบ"
-            onPress={signOut}
-          />
-        )
-        wordComponent = (
-          <Hello name="พล" website="nextflow.in.th" />
-        )
-      } else {
-        buttonComponent = (
-          <Button
-            title="ลงชื่อเข้าใช้"
-            onPress={signIn}
-          />
-        )
-        wordComponent = (
-          <Goodbye name="พล" website="nextflow.in.th" />
-        )
-      }
+        // เราจะอัพเดตค่าของตัวแปร state ที่ชื่อ `counter` ด้วย `setCounter()` function ที่ถูกสร้างขึ้นมา
+        setCounter(counter + 1)
+        console.log('count:', counter)
     }
 
-    return (
-      <View style={styles.container}>
-        {wordComponent}
-        {buttonComponent}
-      </View>
-    );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-```
-
-# ไฟล์เต็ม Goodbye.js 
-
-```jsx
-import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-
-export class Goodbye extends Component {
-    render() {
-        return (
-            <View>
-                <Text style={styles.defaultText}>Goodbye</Text>
-            </View>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-    defaultText: {
-        fontSize: 30,
-        color: 'red'
-    }
-});
-
-export default Goodbye
-```
-
-# ไฟล์เต็ม Hello.js 
-
-```jsx
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
-const Hello = () => {
     return (
         <View>
-            <Text style={styles.helloText}>Hello</Text>
+          {/* นำตัวแปร state มาใช้ได้เหมือนตัวแปรทั่วไป*/}
+            <Text>{counter}</Text>
+            <Button title="เพิ่ม" onPress={increase}></Button>
+        </View>
+    )
+}
+```
+
+
+# ไฟล์เต็ม `CounterView.js`
+
+```jsx
+
+
+import React, { useState } from 'react'
+import { View, Text, Button } from 'react-native'
+
+export default function CounterView() {
+
+    const [counter, setCounter] = useState(0)
+    let count = 0
+
+    const increase = () => {
+        counter++
+        console.log('count:', counter)
+    }
+
+    return (
+        <View>
+            <Text>{count}</Text>
+            <Button title="เพิ่ม" onPress={increase}></Button>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  }
-});
-
-export default Hello
 ```
+
