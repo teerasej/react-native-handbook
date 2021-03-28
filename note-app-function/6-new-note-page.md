@@ -1,5 +1,5 @@
 
-# 6. สร้างหน้า New Note Page
+# สร้างหน้า New Note Page
 
 ## 1. สร้างไฟล์ NewNotePage.js
 

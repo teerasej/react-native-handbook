@@ -1,5 +1,5 @@
 
-# 3. ติดตั้ง UI Framework
+# ติดตั้ง UI Framework
 
 - [ดูเพิ่มเติมเกี่ยวกับ Nativebase UI](https://docs.nativebase.io/Components.html#Components)
 
