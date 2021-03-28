@@ -65,6 +65,9 @@ const initialState = {
     notes: []
 }
 
+// หากมี action ใหม่ส่งให้ reducer 
+// ทาง redux store จะส่ง state object ปัจจุบันเข้ามาใน function ด้วย 
+// เพื่อให้ เราสามารถอ้างอิงข้อมูลปัจจุบันใน redux state ปัจจุบันได้ ก่อนที่จะใช้มันสร้าง reduxt state object ใหม่
 export default (state = initialState, { type, payload }) => {
     switch (type) {
 
@@ -114,8 +117,10 @@ import { useSelector } from 'react-redux';
 
 export default function HomePage({ navigation }) {
 
-    // function ใน useSelector จะได้รับ redux state ในตอนเริ่ม render ครั้งแรก และทุกครั้งที่ reducer return ค่า redux state object ใหม่ออกมา
+    // function ใน useSelector จะได้รับ redux state ในตอนเริ่ม render ครั้งแรก และทุกครั้งที่ reducer return ค่า redux state object ใหม่ออกมา จะทำให้ component render ตัวเองใหม่
+
     // เราจึงสามารถเลือกค่า property จาก redux state มาเก็บในตัวแปร เพื่อใช้ใน component ได้ 
+
     // ตัวอย่างนี้ เราดึง property .notes เพื่อเอามาใช้เป็น array แสดงใน List ของหน้า Homepage
     const notes = useSelector(state => state.notes)
 
