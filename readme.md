@@ -13,7 +13,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 4. [Connect Web API](fundamental/react-web-api/README.md)
 5. [SQLite](fundamental/react-sqlite/README.md)
 
-# Example part
+# Example part (Class Component)
 
 - **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api.md)
 - **SQLite Database:** [บันทึกข้อมูล](example-part/save-data-sqlite.md)
@@ -22,11 +22,10 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 # + Workshop 
 
-- [Counter](counter/README.md)
-- [Counter + Redux](counter-redux/readme.md)
-- Note Application: [Function component](note-app-function/README.md) | [Class Component](note-app/README.md)
-- [Barcode Checker](barcode-checker/README.md)
-- [Branch Locator](branch-locator/README.md)
+- **Counter + Redux:** [แบบ Function component](counter-redux-function/readme.md) | [แบบ Class Component](counter-redux/readme.md)
+- **Note Application**: [แบบ Function component](note-app-function/README.md) | [แบบ Class Component](note-app/README.md)
+- **Barcode Checker** [แบบ Class Component](barcode-checker/README.md)
+- **Branch Locator** [แบบ Class Component](branch-locator/README.md)
 
 # Publishing 
 
