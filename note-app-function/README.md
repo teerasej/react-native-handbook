@@ -18,9 +18,10 @@
 5. [สร้าง และใช้งานหน้า HomePage](4-home-page.md)
 6. [กำหนดค่าเพื่อใช้แสดงผลใน List](5-data-for-list.md)
 
-## Redux Form
+## Form
 
 7. [สร้างหน้า New Note Page](6-new-note-page.md)
+8. [การใช้ formik จัดการฟอร์ม และตรวจสอบข้อมูล](7-formik-validate-and-get-data-form.md)
 
 ## Redux
 
@@ -29,14 +30,14 @@ Redux เป็น module ที่สามารถนำมาใช้งา
 ![Paper React_React_Native 85](https://user-images.githubusercontent.com/85179/98917159-9ed53c80-24fe-11eb-99c2-6d22855524ea.png)
 
 
-8. [Setup Redux](7-setup-redux.md)
+9. [สร้าง และตั้งค่า Redux](8-setup-redux.md)
 
 ## React Navigation
 
-9. [ติดตั้งใช้งาน react-navigation](8-setup-navigation.md)
+10. [ติดตั้งใช้งาน react-navigation](9-setup-navigation.md)
 
 
 ## Redux in Action
 
-10. [สร้างกลไกการ save note](10-action-new-note.md)
+11. [สร้างกลไกการ save note](10-action-new-note.md)
 
