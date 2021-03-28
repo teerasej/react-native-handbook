@@ -29,13 +29,13 @@ expo init nextflow-note-app
 ## 2. ติดตั้ง Module 
 
 ```bash
-npm install redux react-redux redux-logger formik @react-navigation/native @react-navigation/stack native-base yup
+npm install redux react-redux redux-logger formik @react-navigation/native @react-navigation/stack native-base yup useeffectasync
 ```
 
 หรือ
 
 ```bash
-yarn add redux react-redux redux-logger formik @react-navigation/native @react-navigation/stack native-base yup
+yarn add redux react-redux redux-logger formik @react-navigation/native @react-navigation/stack native-base yup useeffectasync
 ```
 
 ## 3. ติดตั้ง Module สำหรับระบบ Navigation 
