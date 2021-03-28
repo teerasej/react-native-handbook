@@ -116,6 +116,8 @@ export default function App() {
 ```js
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
+// เพิ่มส่วนนี้ เป็นการเรียกใช้ Button component จาก module ชื่อ react-native
 import { Button } from 'react-native';
 ```
 
