@@ -42,9 +42,10 @@ Command `link` unrecognized. Make sure that you have run `npm install` and that 
 
 ```jsx
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import { View, Text } from 'react-native';
+import {useEffectAsync} from 'useeffectasync'
 
 // import Font มาจาก package expo-font
 import * as Font from 'expo-font';
@@ -53,50 +54,37 @@ import { Ionicons } from '@expo/vector-icons';
 
 // แปลง Function component 
 // เป็น Class component 
-export default class App extends React.Component {
+export default function App() {
 
-  // Constructor method, ทำงานเป็นตัวแรกตอน class App ถูกสร้างขึ้นมาใช้งานในระบบ
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+  const [isReady, setIsReady] = useState(false)
 
-  // Life cycle method `componentDidMount()` 
   // ทำงานหลังจาก App component ถูกสร้างขึ้นแสดงบนหน้าแอพแล้ว
-  async componentDidMount() {
-
+  useEffectAsync( async () => {
     // สั่งให้ Load font เพื่อใช้งานใน UI Component ที่สร้างด้วย Native base
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
       ...Ionicons.font,
-    });
+    })
 
     // ตั้งค่า State ใหม่ เพื่อให้ App component ทำการ render ตัวเองอีกครั้ง
-    this.setState({ isReady: true });
-  }
+    setIsReady(true)
+  }, [])
 
-  render() {
-    
+
     // แสดงตัว Loading ถ้า state ไม่พร้อม 
     // เพื่อป้องกันการ error เวลาที่ load font ให้กับ Native base UI ไม่เสร็จ
-    if (!this.state.isReady) {
-      return <AppLoading />;
+    if (!isReady) {
+      return <AppLoading/>;
     }
 
     // แสดง User Interface ที่แท้จริงของแอพ
     return (
       <View>
-        <Text style={{
-          textAlign: 'center',
-          }}>
-            test...
-        </Text>
+        <Text>Hey..............</Text>
       </View>
     );
-  }
+  
 }
 ```
 
