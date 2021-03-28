@@ -17,14 +17,13 @@ git clone -b start-for-redux https://github.com/teerasej/counter-redux-native-ap
 
 5. [Setup Redux](5-setup-redux-system.md)
 6. [Setup Redux store ให้ App component](6-setup-redux-store.md)
-7. [เชื่อม Component เข้ากับ Redux store](7-connect-component-to-redux.md)
-8. [ใช้ redux state จาก reducer ใน component ที่ต้องการ](8-use-redux-state.md)
+7. [ใช้ redux state จาก reducer ใน component ที่ต้องการ](7-use-redux-state.md)
 
 ## Redux: dispatch object
 
-9. [กำหนดประเภทของ Action (Action Type)](9-create-action-type.md)
-10.  [กำหนด dispatch function ให้ Component เรียกใช้ผ่าน Props](10-declare-dispatch.md)
-11.  [กำหนดให้ reducer จัดการ Action และ payload ](11-update-redux-state-in-reducer.md)
+8. [กำหนดประเภทของ Action (Action Type)](8-create-action-type.md)
+9.  [กำหนด dispatch function ให้ Component เรียกใช้ผ่าน Props](9-declare-dispatch.md)
+10.  [กำหนดให้ reducer จัดการ Action และ payload ](10-update-redux-state-in-reducer.md)
 
 
 

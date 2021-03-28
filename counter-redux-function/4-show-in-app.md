@@ -3,24 +3,25 @@
 
 
 ```jsx
-// src/App.js
+// App.js
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CounterNumber from './components/CounterNumber';
-import IncreaseButton from './components/IncreaseButton';
-
+import CounterNumber from './CounterNumber';
+import IncreaseButton from './IncreaseButton';
 
 export default function App() {
   return (
-    
-      <View style={styles.container}>
-        <CounterNumber />
-        <IncreaseButton />
-        <StatusBar style="auto" />
-      </View>
-    
+    <View style={styles.container}>
+      
+      
+      {/* แสดงตัวนับ และปุ่มเพิ่มจำนวน */}
+      <CounterNumber/>
+      <IncreaseButton/>
+
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

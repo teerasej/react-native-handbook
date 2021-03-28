@@ -1,31 +1,62 @@
 
 # สร้างส่วนแสดงจำนวน Counter
 
-สร้างไฟล์ `src\components\CounterNumber.js`
+## 1. สร้างไฟล์ `CounterNumber.js`
 
 ```jsx
-// snippet: rnc
-// src/components/CounterNumber.js
+// snippet: rnfc
+// CounterNumber.js
 
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import PropTypes from 'prop-types'
 
-export default class CounterNumber extends Component {
-    static propTypes = {
-        count: PropTypes.number
-    }
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-    static defaultProps = {
-        count: 0
-    }
-
-    render() {
-        return (
-            <View>
-                <Text>{this.props.count}</Text>
-            </View>
-        )
-    }
+export default function CounterNumber() {
+    return (
+        <View>
+            <Text style={styles.counter}>0</Text>
+        </View>
+    )
 }
+
+const styles = StyleSheet.create({
+    counter: {
+        fontSize: 60
+    }
+})
+
+```
+
+
+## 2. นำมาแสดงในแอพ
+
+```jsx
+// App.js
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import CounterNumber from './CounterNumber';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      
+    {/* แสดงตัวนับ */}
+      <CounterNumber/>
+
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 ```

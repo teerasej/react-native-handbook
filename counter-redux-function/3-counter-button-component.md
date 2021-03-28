@@ -1,30 +1,63 @@
 
 # สร้างส่วนปุ่มเพิ่มจำนวน Counter
 
-สร้างไฟล์ `src/components/IncreaseButton.js`
+## 1. สร้างไฟล์ `IncreaseButton.js`
 
 ```jsx
-// rnc
-// src/components/IncreaseButton.js
+// rnfs
+// IncreaseButton.js
 
-import React, { Component } from 'react'
-import { View, Text,Button } from 'react-native'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
 
-export default class IncreaseButton extends Component {
+export default function IncreaseButton() {
 
-    addMoreNumber = () => {
-       
+    const increase = () => {
+        console.log('increase...')
     }
 
-
-    render() {
-        return (
-            <div>
-                <button onClick={this.addMoreNumber}>เพิ่ม</button>
-            </div>
-        )
-    }
+    return (
+        <View>
+            <Button title="เพิ่ม" onPress={increase}></Button>
+        </View>
+    )
 }
+
+const styles = StyleSheet.create({})
+
+
+```
+
+## 2. นำมาแสดงในแอพ
+
+```jsx
+// App.js
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import CounterNumber from './CounterNumber';
+import IncreaseButton from './IncreaseButton';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <CounterNumber/>
+
+      {/* แสดงปุ่มเพิ่มจำนวน */}
+      <IncreaseButton/>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 ```
