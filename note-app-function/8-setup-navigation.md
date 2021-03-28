@@ -10,11 +10,7 @@ React Navigation เป็น module ด้าน UI ตัวหนึ่ง �
 
 ## 1. ติดตั้ง navigation สำหรับ expo
 
-รันคำสั่งด้านล่าง ใน Terminal
-
-```bash
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
-```
+ให้ดู[การติดตั้ง package ที่จำเป็นทั้งหมดในส่วนการติดตั้ง](1-setup-expo.md)
 
 ### ถ้าเจอปัญหาเกี่ยวกับ react-native-gesture-handler
 
@@ -42,19 +38,34 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 ```
 
-จากนั้นเราจะใช้ `NavigationContainer` ใส่ลงไปใน `<Provider>` แทน
+จากนั้นเราจะใช้ `NavigationContainer` ใส่ลงไปด้านใน `<Provider>` 
 
 เราสามารถตั้งค่าผ่าน JSX ชื่อ `<Stack.Navigator>` 
 
 เช่น 
 
 ```jsx
-<NavigationContainer>
-  <Stack.Navigator>
-    <Stack.Screen name="New Note Page" component={NewNotePage} />
-  </Stack.Navigator>
-</NavigationContainer>
+return (
+  <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: 'green',
+            },
+            headerTintColor: '#fff',
+          }}
+        >
+          <Stack.Screen name="Note App" component={HomePage} />
+          <Stack.Screen name="New Note Page" component={NewNotePage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+)
 ```
+
+- สามารถ[ดูวิธีปรับแต่ง Stack.Navigator ได้ที่นี่](https://reactnavigation.org/docs/headers#sharing-common-options-across-screens) 
+- และ[ดูวิธีปรับแต่ง Stack.Screen ได้ที่นี่](https://reactnavigation.org/docs/headers#adjusting-header-styles)
 
 ```jsx
 render() {
@@ -77,58 +88,66 @@ render() {
 ## 2.A ไฟล์เต็ม App.js
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import AppLoading from 'expo-app-loading';
-import { Container, Text } from 'native-base';
+import { View, Text } from 'react-native';
+import { useEffectAsync } from 'useeffectasync'
+
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import configureStore from "./redux/store";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
 
+const Stack = createStackNavigator();
 const store = configureStore();
 
+export default function App() {
 
+  const [isReady, setIsReady] = useState(false)
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
-
-  async componentDidMount() {
+  
+  useEffectAsync(async () => {
+   
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
       ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
+    })
+
+   
+    setIsReady(true)
+  }, [])
+
+
+  if (!isReady) {
+    return <View></View>;
+
   }
 
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: 'green',
+            },
+            headerTintColor: '#fff',
+          }}
+        >
+          <Stack.Screen name="Note App" component={HomePage} />
+          <Stack.Screen name="New Note Page" component={NewNotePage} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
 
-    return (
-        <Provider store={store}>
-            <NavigationContainer>
-              <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomePage} />
-                <Stack.Screen name="New Note Page" component={NewNotePage} />
-              </Stack.Navigator>
-            </NavigationContainer>
-        </Provider>
-    );
-  }
 }
 ```
 
@@ -138,66 +157,123 @@ export default class App extends React.Component {
 
 ```jsx
 // pages/home-page/HomePage.js จะเหลือแค่นี้
-render() {
-        return (
-           <Container>
-                <Content>
-                    <List>
-                        {
-                            this.props.notes.map((item, index) => {
-                                return (
-                                    <ListItem key={index}>
-                                        <Text>{item.title}</Text>
-                                    </ListItem>
-                                )
-                            })
-                        }
-                    </List>
-                </Content>
-           </Container>
-        )
-    }
+
+//...
+
+export default function HomePage() {
+
+    //...
+
+    return (
+        <Container>
+            {/* ส่วนที่เอาออก */}
+            {/* 
+            <Header>
+                <Body>
+                    <Title>Note App</Title>
+                </Body>
+            </Header>
+            */}
+            <Content>
+                <List>
+                    {
+                      //...
+                    }
+                </List>
+            </Content>
+        </Container>
+    )
+}
+
 ```
 
 ```jsx
 // pages/new-note-page/NewNotePage.js จะเหลือแค่นี้
-render() {
-        return (
-           <Container>
-                <Content padder>
-                    <NewNoteForm onSubmit={this.onFormSave}/>
-                </Content>
-            </Container>
-        )
+
+//...
+
+export default function NewNotePage() {
+
+    //...
+
+
+    return (
+        <Container>
+            
+            {/* ส่วนที่เอาออก */}
+            {/* 
+            <Header>
+                <Body>
+                    <Title>New Note</Title>
+                </Body>
+            </Header>
+            */}
+            <Content padder>
+                <Formik
+                    initialValues={{
+                        message: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, { resetForm  }) => {
+                        console.log(values)
+                        resetForm()
+                    }}
+                >
+                    ...
+                </Formik>
+            </Content>
+        </Container>
+    )
 }
+
 ```
 
 ## 5. ปรับให้ header มีปุ่มด้านขวาผ่าน navigationOptions
 
-เริ่มจากนำ component ที่ต้องใช้ในการสร้างปุ่มเข้ามาในไฟล์ `pages/home-page/HomePage.js`
+เริ่มจาก import Component และ hook ที่ต้องใช้เข้ามาในไฟล์ `pages/home-page/HomePage.js`
 
 ```jsx
 // pages/home-page/HomePage.js
 
-import { Container, Header, Title, Content, List, ListItem, Text, Body, Button, Icon} from 'native-base';
+// นำ component `Button` และ `Icon` ที่ต้องใช้ในการสร้างปุ่ม
+import { Body, Container, Content, Header, List, ListItem, Title,  Button, Icon } from 'native-base'
 
+// useLayoutEffect เป็น hook ที่จะทำงานหลังจาก component render ไปแล้วใช้ในการ re-render component ที่ต้องการ
+import React, { useLayoutEffect } from 'react'
 ```
 
-และเพิ่ม `componentDidMount()` เพื่อทำการ set ค่าให้ header ของหน้า home page
+และเรียกใช้ `useLayoutEffect()` เพื่อทำการ set ค่าให้ header ของหน้า home page
 
 ```jsx
-componentDidMount() {
-        this.props.navigation.setOptions({
-            headerRight: () => (
-                <Button transparent>
-                  <Icon name='add'/>
-                </Button>
-              ),
+
+//..
+
+// ดึงค่าตัวแปร navigation ออกมาจาก props ที่ส่งเข้ามาใน HomePage component
+// ถ้าไม่ใช้วิธีนี้ สามารถกำหนดเป็น HomePage(props) ได้ แต่ตอนเรียกใช้ navigation ต้องเรียกผ่าน props.navigation
+export default function HomePage({navigation}) {
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => (
+            <Button transparent>
+                <Icon 
+                    name='add' 
+                    style={
+                        {color: 'white'}
+                    }
+                />
+            </Button>
+          ),
         });
-    }
+      }, [navigation]);
+
+  //..
+
+}
 ```
 
-
+- [ดูเพิ่มเติม การใส่ปุ่มใน Header](https://reactnavigation.org/docs/header-buttons)
+- [ดูเพิ่มเติม `useLayoutEffect`](https://reactjs.org/docs/hooks-reference.html#uselayouteffect)
 
 ## 6. ใส่ function สำหรับเปิดไปหน้า new note
 
@@ -206,105 +282,189 @@ componentDidMount() {
 ```jsx
 // pages/home-page/HomePage.js
 
-componentDidMount() {
-        this.props.navigation.setOptions({
-            headerRight: () => (
-                <Button transparent 
-                onPress={() => {
-                    console.log('ok')
-                    this.props.navigation.navigate('New Note Page')
-                }}>
-                  <Icon name='add'/>
-                </Button>
-              ),
+export default function HomePage({navigation}) {
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+          headerRight: () => (
+            {/* เพิ่ม function ให้กับ props onPress ของปุ่ม */}
+            <Button transparent onPress={onPlusButtonPress}>
+                <Icon 
+                    name='add' 
+                    style={
+                        {color: 'white'}
+                    }
+                />
+            </Button>
+          ),
         });
+      }, [navigation]);
+
+    // เขียน function เปิดไปยัง component NewNotePage
+    const onPlusButtonPress = () => {
+        navigation.navigate('New Note Page')
     }
+
+  //..
+
+}
 ```
 
-ให้สังเกตว่า เราเข้าถึง `navigation` ผ่าน `this.props.navigation` แบบเดียวกับการเข้าถึง props อื่นๆ 
-
-
-## 6.A ไฟล์เต็ม `pages/home-page/HomePage.js`
-
-```jsx
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Container, Header, Title, Content, List, ListItem, Text, Body, Button, Icon} from 'native-base';
-
-export class HomePage extends Component {
-
-    componentDidMount() {
-        this.props.navigation.setOptions({
-            headerRight: () => (
-                <Button transparent onPress={() => {
-                    console.log('ok')
-                    this.props.navigation.navigate('New Note Page')
-                }}>
-                  <Icon name='add'/>
-                </Button>
-              ),
-        });
-    }
-
-
-    static propTypes = {
-        notes: PropTypes.array
-    }
-
-    static defaultProps = {
-        notes: [
-            { title: 'a' },
-            { title: 'b' },
-            { title: 'c' }
-        ]
-    }
-
-    render() {
-        return (
-            <Container>
-                <Content>
-                    <List>
-                        {
-                            this.props.notes.map((item, index) => {
-                                return (
-                                    <ListItem key={index}>
-                                        <Text>{item.title}</Text>
-                                    </ListItem>
-                                )
-                            })
-                        }
-                    </List>
-                </Content>
-            </Container>
-        )
-}
-}
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
-
-```
 
 ## 7. ถ้ากดปุ่ม save ใน NewNoteForm จะเป็นการบันทึกและเปิดกลับไปหน้าแรก
 
 ```js
 // pages/new-note-page/NewNotePage.js
 
-export class NewNotePage extends Component {
+//..
 
-  onFormSave = (values) => {
-    console.log(values);
-    this.props.navigation.goBack();
-  }
+// ดึงค่าตัวแปร navigation ออกมาจาก props ที่ส่งเข้ามาใน NewNotePage component
+// ถ้าไม่ใช้วิธีนี้ สามารถกำหนดเป็น NewNotePage(props) ได้ แต่ตอนเรียกใช้ navigation ต้องเรียกผ่าน props.navigation
+export default function NewNotePage({ navigation }) {
+
+  //..
+
+  return (
+        <Container>
+            <Content padder>
+                <Formik
+                    initialValues={{
+                        message: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, { resetForm  }) => {
+                        console.log(values)
+                        resetForm()
+
+                        // สั่ง navigation ให้ย้อนกลับไป
+                       navigation.goBack()
+                    }}
+                >
 
 }
+```
+
+## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
+
+```jsx
+import { Body, Container, Content, Header, List, ListItem, Title, Button, Icon } from 'native-base'
+import React, { useLayoutEffect } from 'react'
+import { View, Text } from 'react-native'
+
+export default function HomePage({ navigation }) {
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Button transparent onPress={onPlusButtonPress}>
+                    <Icon
+                        name='add'
+                        style={
+                            { color: 'white' }
+                        }
+                    />
+                </Button>
+            ),
+        });
+    }, [navigation]);
+
+    const onPlusButtonPress = () => {
+        navigation.navigate('New Note Page')
+    }
+
+    let notes = [
+        { title: 'a' },
+        { title: 'b' },
+        { title: 'c' }
+    ]
+
+    return (
+        <Container>
+            <Content>
+                <List>
+                    {
+                        notes.map((item, index) => {
+                            return (
+                                <ListItem key={index}>
+                                    <Text>{item.title}</Text>
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
+            </Content>
+        </Container>
+    )
+}
+
+```
+
+## B. ไฟล์เต็ม `pages/new-note-page/NewNotePage.js`
+
+```jsx
+import { Body, Header, Button, Container, Content, Input, Item, Label, Title } from 'native-base'
+import React from 'react'
+import { View, Text } from 'react-native'
+import * as yup from 'yup'
+import { Field, Formik } from "formik";
+
+export default function NewNotePage({ navigation }) {
+
+    const validationSchema = yup.object({
+        message: yup.string()
+            .required('Please fill something')
+            .min(3, 'fill something more...')
+    })
+
+
+    return (
+        <Container>
+            <Content padder>
+                <Formik
+                    initialValues={{
+                        message: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, { resetForm  }) => {
+                        console.log(values)
+                        resetForm()
+
+                        navigation.goBack()
+                    }}
+                >
+                    {
+                        ({ handleChange, handleBlur, handleSubmit, values, errors }) => {
+                            return (
+                                <View>
+                                    <Item stackedLabel >
+                                        <Label>Message: </Label>
+                                        <Field
+                                            id="message"
+                                            name="message"
+                                            component={Input}
+                                            value={values.message || ''}
+                                            onChangeText={handleChange('message')}
+                                            onBlur={handleBlur('message')}
+                                        />
+                                        {Boolean(errors.message) ?
+                                            (<Text>{errors.message}</Text>) : null
+                                        }
+                                    </Item>
+                                    <Button
+                                        block
+                                        primary
+                                        onPress={handleSubmit}
+                                    >
+                                        <Text>Save</Text>
+                                    </Button>
+                                </View>
+                            )
+                        }
+                    }
+                </Formik>
+            </Content>
+        </Container>
+    )
+}
+
 ```
