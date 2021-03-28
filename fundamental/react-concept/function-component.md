@@ -24,8 +24,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
+
       {/* ใช้งาน Hello component */}
       <Hello/>
+      
       <Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}/>
     </View>
   );
@@ -36,13 +38,13 @@ export default function App() {
 
 เริ่มจากสร้างไฟล์ `Hello.js` และเขียนโค้ดด้านล่าง
 
-ใช้ snippet ชื่อ **rnf** ได้ 
+ใช้ snippet ชื่อ **rnfs** ได้ 
 
 ```jsx
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const Hello = () => {
+export default function Hello() {
     return (
         <View>
             <Text style={styles.helloText}>Hello</Text>
@@ -57,7 +59,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Hello
 ```
 
 และกลับมาที่ไฟล์ `App.js` แล้วเขียนคำสั่ง Import component มาจากไฟล์ `Hello.js`
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const Hello = () => {
+export default function Hello() {
     return (
         <View>
             <Text style={styles.helloText}>Hello</Text>
@@ -119,11 +120,10 @@ const Hello = () => {
 }
 
 const styles = StyleSheet.create({
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  }
-});
+    helloText: {
+        fontSize: 30,
+        color: 'green'
+      }
+})
 
-export default Hello
 ```
