@@ -10,13 +10,13 @@ expo init nextflow-my-app
 ## 2. ติดตั้ง Node Module 
 
 ```bash
-npm install redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+npm install react-navigation react-navigation-stack
 ```
 
 หรือ
 
 ```bash
-yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+yarn add react-navigation react-navigation-stack
 ```
 
 
