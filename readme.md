@@ -18,9 +18,14 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 4. [Connect Web API](fundamental/react-web-api/README.md)
 5. [SQLite](fundamental/react-sqlite/README.md)
 
-# Example part (Class Component)
+# Example part 
 
-- **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api.md)
+## Function Component
+
+- **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api-axios.md)
+
+## Class Component
+
 - **SQLite Database:** [บันทึกข้อมูล](example-part/save-data-sqlite.md)
 - **JWT Sign in:** [Login with JWT](example-part/login-with-jwt.md)
 - **Google Map:** [Pin Marker on Map](example-part/pin-marker-on-map.md)

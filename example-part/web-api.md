@@ -12,10 +12,12 @@
 
 เราจะเริ่มจากการสร้าง function ที่ใช้ในการส่ง action object เข้า Redux store ด้วยวิธีนี้ จะทำให้เราสามารถส่ง action จาก component ไหนก็ได้ เพียงแค่ import function ของเราเข้าไปใช้งาน
 
-เปิดไฟล์ `redux/actions.js` 
+เปิดไฟล์ `redux/action-make-call.js` 
 
 ```js
-const startGetUser = async (dispatch) => {
+import { Types } from './actions'
+
+export const startGetUser = async (dispatch) => {
 
     const url = 'https://randomuser.me/api/?results=50';
 
