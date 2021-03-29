@@ -5,6 +5,11 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - [Slide](https://www.dropbox.com/s/cyhcqicdsereggb/React%20Native.pdf?dl=0)
 
+# Reference 
+
+- [Node Handbook](https://github.com/teerasej/node-handbook)
+- [React Handbook](https://github.com/teerasej/react-handbook)
+
 # Fundamental
 
 1. [React Fundamental](fundamental/react-concept/README.md)
