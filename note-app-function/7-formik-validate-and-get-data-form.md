@@ -226,7 +226,7 @@ export default function NewNotePage() {
                                             id="message"
                                             name="message"
                                             component={Input}
-                                            value={values.message || ''}
+                                            values={values.message || ''}
                                             onChangeText={handleChange('message')}
                                             onBlur={handleBlur('message')}
                                         />
