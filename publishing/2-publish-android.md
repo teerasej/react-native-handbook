@@ -3,15 +3,9 @@
 
 > [App Signing for Android](https://docs.expo.io/versions/latest/distribution/app-signing/)
 
-## 1. เช็ค Google Play Signing
 
-รันคำสั่งเพื่อเช็คว่าโปรเจคอยู่ในส่วนจัดการของ Google Play Signing หรือยัง
 
-```bash
-expo opt-in-google-play-signing
-```
-
-## 2. รันคำสั่งสร้างไฟล์ Android App Bundle  
+## 1. รันคำสั่งสร้างไฟล์ Android App Bundle  
 
 รันคำสั่ง ด้านล่างเพื่อเริ่มกระบวนการ 
 
@@ -41,7 +35,7 @@ Waiting for build to complete. You can press Ctrl+C to exit.
 Successfully built standalone app: https://expo.io/artifacts/e5cbb0dd-a798-4dd2-95c5-fca3fd873137
 ```
 
-## 3. สร้างไฟล์ Certificate และ Keystore 
+## 2. สร้างไฟล์ Certificate และ Keystore 
 
 ### Certificate
 
@@ -61,7 +55,7 @@ fetch:android:upload-cert
 expo fetch:android:keystore
 ```
 
-## 4. รันคำสั่ง build:android ปกติ ถ่้าต้องการ build ใหม่ 
+## 3. รันคำสั่ง build:android ปกติ ถ่้าต้องการ build ใหม่ 
 
 ```bash
 expo build:android -t app-bundle
