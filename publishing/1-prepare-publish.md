@@ -1,4 +1,3 @@
-![icon](https://user-images.githubusercontent.com/85179/113394518-99e82b00-93c2-11eb-9193-c091d6ecfba6.png)
 
 # 1. การเตรียมโปรเจค
 
