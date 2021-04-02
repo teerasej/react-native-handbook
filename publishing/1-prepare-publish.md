@@ -1,3 +1,4 @@
+![icon](https://user-images.githubusercontent.com/85179/113394518-99e82b00-93c2-11eb-9193-c091d6ecfba6.png)
 
 # 1. การเตรียมโปรเจค
 
@@ -89,3 +90,12 @@
 - assets/splash.png 
     - ควรมีขนาด 1242 x 2436 px 
     - เป็นไฟล์ png 
+
+### icon.png
+
+![icon](https://user-images.githubusercontent.com/85179/113394518-99e82b00-93c2-11eb-9193-c091d6ecfba6.png)
+
+## splash.png
+
+![splash](https://user-images.githubusercontent.com/85179/113394765-06632a00-93c3-11eb-9106-fac46fcf8b37.png)
+
