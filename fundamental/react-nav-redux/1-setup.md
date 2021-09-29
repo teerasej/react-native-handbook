@@ -19,13 +19,13 @@ yarn install
 ## หรือติดตั้ง module ด้วยตัวเองในโปรเจค
 
 ```bash
-npm install redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+npm install redux react-redux react-navigation react-navigation-stack redux-logger
 ```
 
 หรือ 
 
 ```bash
-yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger
+yarn add redux react-redux react-navigation react-navigation-stack redux-logger
 ```
 
 ## โปรเจคสมบูรณ์
