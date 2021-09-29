@@ -19,14 +19,14 @@ yarn install
 ## หรือติดตั้ง module ด้วยตัวเองในโปรเจค
 
 ```bash
-npm install redux react-redux redux-logger @react-navigation/native-stack @react-navigation/native expo-app-loading formik
+npm install redux react-redux redux-logger @react-navigation/native-stack @react-navigation/native expo-app-loading formik native-base@next react-native-svg styled-components styled-system
 expo install react-native-screens react-native-safe-area-context expo-font
 ```
 
 หรือ 
 
 ```bash
-yarn add redux react-redux @react-navigation/native-stack @react-navigation/native @react-navigation/stack redux-logger expo-app-loading formik
+yarn add redux react-redux redux-logger @react-navigation/native-stack @react-navigation/native expo-app-loading formik native-base@next react-native-svg styled-components styled-system
 expo install react-native-screens react-native-safe-area-context expo-font
 ```
 
