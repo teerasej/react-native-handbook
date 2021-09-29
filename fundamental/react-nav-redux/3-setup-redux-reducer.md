@@ -1,7 +1,7 @@
 
 # 3. สร้าง Redux Reducer
 
-สร้างไฟล์ `redux/note.reducer.js`
+สร้างไฟล์ `redux/reducer.js`
 
 ```js
 // ใช้ snippet: rxreducer

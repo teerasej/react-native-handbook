@@ -14,23 +14,12 @@
 สร้างไฟล์ `redux/store.js`
 
 ```js
-import { createStore, combineReducers } from 'redux';
-
-import noteReducer from "./note.reducer";
-import { reducer as formReducer } from "redux-form";
+import { createStore } from 'redux'
+import reducer from "./reducer"
 
 export default configureStore = () => {
-    const store = createStore(
-        // `combineReducers` เป็น function สำหรับการรวม Reducer ต่างๆ เข้าด้วยกัน
-        combineReducers({
-            // NoteReducer เป็น function ที่เราสร้างไว้
-            note: noteReducer,
-            // จะเห็นว่าในที่นี้เรามี Form Reducer ที่เอาไว้จัดการข้อมูลจาก Form ด้วย
-            form: formReducer
-        })
-    );
-
-    return store;
+    const store = createStore(reducer)
+    return store
 }   
 ```
 

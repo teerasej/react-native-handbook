@@ -32,48 +32,46 @@ render() {
 ## A. ไฟล์เต็ม App.js
 
 ```jsx
-import React from 'react';
-import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+//import 'react-native-gesture-handler';
 import AppLoading from 'expo-app-loading';
 import { Container, Text, Button, Icon } from 'native-base';
-import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
-import { Provider } from 'react-redux';
-import createStore from "./redux/store";
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator();
-const store = createStore();
+import configureStore from "./redux/store";
+import { Provider } from "react-redux";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+const store = configureStore();
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
+const Stack = createNativeStackNavigator();
 
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
+export default function App() {
 
+  let [fontsLoaded] = useFonts({
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    ...Ionicons.font,
+  });
+
+  if (!fontsLoaded) {
     return (
-      <Provider store={store}>
+      <AppLoading />
+    )
+  }
+
+  return (
+    <Provider store={store}>
       <NavigationContainer>
+        {/* กำหนด Stack */}
         <Stack.Navigator>
+          {/* กำหนดหน้าแอพแรก ชื่อว่า Home และเลือก component HomePage เป็นตัว User Interface */}
           <Stack.Screen name="Home" component={HomePage}
             options={(props) => {
               return {
@@ -88,15 +86,13 @@ export default class App extends React.Component {
               }
             }}
           />
-          <Stack.Screen name="CreateNote" component={NewNotePage} 
-            options={{
-              title: 'New Note'
-            }}
+          <Stack.Screen name="CreateNote" component={NewNotePage}
+            options={{ title: 'New Note' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
-      </Provider>
-    );
-  }
+    </Provider>
+  );
 }
+
 ```

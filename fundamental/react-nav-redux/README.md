@@ -23,11 +23,10 @@ Redux ประกอบไปด้วย 3 ส่วนที่ต้อง�
 4. [สร้าง Redux Store](4-setup-redux-store.md)
 5. [Setup redux store เข้ากับ navigation ผ่าน Provider](5-setup-redux-store-to-provider.md)
 6. [กำหนดปุ่ม Save ให้มีการย้อนกลับไปหน้าแรก](6-save-button-to-home.md)
-7. [เชื่อม HomePage และ NewNotePage เข้า Redux](7-connect-to-redux.md)
-8. [เรียกใช้ค่าจาก redux state ใน HomePage](8-access-redux-state.md)
+7. [เรียกใช้ค่าจาก redux state ใน HomePage](8-access-redux-state.md)
 
 ## Redux Action 
 
-9. [สร้าง Action ที่เกิดขึ้นในระบบ](9-action.md)
-10. [กำหนด function ที่ต้องการสร้าง Action ใน NewNotePage](10-map-dispatch-action.md)
-11. [กำหนด Action Type ที่ Reducer ต้องเอาข้อมูลมาอัพเดตใน redux state](11-reducer-update-state.md)
+8. [สร้าง Action ที่เกิดขึ้นในระบบ](9-action.md)
+9. [กำหนด function ที่ต้องการสร้าง Action ใน NewNotePage](10-map-dispatch-action.md)
+10. [กำหนด Action Type ที่ Reducer ต้องเอาข้อมูลมาอัพเดตใน redux state](11-reducer-update-state.md)
