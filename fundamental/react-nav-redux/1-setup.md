@@ -1,7 +1,7 @@
 
 # 1. เตรียมโปรเจคให้พร้อมใช้งาน
 
-1. [ดาวน์โหลดไฟล์ zip และแตกไฟล์](https://www.dropbox.com/s/rw9x0eswgd8spwf/nextflow-note-app-starter.zip?dl=0)
+1. [ดาวน์โหลดไฟล์ zip และแตกไฟล์](https://github.com/teerasej/react-native-note-app-mobile/tree/C-starter)
 2. เปิดโฟลเดอร์โปรเจคขึ้นมาใน Visual Studio Code
 3. เปิด Menu View > Terminal
 4. รันคำสั่ง 
