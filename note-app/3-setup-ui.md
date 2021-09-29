@@ -46,7 +46,6 @@ Command `link` unrecognized. Make sure that you have run `npm install` and that 
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 // import ตัว Loading มาแสดงถ้าแอพยังไม่พร้อมทำงาน
 import AppLoading from 'expo-app-loading';
 
@@ -54,33 +53,19 @@ import AppLoading from 'expo-app-loading';
 import { Ionicons } from '@expo/vector-icons';
 
 // import Font มาจาก package expo-font
-import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 
 
 
 export default function App() {
 
-  const [isReady, setIsReady] = useState(false)
+  let [fontsLoaded] = useFonts({
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    ...Ionicons.font,
+  });
 
-  useEffect(() => {
-
-    // สั่งให้ Load font เพื่อใช้งานใน UI Component ที่สร้างด้วย Native base
-    let loadFont = async () => {
-      await Font.loadAsync({
-        Roboto: require('native-base/Fonts/Roboto.ttf'),
-        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        ...Ionicons.font,
-      });
-
-      // ตั้งค่า State ใหม่ เพื่อให้ App component ทำการ render ตัวเองอีกครั้ง
-      setIsReady(true)
-    }
-
-    // เริ่มการ load font
-    loadFont();
-  }, [])
-
-  if(!isReady) {
+  if (!fontsLoaded) {
     return (
       <AppLoading />
     )
