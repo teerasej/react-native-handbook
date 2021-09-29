@@ -8,11 +8,11 @@
 ให้รันคำสั่งติดตั้ง 
 
 ```bash
-npm install @react-navigation/native @react-navigation/stack
+npm install @react-navigation/native-stack @react-navigation/native
 ```
 หรือ
 ```bash
-yarn add @react-navigation/native @react-navigation/stack
+yarn add @react-navigation/native-stack @react-navigation/native
 ```
 
 และสุดท้ายอย่าลืม
@@ -21,13 +21,6 @@ yarn add @react-navigation/native @react-navigation/stack
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 ```
 
-## 1. import `react-native-gesture-handler`
-
-เปิดไฟล์ `App.js` และใช้คำสั่ง import `react-native-gesture-handler` เพื่อป้องกันแอพพัง ([อ้างอิงจาก React Navigation 5](https://reactnavigation.org/docs/en/getting-started.html#installing-dependencies-into-a-bare-react-native-project)) 
-
-```js
-import 'react-native-gesture-handler';
-```
  
 ## 2. import `NavigationContainer` และใช้กำหนด Route ของแอพพลิเคชั่น
 
@@ -37,7 +30,7 @@ import module สำหรับการทำ Navigation
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 ```
 
 จากนั้นสร้าง component จาก `createStackNavigator` function 
@@ -132,69 +125,61 @@ return (
 ## A. ไฟล์เต็ม App.js
 
 ```jsx
-import React from 'react';
-import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+//import 'react-native-gesture-handler';
 import AppLoading from 'expo-app-loading';
 import { Container, Text, Button, Icon } from 'native-base';
-import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
+export default function App() {
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+  let [fontsLoaded] = useFonts({
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    ...Ionicons.font,
+  });
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
-
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
-
+  if (!fontsLoaded) {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomePage}
-            options={(props) => {
-              return {
-                headerTitle: <Text>Home</Text>,
-                headerRight: () => (
-                  <Button transparent
-                    onPress={() => props.navigation.navigate('CreateNote')}
-                  >
-                    <Icon name='add' />
-                  </Button>
-                ),
-              }
-            }}
-          />
-          <Stack.Screen name="CreateNote" component={NewNotePage} 
-            options={{
-              title: 'New Note'
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
+      <AppLoading />
+    )
   }
+
+  return (
+    <NavigationContainer>
+      {/* กำหนด Stack */}
+      <Stack.Navigator>
+        {/* กำหนดหน้าแอพแรก ชื่อว่า Home และเลือก component HomePage เป็นตัว User Interface */}
+        <Stack.Screen name="Home" component={HomePage}
+      options={(props) => {
+        return {
+          headerTitle: <Text>Home</Text>,
+          headerRight: () => (
+            <Button transparent
+              onPress={() => props.navigation.navigate('CreateNote')}
+            >
+              <Icon name='add' />
+            </Button>
+          ),
+        }
+      }}
+    />
+  <Stack.Screen name="CreateNote" component={NewNotePage} 
+    options={{ title: 'New Note' }}
+    />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
+
 ```
 
