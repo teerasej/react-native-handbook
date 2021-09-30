@@ -33,10 +33,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 ```
 
-จากนั้นสร้าง component จาก `createStackNavigator` function 
+จากนั้นสร้าง component จาก `createNativeStackNavigator` function 
 
 ```js
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 ```
 
 ในส่วนของ App component เราจะกำหนดใช้ `<NavigationContainer>` ใน JSX

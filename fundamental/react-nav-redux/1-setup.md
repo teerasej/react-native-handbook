@@ -13,7 +13,7 @@ npm install
 หรือ 
 
 ```bash
-yarn install 
+yarn 
 ```
 
 ## หรือติดตั้ง module ด้วยตัวเองในโปรเจค
@@ -32,4 +32,4 @@ expo install react-native-screens react-native-safe-area-context expo-font
 
 ## โปรเจคสมบูรณ์
 
-- [ดาวน์โหลดไฟล์ zip ของโปรเจคที่เสร็จแล้ว](https://www.dropbox.com/s/sqxpmk7ubxxtjpy/nextflow-note-app-finish.zip?dl=0)
+- [ดาวน์โหลดไฟล์ zip ของโปรเจคที่เสร็จแล้ว](https://github.com/teerasej/react-native-note-app-mobile/tree/C-finish-function-component)
