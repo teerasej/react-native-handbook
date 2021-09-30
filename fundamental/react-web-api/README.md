@@ -1,12 +1,12 @@
 
 # Connect to Web API
 
-- [ดาวน์โหลดโปรเจคเริ่มต้น](https://www.dropbox.com/s/m2nlo5gc3a1dbku/nextflow-contact-app-starter.zip?dl=0)
-- [ดาวน์โหลดโปรเจคสมบูรณ์](https://www.dropbox.com/s/ujtx2gewv7phbxx/nextflow-contact-app-finish.zip?dl=0)
+- [ดาวน์โหลดโปรเจคเริ่มต้น](https://github.com/teerasej/react-native-random-user-contact/tree/starter)
+- [ดาวน์โหลดโปรเจคสมบูรณ์](https://github.com/teerasej/react-native-random-user-contact/tree/finish-oct-2021)
 
 ## โหลดข้อมูลจาก Web API มาแสดงใน HomePage
 
-1. [สร้าง function `startGetUser`](1-create-func-startGetUser.md)
+1. [สร้าง function `startGetUser` เพื่อรันคำสั่งดึงข้อมูลจาก Web API](1-create-func-startGetUser.md)
 2. [เรียกใช้ Action Function ใน HomePage](2-call-function-in-homepage.md)
 3. [ส่ง array ที่ได้จาก action ลง redux state](3-keep-array-user-in-redux-state.md)
 4. [แสดงข้อมูล Users จาก Redux state ในหน้า HomePage](4-map-state-users-to-homepage.md)

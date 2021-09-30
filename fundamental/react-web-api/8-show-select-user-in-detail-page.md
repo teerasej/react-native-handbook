@@ -3,92 +3,72 @@
 
 เปิดไฟล์ `pages/detail-page/DetailPage.js`
 
-## 1. เริ่มจากกำหนดค่าใน mapStateToProps
+## 1. เรียกใช้ค่า selectedUser มาจาก redux state
 
 ```js
-const mapStateToProps = (state) => ({
-    selectedUser: state.app.selectedUser
-})
+export default function DetailPage() {
+
+    // เลือกดึง property selectedUser มาจาก redux state
+    const selectedUser = useSelector(state => state.selectedUser)
 ```
 
 ## 2. แสดงข้อมูล User ที่ถูกเลือก ใน JSX 
 
 ```jsx
-render() {
-
-        const user = this.props.selectedUser;
-
-        return (
-            <Content padder>
-                <List>
-                    <ListItem>
-                        <Text>ชื่อ: {user.name.first}</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>นามสกุล: {user.name.last}</Text>
-                    </ListItem>
-                </List>
-                <Button iconLeft block 
+return (
+        <Content padder>
+            <List>
+                <ListItem>
+                    <Text>ชื่อ: {selectedUser.name.first}</Text>
+                </ListItem>
+                <ListItem>
+                    <Text>นามสกุล: {selectedUser.name.last}</Text>
+                </ListItem>
+            </List>
+            <Button iconLeft block
+                onPress={() => callUser(selectedUser.phone)}
                 style={{
                     marginTop: 10
                 }}>
-                    <Icon name="call" />
-                    <Text>โทร: {user.phone}</Text>
-                </Button>
-            </Content>
-        )
-    }
+                <Icon name="call" />
+                <Text>โทร: {selectedUser.phone}</Text>
+            </Button>
+        </Content>
+    )
 ```
 
 ## A. ไฟล์เต็ม `pages/detail-page/DetailPage.js`
 
 ```jsx
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Content, List, ListItem, Text, Body, Button, Icon } from 'native-base';
-import { connect } from 'react-redux'
+import React from 'react'
+import { Content, List, ListItem, Text, Button, Icon } from 'native-base';
+import { useSelector } from 'react-redux';
 
-import actions from "../../redux/actions";
+export default function DetailPage() {
 
-export class DetailPage extends Component {
+    const selectedUser = useSelector(state => state.selectedUser)
 
-    static navigationOptions = {
-        title: 'Detail'
-    };
-
-    render() {
-
-        const user = this.props.selectedUser;
-
-        return (
-            <Content padder>
-                <List>
-                    <ListItem>
-                        <Text>ชื่อ: {user.name.first}</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>นามสกุล: {user.name.last}</Text>
-                    </ListItem>
-                </List>
-                <Button iconLeft block 
+    return (
+        <Content padder>
+            <List>
+                <ListItem>
+                    <Text>ชื่อ: {selectedUser.name.first}</Text>
+                </ListItem>
+                <ListItem>
+                    <Text>นามสกุล: {selectedUser.name.last}</Text>
+                </ListItem>
+            </List>
+            <Button iconLeft block
+                
                 style={{
                     marginTop: 10
                 }}>
-                    <Icon name="call" />
-                    <Text>โทร: {user.phone}</Text>
-                </Button>
-            </Content>
-        )
-    }
-}
-
-const mapStateToProps = (state) => ({
-    selectedUser: state.app.selectedUser
-})
-
-const mapDispatchToProps = {
+                <Icon name="call" />
+                <Text>โทร: {selectedUser.phone}</Text>
+            </Button>
+        </Content>
+    )
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailPage)
 ```

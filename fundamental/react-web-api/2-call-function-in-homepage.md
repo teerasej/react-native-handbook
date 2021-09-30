@@ -3,65 +3,87 @@
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
-## 1. กำหนด function ให้ props ผ่าน mapDispatchToProps
+## 1. เรียกใช้ dispatch function ของ redux ผ่าน react hook ชื่อ `useDispatch()`
 
 ```js
-const mapDispatchToProps = dispatch => ({
-    startGetUser: () => actions.startGetUser(dispatch)
-})
+export default function HomePage() {
+
+    const dispatch = useDispatch()
+
+    //...
+
+}
 ```
 
 ## 2. เรียกใช้ function ตอนหน้า HomePage แสดงขึ้นมาแล้ว 
 
+- ในที่นี้เราจะใช้ react hook ที่ชื่อ `useEffect` ในการรันคำสั่งหลังจาก render component ขึ้นมาแล้ว
+- function `startGetUser` เราสร้างเอาไว้ใน `redux/action.js`
+- และเราต้องการ dispatch action จากภายใน function เราเลยส่ง dispatch เข้าไปเพื่อใช้งาน
+
 ```js
-componentDidMount() {
-        this.props.startGetUser();
-}
+useEffect(() => {
+    startGetUser(dispatch)
+}, [])
 ```
 
 ## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
 
 ```jsx
-mport React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { Content, List, ListItem, Text, Body, Button, Icon, Left, Thumbnail, Right } from 'native-base';
-import actions from "../../redux/actions";
+import React, { useEffect } from 'react'
+import { Container, Content, List, ListItem, Text, Body, Left, Right, Thumbnail } from 'native-base';
 
-export class HomePage extends Component {
-    
-    static navigationOptions = {
-        title: 'Contacts'  
-    };
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/core';
+import { createAction_UserSelected, startGetUser } from '../../redux/actions';
 
-    componentDidMount() {
-        this.props.startGetUser();
+export default function HomePage() {
+
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
+    const users = useSelector(state => state.users)
+
+    useEffect(() => {
+        startGetUser(dispatch)
+    }, [])
+
+    const openDetail = (user) => {
+        navigation.navigate('Detail')
     }
 
-    openDetail = () => {
-        this.props.navigation.navigate('Detail');
+    if (users == undefined) {
+        return <Text>Loading</Text>
     }
 
-    render() {
-        return (
-            <Content padder>
+    return (
+        <Container>
+            <Content>
                 <List>
-                    <ListItem button onPress={() => this.openDetail()}>
-                        <Text>Hello</Text>
-                    </ListItem>
+                    {
+                        users.map((item, index) => {
+                            return (
+                                <ListItem thumbnail
+                                    button
+                                    key={index}
+                                    onPress={() => { openDetail(item) }}
+                                >
+                                    <Left>
+                                        <Thumbnail source={{ uri: item.picture.thumbnail }} />
+                                    </Left>
+                                    <Body>
+                                        <Text>{item.name.first} {item.name.last}</Text>
+                                        <Text note>{item.phone}</Text>
+                                    </Body>
+                                    <Right></Right>
+                                </ListItem>
+                            )
+                        })
+                    }
                 </List>
             </Content>
-        )
-    }
+        </Container>
+    )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = dispatch => ({
-    startGetUser: () => actions.startGetUser(dispatch)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
 ```

@@ -3,21 +3,17 @@
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
-## 1. เริ่มจากกำหนด function ผ่าน mapDispatchToProps
+
+
+## 1. เรียกใช้ function 
+
+เรียกใช้ function `createAction_UserSelected` โดยการส่ง user object เข้าไป จาก function `openDetail()` ที่จะทำงานเมื่อมีการกดเลือกผู้ใช้
 
 ```js
-const mapDispatchToProps = dispatch => ({
-    startGetUser: () => actions.startGetUser(dispatch),
-    selectUser: (user) => actions.selectUser(user)
-})
-```
-
-## 2. เรียกใช้ function 
-
-```js
-openDetail = (user) => {
-    this.props.selectUser(user);
-    this.props.navigation.navigate('Detail');
+const openDetail = (user) => {
+    let action = createAction_UserSelected(user)
+    dispatch(action)
+    navigation.navigate('Detail')
 }
 ```
 
@@ -26,14 +22,15 @@ openDetail = (user) => {
 ```jsx
 <List>
     {
-        this.props.users.map((item, index) => {
+        users.map((item, index) => {
             return (
                 <ListItem thumbnail
                     button
                     key={index}
-                    onPress={() => this.props.selectUser(item)}
+                    onPress={() => { openDetail(item) }}
                 >
-                    ...
+                
+                ...
            
 ```
 
@@ -41,43 +38,47 @@ openDetail = (user) => {
 ## A. ไฟล์เต็ม `pages/home-page/HomePage.js`
 
 ```js
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { Content, List, ListItem, Text, Body, Button, Icon, Left, Right, Thumbnail } from 'native-base';
-import actions from "../../redux/actions";
+import React, { useEffect } from 'react'
+import { Container, Content, List, ListItem, Text, Body, Left, Right, Thumbnail } from 'native-base';
 
-export class HomePage extends Component {
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/core';
+import { createAction_UserSelected, startGetUser } from '../../redux/actions';
 
-    static navigationOptions = {
-        title: 'Contacts'
-    };
+export default function HomePage() {
 
-    componentDidMount() {
-        this.props.startGetUser();
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
+    const users = useSelector(state => state.users)
+
+    useEffect(() => {
+
+        startGetUser(dispatch)
+
+    }, [])
+
+    const openDetail = (user) => {
+        let action = createAction_UserSelected(user)
+        dispatch(action)
+        navigation.navigate('Detail')
     }
 
-    openDetail = (user) => {
-        this.props.selectUser(user);
-        this.props.navigation.navigate('Detail');
+    if (users == undefined) {
+        return <Text>Loading</Text>
     }
 
-    render() {
-
-        if(this.props.users == undefined){
-            return <Text></Text>
-        }
-
-        return (
+    return (
+        <Container>
             <Content>
                 <List>
                     {
-                        this.props.users.map((item, index) => {
+                        users.map((item, index) => {
                             return (
                                 <ListItem thumbnail
                                     button
                                     key={index}
-                                    onPress={() => this.openDetail(item)}
+                                    onPress={() => { openDetail(item) }}
                                 >
                                     <Left>
                                         <Thumbnail source={{ uri: item.picture.thumbnail }} />
@@ -91,21 +92,10 @@ export class HomePage extends Component {
                             )
                         })
                     }
-
                 </List>
             </Content>
-        )
-    }
+        </Container>
+    )
 }
 
-const mapStateToProps = (state) => ({
-    users: state.app.users
-})
-
-const mapDispatchToProps = dispatch => ({
-    startGetUser: () => actions.startGetUser(dispatch),
-    selectUser: (user) => dispatch(actions.selectUser(user))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
 ```

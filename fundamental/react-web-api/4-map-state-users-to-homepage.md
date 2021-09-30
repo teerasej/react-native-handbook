@@ -1,31 +1,40 @@
 
 # 4. แสดงข้อมูล Users จาก Redux state ในหน้า HomePage
 
-## 1. ทำการ Map ค่าที่ได้จาก state เข้า props object
+## 1. เข้าถึง redux state object ผ่าน react hook ชื่อ `useSelector`
+
+โดยเราสามารถใช้ snippet ชื่อ useSelector ในการเขียนได้
 
 ```js
-const mapStateToProps = (state) => ({
-    users: state.app.users
-})
+export default function HomePage() {
+
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
+    // useSelector จะได้รับ redux state object มา เราสามารถเลือก property ที่ต้องการเอามาเก็บในตัวแปร เพื่อใช้ใน component ได้
+    const users = useSelector(state => state.users)
 ```
 
 ## 2. แสดงข้อมูล Users array ใน JSX
 
 ```js
-render() {
+    // ถ้ายังไม่มี users (ข้อมูลยังไม่พร้อมใช้จาก redux state) ให้แสดงเป็นคำว่า Loading
+    if (users == undefined) {
+        return <Text>Loading</Text>
+    }
 
-        // ถ้ายังไม่มี props.user (ข้อมูลยังไม่พร้อมใช้จาก redux state) ให้แสดงเป็นคำว่า Loading
-        if(this.props.users == undefined){
-            return <Text>Loading...</Text>
-        }
-
-        return (
+    return (
+        <Container>
             <Content>
                 <List>
                     {
-                        this.props.users.map((item, index) => {
+                        users.map((item, index) => {
                             return (
-                                <ListItem thumbnail>
+                                <ListItem thumbnail
+                                    button
+                                    key={index}
+                                    onPress={() => { openDetail(item) }}
+                                >
                                     <Left>
                                         <Thumbnail source={{ uri: item.picture.thumbnail }} />
                                     </Left>
@@ -38,49 +47,57 @@ render() {
                             )
                         })
                     }
-
                 </List>
             </Content>
-        )
-    }
+        </Container>
+    )
 ```
 
-## A. ไฟล์เต็ม `
+## A. ไฟล์เต็ม 
 
 ```jsx
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { Content, List, ListItem, Text, Body, Button, Icon, Left, Thumbnail, Right } from 'native-base';
-import actions from "../../redux/actions";
+import React, { useEffect } from 'react'
+import { Container, Content, List, ListItem, Text, Body, Left, Right, Thumbnail } from 'native-base';
 
-export class HomePage extends Component {
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/core';
+import { createAction_UserSelected, startGetUser } from '../../redux/actions';
 
-    static navigationOptions = {
-        title: 'Contacts'
-    };
+export default function HomePage() {
 
-    componentDidMount() {
-        this.props.startGetUser();
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
+    const users = useSelector(state => state.users)
+
+    useEffect(() => {
+
+        startGetUser(dispatch)
+
+    }, [])
+
+    const openDetail = (user) => {
+        dispatch(createAction_UserSelected(user))
+        navigation.navigate('Detail')
     }
 
-    openDetail = () => {
-        this.props.navigation.navigate('Detail');
+    // ถ้ายังไม่มี users (ข้อมูลยังไม่พร้อมใช้จาก redux state) ให้แสดงเป็นคำว่า Loading
+    if (users == undefined) {
+        return <Text>Loading</Text>
     }
 
-    render() {
-
-        if(this.props.users == undefined){
-            return <Text></Text>
-        }
-
-        return (
+    return (
+        <Container>
             <Content>
                 <List>
                     {
-                        this.props.users.map((item, index) => {
+                        users.map((item, index) => {
                             return (
-                                <ListItem thumbnail>
+                                <ListItem thumbnail
+                                    button
+                                    key={index}
+                                    onPress={() => { openDetail(item) }}
+                                >
                                     <Left>
                                         <Thumbnail source={{ uri: item.picture.thumbnail }} />
                                     </Left>
@@ -93,20 +110,10 @@ export class HomePage extends Component {
                             )
                         })
                     }
-
                 </List>
             </Content>
-        )
-    }
+        </Container>
+    )
 }
 
-const mapStateToProps = (state) => ({
-    users: state.app.users
-})
-
-const mapDispatchToProps = dispatch => ({
-    startGetUser: () => actions.startGetUser(dispatch)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
 ```
