@@ -35,6 +35,19 @@ Waiting for build to complete. You can press Ctrl+C to exit.
 Successfully built standalone app: https://expo.io/artifacts/e5cbb0dd-a798-4dd2-95c5-fca3fd873137
 ```
 
+### หากใช้ Expo สร้าง Android Keystore 
+
+หลังจากการสร้างเสร็จสมบูรณ์ ให้รันคำสั่งด้านล่าง 
+
+```bash
+expo fetch:android:keystore
+```
+
+- เพื่อใช้ในการดาวน์โหลดไฟล์​ key store มาไว้ในเครื่อง
+- ให้ทำการ backup ไฟล์ที่ได้มาจากคำสั่ง 
+- เพราะการส่งแอพเวอร์ชั่นอัพเดตรอบต่อไปต้องใช้ keystore เดิม **ห้ามหาย**
+
+
 ## 2. สร้างไฟล์ Certificate และ Keystore 
 
 ### Certificate
