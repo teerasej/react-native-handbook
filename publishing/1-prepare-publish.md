@@ -33,7 +33,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "th.in.nextflow.react.native.noteapp"
+      "bundleIdentifier": "th.in.nextflow.react.native.noteapp",
+      "buildNumber": "1.0.0"
     },
     "androidStatusBar": {
       "barStyle": "light-content",
@@ -48,6 +49,7 @@
 > [ดูอ้างอิงการกำหนดค่า iOS](https://docs.expo.io/versions/latest/workflow/configuration/#ios)
 
 - **bundleIdentifier** เป็นค่า App ID ที่จะใช้กำหนดกับแอพ iOS จะเขียนเป็นแบบ reverse domain name
+- **buildNumber** เวอร์ชั่นที่จะกำหนดลงไปในแอพ 
 
 ```json
 "ios": {
@@ -62,13 +64,14 @@
 > [ดูอ้างอิงการกำหนดค่า Android](https://docs.expo.io/versions/latest/workflow/configuration/#android)
 
 - **package** เป็นค่า App ID ที่จะใช้กำหนดกับแอพ Android จะเขียนเป็นแบบ reverse domain name
-- **permissions** เป็นการกำหนด android permission แบบเดียวกับใน `AndroidManifest.xml` 
+- **permissions** เป็นการกำหนด android permission แบบเดียวกับใน `AndroidManifest.xml`
+- **versionCode** เป็นเลขเวอร์ชั่นที่กำหนดให้กับแต่ละ release ตัว Play Store จะใช้เลขนี้แยกแยะความใหม่เก่าของไฟล์ที่อัพโหลดเข้า Play Store ดังนั้นควรเปลี่ยนให้เพิ่มขึ้นในแต่ละครั้งที่จะ release ขึ้น Play Store
 - ค่าในตัวอย่างเป็นพื้นฐานที่จำเป็นต้องใช้สำหรับการส่งแอพขึ้น Play Store 
 
 ```json
 "android": {
       "package": "th.in.nextflow.react.native.noteapp",
-      "versionCode": 2,
+      "versionCode": 1,
       "permissions": [
         "CAMERA",
         "READ_CONTACTS",
