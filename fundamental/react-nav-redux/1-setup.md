@@ -13,7 +13,7 @@ npm install
 หรือ 
 
 ```bash
-yarn install 
+yarn 
 ```
 
 ## หรือติดตั้ง module ด้วยตัวเองในโปรเจค
