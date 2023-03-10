@@ -50,7 +50,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 
 // import Icon มาใช้งาน (ถ้าต้องการ)
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 // import Font มาจาก package expo-font
 import { useFonts } from 'expo-font';

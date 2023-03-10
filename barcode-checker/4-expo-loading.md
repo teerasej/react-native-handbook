@@ -20,7 +20,7 @@ import { View, Text } from 'react-native';
 // import Font มาจาก package expo-font
 import * as Font from 'expo-font';
 // import Icon มาใช้งาน (ถ้าต้องการ)
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 // แปลง Function component 
 // เป็น Class component 

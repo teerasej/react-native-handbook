@@ -38,7 +38,7 @@ import React, { useState, useEffect } from 'react';
 import AppLoading from 'expo-app-loading';
 import { Container, Text, Button, Icon } from 'native-base';
 import { useFonts } from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 

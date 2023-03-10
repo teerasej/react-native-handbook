@@ -156,7 +156,7 @@ import {useEffectAsync} from 'useeffectasync'
 
 
 import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import HomePage from './pages/home-page/HomePage';
 import NewNotePage from './pages/new-note-page/NewNotePage';
 

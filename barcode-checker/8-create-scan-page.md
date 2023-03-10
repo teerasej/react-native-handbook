@@ -146,7 +146,7 @@ import AppLoading from 'expo-app-loading';
 import { View } from 'react-native';
 import { Container, Text } from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import HomePage from "./pages/home-page/HomePage";
 
 // config ส่วน redux
