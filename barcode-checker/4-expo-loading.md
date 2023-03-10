@@ -6,7 +6,7 @@
 รันคำสั่ง ติดตั้ง Expo Font ใน Terminal 
 
 ```bash
-expo install expo-font
+npx expo install expo-font
 ```
 
 ## 2. เขียน Logic ให้แน่ใจว่าตัว App โหลด font ของ Native base UI พร้อมใช้งานได้แน่นอน

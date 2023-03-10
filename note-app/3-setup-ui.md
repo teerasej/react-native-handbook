@@ -18,14 +18,14 @@ cd nextflow-note
 
 ```bash
 npm install native-base
-expo install expo-font
+npx expo install expo-font
 ```
 
 หรือ
 
 ```bash
 yarn add native-base
-expo install expo-font
+npx expo install expo-font
 ```
 
 ## 4. ติดตั้ง 
