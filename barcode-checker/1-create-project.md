@@ -4,19 +4,17 @@
 ## 1. สร้างโปรเจค 
 
 ```bash
-expo init nextflow-barcode-checker-app
+npx create-expo-app nextflow-barcode-checker-app
 ```
 
-## 2. ติดตั้ง Module 
+อาจจะมีการแจ้งให้ติดตั้ง package เพิ่มเติม ให้พิมพ์ `y` และกด enter
 
 ```bash
-npm install redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger native-base
+# ตัวอย่างข้อความที่แจ้งให้ติดตั้ง package เพ่ิมเติม 
+Need to install the following packages:
+  create-expo-app
+Ok to proceed? (y) 
 ```
 
-หรือ
-
-```bash
-yarn add redux react-redux redux-saga redux-form react-navigation react-navigation-stack redux-logger native-base
-```
 
 
