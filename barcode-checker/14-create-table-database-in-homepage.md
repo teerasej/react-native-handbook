@@ -4,101 +4,88 @@
 เปิดไฟล์​ `App.js` 
 
 ```js
-import DBService from './services/db.service';
-
-export default class App extends React.Component {
-
-    async componentDidMount() {
-        await Font.loadAsync({
-        Roboto: require('native-base/Fonts/Roboto.ttf'),
-        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        ...Ionicons.font,
-        });
-
-        // สั่ง init database
-        await new DBService().init();
-
-        this.setState({ isReady: true });
-    }
-
-
-}
-```
-
-## A. ไฟล์เต็ม App.js 
-
-```js
-import React from 'react';
-import AppLoading from 'expo-app-loading';
-import { View } from 'react-native';
-import { Container, Text } from 'native-base';
-import * as Font from 'expo-font';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import HomePage from "./pages/home-page/HomePage";
-
-// config ส่วน redux
-import { Provider } from 'react-redux';
-import configureStore from "./redux/store";
-const store = configureStore();
-
-// config ส่วน navigation
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { NativeBaseProvider, Box, IconButton, Icon, Center } from "native-base";
+import HomePage from './pages/home-page/HomePage';
+import { FontAwesome } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScanPage from './pages/scan-page/ScanPage';
-import DBService from './services/db.service';
 
-const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage }
-});
+import { Provider } from 'react-redux';
+import store from "./redux/store";
 
-const RootNavigator = createStackNavigator(
-  {
-    Main: {
-      screen: AppNavigator
-    },
-    ScanPopup: {
-      screen: ScanPage,
-    },
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  });
+// import initDB function
+import { initDB } from './services/db.service';
 
+const Stack = createNativeStackNavigator();
 
-const AppContainer = createAppContainer(RootNavigator);
+// สร้าง log ก่อนการ render App component 
+console.log('starting up... ')
 
+export default function App() {
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
+  // เรียกใช้ initDB hook และเราจะได้ตัวแปร isDBReady มาใช้งาน
+  const { isDBReady } = initDB();
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
+  // ข้อมูลของ isDBReady
+  console.log(`Rendering... [isDBReady: ${isDBReady}]`);
 
-    await new DBService().init();
+  return (
+    <Provider store={store}>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          {  
+            // เช็คค่า isDBReady ถ้าไม่ใช่ undefined หรือ false หมายความว่าการ initDB ไม่มีปัญหา และแสดงหน้าแอพปกติ
+            isDBReady == true && (
+              <Stack.Navigator>
+                <Stack.Screen name="Home"
+                  component={HomePage}
+                  options={({ navigation }) => ({
+                    title: 'My home',
+                    headerRight: () => (
+                      <IconButton
+                        icon={<Icon as={FontAwesome} name="qrcode" />}
+                        borderRadius="full"
+                        onPress={() => navigation.navigate('Scan')}
+                      />
+                    )
+                  })}
+                />
 
-    this.setState({ isReady: true });
-  }
+                <Stack.Screen name="Scan" component={ScanPage} />
 
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
+              </Stack.Navigator>
 
-    return (
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-    );
-  }
+            ) 
+          }
+          {
+            // ถ้าค่า isDBReady เป็น undefined หมายความว่ากำลังอยู่ในขั้นตอนการ init database
+            isDBReady == undefined && (
+              <Center flex={1}>
+                <Box>
+                  <Text textAlign="center">Loading</Text>
+                </Box>
+              </Center>
+            )
+          }
+          {
+            // ถ้าค่า isDBReady เป็น false หมายความว่าการ initDB มีปัญหา 
+            isDBReady == false && (
+              <Center flex={1}>
+                <Box>
+                  <Text textAlign="center">Error init database</Text>
+                </Box>
+              </Center>
+            )
+          }
+
+          <StatusBar style="auto" />
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </Provider>
+  );
 }
+
 ```

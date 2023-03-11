@@ -6,7 +6,7 @@
 สร้างไฟล์ `services/db.service.js`
 
 ```js
-import * as SQLite from 'expo-sqlite';
+import * as SQLite from "expo-sqlite";
 
 // กำหนดชื่อไฟล์ database และ ชื่อ Table
 const dbName = 'barcodeDB.db';
@@ -15,66 +15,55 @@ const tableName = 'BarcodeHistory';
 // ใช้ SQLite ของ Expo ในการเปิดการเชื่อมต่อไปที่ไฟล์ database
 const db = SQLite.openDatabase(dbName);
 
-export default class DBService {
-
-} 
+export default db
 ```
 
-## 2. สร้าง method `init()` เพื่อสร้าง table สำหรับการใช้งาน
+## 2. สร้าง `initDB()` hook function
 
-สังเกตว่า เรา return เป็น Promise() object เพื่อสร้างการทำงานแบบ Asynchronous และทำให้ใช้งาน keyword `async` และ `await` ได้
-
-```js
-init() {
-
-    // Promise จะรับ function เข้ามา 2 ตัว
-    // resolve() สำหรับกรณีการทำงานเสร็จสมบูรณ์
-    // reject() สำหรับกรณีที่ไม่สมบูรณ์
-    return new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                `CREATE TABLE IF NOT EXISTS ${tableName} (id INTEGER PRIMARY KEY NOT NULL, barcodeData text);`,
-                [],
-                () => {
-                    console.log('db ready');
-
-                    // สั่ง reolve เพื่อยืนยันการทำงานที่สมบูรณ์
-                    resolve();
-                }
-            );
-        });
-    });
-
-}
-```
-
-## A. ไฟล์เต็ม `services/db.service.js`
+ในที่นี้เราจะสร้าง hook function เพื่อเตรียม table ให้พร้อมใช้งานในแอพ
 
 ```js
-import * as SQLite from 'expo-sqlite';
+// services/db.service.js
+
+import * as SQLite from "expo-sqlite";
+import { useState } from "react";
 
 const dbName = 'barcodeDB.db';
 const tableName = 'BarcodeHistory';
 const db = SQLite.openDatabase(dbName);
 
-export default class DBService {
+export const initDB = () => {
 
-    init() {
+    // สร้าง State variable ที่แสดงสถานะของ database ที่พร้อมสำหรับการใช้งาน
+    const [isDBReady, setIsDBReady] = useState(undefined)
 
-        return new Promise((resolve, reject) => {
-            db.transaction(tx => {
-                tx.executeSql(
-                    `CREATE TABLE IF NOT EXISTS ${tableName} (id INTEGER PRIMARY KEY NOT NULL, barcodeData text);`,
-                    [],
-                    () => {
-                        console.log('db ready');
-                        resolve();
-                    }
-                );
-            });
-        });
+    // สั่งรัน transaction ไปที่ database
+    db.transaction(tx => {
 
-    }
+        // Execute SQL ในการสร้าง table สำหรับเก็บข้อมูลบาร์โค้ดที่แสกนได้
+        tx.executeSql(
+            `CREATE TABLE IF NOT EXISTS ${tableName} (id INTEGER PRIMARY KEY NOT NULL, barcodeData text);`,
+            [],
+            () => {
+                
+                // กำหนดค่ายืนยันว่า Database และ table พร้อมใช้งานแล้ว
+                setIsDBReady(true);
+            },
+            (error) => {
+                // กำหนดค่าว่่า database ไม่พร้อมใช้งาน
+                setIsDBReady(false);
+                console.error(error);
+            }
+        );
+    });
 
-} 
+    // ส่ง State variable ออกไปให้กับ component ที่เรียกใช้ initDB() hook ของเรา
+    return { isDBReady };
+
+}
+
+export default db;
 ```
+
+
+

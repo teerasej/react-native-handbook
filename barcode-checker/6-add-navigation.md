@@ -1,140 +1,66 @@
 
 # 6. เพิ่มระบบ Navigation
 
-## ติดตั้ง navigation สำหรับ expo
-
-รันคำสั่งด้านล่าง ใน Terminal
-
-```bash
-expo install react-native-gesture-handler react-native-reanimated
-```
-
-## 1. กำหนดข้อมูลให้หน้า Home Page
-
-เปิดไฟล์ `pages/home-page/HomePage.js`
-
-เราจะเพิ่ม property `navigationOptions` เข้าไปใน **HomePage** เพื่อใช้สำหรับระบบ React Navigation
-
-```js
-
-export default class HomePage extends Component {
-
-    static navigationOptions = {
-        // กำหนด title ของส่วนนี้เป็น Home
-        title: 'Home'
-    };
-
-    //...
-}
-```
-
-## 2. สร้างระบบ Navigation 
+## 1. สร้างระบบ Navigation 
 
 เปิดไฟล์ `App.js`
 
 ```js
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { NativeBaseProvider, Box } from "native-base";
+import HomePage from './pages/home-page/HomePage';
 
-const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage }
-});
+// Import NavigationContainer ที่ต้องครอบ App ทั้งหมดของเรา
+import { NavigationContainer } from '@react-navigation/native';
+// สร้าง Navigation แบบ Stack
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const AppContainer = createAppContainer(AppNavigator);
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NativeBaseProvider>
+      {/* ครอบ Navigation Container เพื่อสร้างระบบ Navigation */}
+      <NavigationContainer>
+
+        {/* สร้าง Stack Navigator โดยใช้ JSX */}
+        <Stack.Navigator>
+
+          {/* กำหนด Screen พร้อมทั้ง name และ component ที่ต้องการ */}
+          <Stack.Screen name="Home" component={HomePage} />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </NativeBaseProvider>
+  );
+}
+
 ```
 
-**AppContainer** คือระบบที่เราสามารถเอาไปใช้กับ Redux Provider ได้ 
+## 2. ลบ Header ออกจากหน้า Home Page
 
-## 3. ถ้ามีการเอา AppContainer ไปใช้ตอนนี้... จะ error 
+เปิดไฟล์ `pages/home-page/HomePage.js`
 
-ถ้าใช้ `AppContainer` ใส่ลงไปใน `<HomePage>` แทนแบบนี้
-
-```jsx
-render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
-
-    return (
-        <AppContainer />
-    );
-  }
-```
-
-ดังนั้นตอนนี้ถ้าเจอ Error ก็ไม่ใช่เรื่องผิดปกติอะไร เพราะปกติ **AppContainer** ต้องเอาไปใช้กับ Redux Provider นั่นเอง
-
-
-## A. ไฟล์เต็ม `App.js`
+ในที่นี้เราไม่จำเป็นต้องใช้ header ของ Home page แล้ว เราจะไปใช้ของ React Navigator เอง
 
 ```js
-import React from 'react';
-import AppLoading from 'expo-app-loading';
-import { Container, Text } from 'native-base';
-import * as Font from 'expo-font';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import HomePage from './pages/home-page/HomePage';;
+// pages/home-page/HomePage.js
+import { StyleSheet, View } from 'react-native'
+import React from 'react'
+import { Box, HStack, Text } from 'native-base'
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-const AppNavigator = createStackNavigator({
-  Home: { screen: HomePage }
-});
-
-const AppContainer = createAppContainer(AppNavigator);
-
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
-  }
-
-  render() {
-    if (!this.state.isReady) {
-      return <AppLoading />;
-    }
-
+const HomePage = ({ navigator }) => {
     return (
-      <AppContainer />
-    );
-  }
+        <>
+            {/* ลบส่วนนี้ออก */}
+        </>
+    )
 }
+
+export default HomePage
+
+const styles = StyleSheet.create({})
 ```
 
-## B. ไฟล์เต็ม `pages/home-page/HomePage.js`
-
-```js
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Container, Header, Title, Content, List, ListItem, Text, Body  } from 'native-base';
-
-
-export default class HomePage extends Component {
-
-    static navigationOptions = {
-        // กำหนด title ของส่วนนี้เป็น Home
-        title: 'Home'
-    };
-
-    render() {
-        return (
-
-                <Content>
-                </Content>
-            
-        )
-    }
-}
-```
 

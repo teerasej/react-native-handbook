@@ -3,200 +3,107 @@
 
 ## 1. สร้าง Action ที่ใช้ในระบบ
 
-สร้างไฟล์ `redux/actions.js`
 
 ```js
+// redux/barcodeDataSlice.js
+import { createSlice } from '@reduxjs/toolkit'
 
-// กำหนดชื่อประเภทของ action (เหตุการณ์ต่างๆ) ที่เกิดในระบบและมีผลต่อข้อมูลโดยรวม
-const Types = {
-    // ใช้ในกรณีที่มีการแสกนบาร์โค้ดเสร็จแล้ว
-    BARCODE_SCANNED: 'BARCODE_SCANNED'
+const initialState = {
+    barcodeData: undefined
 }
 
-// function สำหรับสร้าง Action object ที่จะส่งเข้า redux store
-const barcodeScanned = (barcodeData) => {
-    return {
-        type: Types.BARCODE_SCANNED,
-        payload: barcodeData
-    };
-}
+const barcodeDataSlice = createSlice({
+    name: 'barcodeData',
+    initialState,
 
-// export เอาไปใช้งาน
-export default {
-    Types,
-    barcodeScanned
-}
+    // กำหนด function ชื่อ barcodeScanned เป็น reducer 
+    //   - โดยที่ตัว function จะทำงานเมื่อมีการเรียกใช้จากภายใน component
+    //   - ทุกครั้งที่ function reducer ทำงาน จะได้รับ state object ล่าสุด และ action ที่ส่งมาจาก component เสมอ
+    reducers: {
+        barcodeScanned: (state, action) => {
+            console.log(`barcode data in slice: ${action.payload}`)
+            // ดึงค่าที่ส่งมากับ action ใส่ลงไปใน state
+            state.barcodeData = action.payload
+        }
+    }
+});
+
+// กำหนด action สำหรับส่งไปเรียกใช้ที่ส่วนอื่นของแอพ
+export const { barcodeScanned } = barcodeDataSlice.actions
+
+export default barcodeDataSlice.reducer
 ```
 
-## 2. ทำการเชื่อม ScanPage component เข้า Redux store
+## 2. ส่งข้อมูล barcode ที่แสกนได้ไปที่ redux store
 
 เปิดไฟล์ `pages/scan-page/ScanPage.js`
 
-เริ่มจาก import `connect` module มาจาก `redux`
 
 ```js
-// ใช้ snippet ชื่อ redux ได้
-import { connect } from 'react-redux'
-```
+// pages/scan-page/ScanPage.js
+import { StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Box, HStack, Text } from 'native-base'
 
-จากนั้นเปลี่ยนการประกาศ `export default class ScanPage` ให้เป็น `export class ScanPage` อย่างเดียว
+import { BarCodeScanner } from 'expo-barcode-scanner'
 
-```js
-// จาก
-export default class ScanPage extends Component 
-// เป็น 
-export class ScanPage extends Component 
-```
+// เรียกใช้ useDispatch hook
+import { useDispatch } from 'react-redux'
+// เรียกใช้ action function ในการสร้าง action object เพื่อส่งให้กับ redux 
+import { barcodeScanned } from '../../redux/barcodeDataSlice'
 
-จากนั้นลงมาด้านล่างของ Class 
+const ScanPage = () => {
 
-```js
-// ใช้ snippet ชื่อ reduxmap ได้
-const mapStateToProps = (state) => ({
-    
-})
+    const [hasPermission, setHasPermission] = useState(null);
+    const [scanned, setScanned] = useState(false);
 
-const mapDispatchToProps = {
-    
-}
+    // สร้าง dispatch function 
+    const dispatch = useDispatch();  
 
-// เขียนกำหนด 2 ค่าด้านบนให้เชื่อมกับ redux store ผ่าน function connect() 
-export default connect(mapStateToProps, mapDispatchToProps)(ScanPage)
-```
+    useEffect(() => {
 
-## 3. สร้าง Action ที่มีข้อมูล barcode ส่งเข้า Redux store
+        console.log('checking permission')
 
-กำหนด dispatch function ให้กับ `props` ของ ScanPage
+        const getBarCodeScannerPermissions = async () => {
+            const result = await BarCodeScanner.requestPermissionsAsync();
+            console.log(`Permission: ${result.granted}`)
+            setHasPermission(result.granted);
+        };
 
-```js
-const mapDispatchToProps = dispatch => {
-    return {
-        barcodeScanned: (barcodeData) => dispatch(actions.barcodeScanned(barcodeData))
+        getBarCodeScannerPermissions();
+    }, []);
+
+    if (hasPermission === null) {
+        console.log('requesting permission')
+        return <Text>Requesting for camera permission</Text>;
     }
-}
-```
+    if (hasPermission === false) {
+        console.log('no permission detected')
+        return <Text>No access to camera</Text>;
+    }
 
-จากนั้น เรียกใช้ในส่วนที่เราได้ข้อมูลจาก Barcode Scanner มาแล้ว
+    const handleBarCodeScanned = ({ type, data }) => {
+        setScanned(true);
+        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
 
-```js
-handleBarCodeScanned = ({ type, data }) => {
-        console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
-        
-        // ส่งข้อมูลเป็น action ผ่าน dispatch function เพื่อส่งเข้า redux store
-        this.props.barcodeScanned(data);
+        // ใส่ข้อมูลบาร์โค้ดที่แสกนได้ให้กับ barcodeScanned action 
+        const action = barcodeScanned(data);
 
-        // ปิดหน้า Scan
-        this.closePopUp();
-    };
-```
-
-## A. ไฟล์เต็ม `pages/scan-page/ScanPage.js`
-
-```js
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
-import { Container, Header, Title, Content, Right, Left, Button, Icon, Text, Body } from 'native-base';
-
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import * as Permissions from 'expo-permissions';
-import actions from '../../redux/actions';
-
-export class ScanPage extends Component {
-
-    state = {
-        hasCameraPermission: null,
-        scanned: false,
+        // ส่ง action ไปที่ redux store ผ่าน dispatch function
+        dispatch(action)
     };
 
-    closePopUp = () => {
-        this.props.navigation.goBack();
-    }
-
-    async componentDidMount() {
-        this.getPermissionsAsync();
-        // this.props.barcodeScanned('1234567');
-        // this.closePopUp();
-    }
-
-    getPermissionsAsync = async () => {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({ hasCameraPermission: status === 'granted' });
-    };
-
-    handleBarCodeScanned = ({ type, data }) => {
-
-        this.setState({
-            scanned: true
-        });
-
-        console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
-        this.props.barcodeScanned(data);
-        this.closePopUp();
-    };
-
-    render() {
-
-        const { hasCameraPermission, scanned } = this.state;
-        let scanPad;
-
-        if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>;
-        }
-
-        if(!scanned){
-            scanPad = (
-                <BarCodeScanner
-                    onBarCodeScanned={this.handleBarCodeScanned}
-                    style={StyleSheet.absoluteFillObject}
-                />
-            )
-        } else {
-            scanPad = <View></View>
-        }
-
-        return (
-
-            <Container>
-                <Header>
-                    <Left>
-
-                    </Left>
-                    <Body>
-                        <Title>Scanner</Title>
-                    </Body>
-                    <Right>
-                        <Button transparent onPress={this.closePopUp}>
-                            <Icon name='close' />
-                        </Button>
-                    </Right>
-                </Header>
-
-                <View
-                    style={{
-                        flex: 1
-                    }}>
-                        {scanPad}
-                </View>
-            </Container>
-        )
-    }
+    return (
+        <>
+            <BarCodeScanner 
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={StyleSheet.absoluteFillObject}
+            />
+        </>
+    )
 }
 
-const mapStateToProps = (state) => ({
+export default ScanPage
 
-})
-
-const mapDispatchToProps = dispatch => {
-    return {
-        barcodeScanned: (barcodeData) => dispatch(actions.barcodeScanned( barcodeData))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ScanPage)
-
-
+const styles = StyleSheet.create({})
 ```
-
-
-

@@ -1,264 +1,222 @@
 
 # 16. โหลดข้อมูลที่มีอยู่ใน SQLite Database เมื่อเปิดหน้า Home Page
 
-## 1. สร้าง method `loadBarcode()` ใน DB Service 
+## 1. สร้าง Async thunk สำหรับโหลดข้อมูล barcode ที่เก็บไว้ ใน DB Service 
 
-เพื่อใช้เรียกข้อมูลจาก module อื่นๆ 
 
 เปิดไฟล์ `services/db.service.js`
 
 ```js
-loadBarcode() {
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import * as SQLite from "expo-sqlite";
+import { useState } from "react";
+
+const dbName = 'barcodeDB.db';
+const tableName = 'BarcodeHistory';
+const db = SQLite.openDatabase(dbName);
+
+export const initDB = () => {
+
+    const [isDBReady, setIsDBReady] = useState(undefined)
+    db.transaction(tx => {
+
+        tx.executeSql(
+            `CREATE TABLE IF NOT EXISTS ${tableName} (id INTEGER PRIMARY KEY NOT NULL, barcodeData text);`,
+            [],
+            () => {
+                
+                setIsDBReady(true);
+            },
+            (error) => {
+                setIsDBReady(false);
+                console.error(error);
+            }
+        );
+    });
+
+    return { isDBReady };
+
+}
+
+export const saveBarcode = createAsyncThunk(
+    'db/saveBarcode',
+    async (barcodeData: String) => {
         return new Promise((resolve, reject) => {
             db.transaction(
                 tx => {
                     tx.executeSql(
-                        `SELECT * FROM ${tableName}`,
+                        `INSERT INTO ${tableName} (barcodeData) values (?)`,
+                        [barcodeData],
+                        () => {},
+                        (error) => reject(error)
+                    );
+
+                    tx.executeSql(
+                        `SELECT * FROM ${tableName} ORDER BY id DESC`,
                         [],
                         (tx, { rows }) => {
-                            // console.log(JSON.stringify(rows));
                             resolve(rows._array);
-                        }
+                        },
+                        (error) => reject(error)
                     );
-                }
-            );
+    
+            });
         })
     }
+);
+
+// สร้าง async function แบบ thunk เพื่อให้ทำงานแบบ async และกำหนดใช้งานเข้ากับ redux slice ได้
+export const loadBarcodeHistories = createAsyncThunk(
+    // ตั้งชื่อ 
+    'db/loadBarcodeHistories',
+    // กำหนด async function 
+    async () => {
+
+        // สร้าง Promise object เพื่อควบคุมการทำงานแบบ Async ด้วยตัวเอง
+        // เพราะ sqlite api ของ Expo มีแต่ callback function ไม่มีโหมดการทำงานแบบ async 
+        return new Promise((resolve, reject) => {
+            db.transaction(
+                tx => {
+                    
+                    // Query ข้อมูลจาก Database 
+                    tx.executeSql(
+                        `SELECT * FROM ${tableName} ORDER BY id DESC`,
+                        [],
+                        (tx, { rows }) => {
+                            // ถ้าสำเร็จ เรียกใช้ resolve() function ถือเป็นการสิ้นสุดการทำงานของ promise 
+                            // และเรียกว่าสถานะ fulfiled ใน slice's extra reducer
+                            // ในที่นี้เราจะส่งข้อมูลที่ query ได้กลับออกไปใน redux slice ในฐานะของ Action Payload 
+                            resolve(rows._array);
+                        },
+                        // ถ้าไม่สำเร็จ เรียกใช้ reject() function ถือเป็นการสิ้นสุดการทำงานของ promise 
+                        // และเรียกว่าสถานะ rejected ใน slice's extra reducer
+                        (error) => reject(error)
+                    );
+    
+            });
+        })
+    }
+);
+
+export default db;
+
+
 ```
 
-## 2. สร้าง action function `requestBarcodeData` 
+## 2. อัพเดต Slice เพื่อรับผลการเรียกใช้ Async thunk 
 
 
-เปิดไฟล์ `redux/actions.js`
+เปิดไฟล์ `redux/barcodeDataSlice.js`
 
-และสร้าง function `requestBarcodeData` ที่สามารถ dispatch action ด้วยตัวเอง
 
 ```js
-const requestBarcodeData = async (dispatch) => {
+import { createSlice } from '@reduxjs/toolkit'
 
-    // เรียกใช้ loadBarcode() ของ DB service
-    let db = new DBService();
-    let rows = await db.loadBarcode();
-    
-    dispatch({
-        type: Types.BARCODE_DATA_LOADED,
-        payload: rows
-    })
+// เรียกใช้ async thunk ที่สร้างไว้
+import { loadBarcodeHistories, saveBarcode } from '../services/db.service';
+
+const initialState = {
+    barcodeData: undefined,
+    barcodeHistories: [],
 }
 
-// อย่าลืม Export ออกไปด้วย module อื่นจะได้ใช้ได้ 
-export default {
-    Types,
-    barcodeScanned,
-    requestBarcodeData
-}
+const barcodeDataSlice = createSlice({
+    name: 'barcodeData',
+    initialState,
+    reducers: {
+        barcodeScanned: (state, action) => {
+            console.log(`barcode data in slice: ${action.payload}`)
+            state.barcodeData = action.payload;
+        }
+    },
+
+    // กำหนดเคสที่จะทำงานเมื่อ async thunk 'saveBarcode' ทำงานเสร็จ ด้วย Builder ใน extraReducers ของ slice
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveBarcode.fulfilled, (state, action) => {
+                console.log(`Save barcode data succeed, current barcode count: ${action.payload.length}`);
+                state.barcodeHistories = action.payload;
+            })
+            .addCase(saveBarcode.rejected, (state, action) => {
+                console.error('Save barcode data failed: ' + action.payload)
+            })
+
+            // เคสที่ loadBarcodeHistories ทำงานสมบูรณ์ ไม่มี rejected หรือ error 
+            .addCase(loadBarcodeHistories.fulfilled, (state, action) => {
+                console.log(`Load barcode data succeed, current barcode count: ${action.payload.length}`);
+                state.barcodeHistories = action.payload;
+            })
+            // เคสที่ loadBarcodeHistories โดน rejected หรือ error 
+            .addCase(loadBarcodeHistories.rejected, (state, action) => {
+                console.error('Load barcode data failed: ' + action.payload)
+            })
+            
+    }
+});
+export const { barcodeScanned } = barcodeDataSlice.actions
+
+export default barcodeDataSlice.reducer
 ```
 
 ## 3. สั่งโหลดข้อมูล barcode มาแสดงหลังจากหน้า HomePage ถูกโหลด
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
-เราจะสร้าง function ในส่วน `mapDispatchToProps` ก่อน
-
-สังเกตว่า เป็นอีกที่ที่เราส่ง dispatch ให้ function เอาไปจัดการเอง อีกครั้ง
-
 ```js
-const mapDispatchToProps = dispatch => {
-    return {
-        loadExistBarcodeData: () => actions.requestBarcodeData(dispatch)
-    }
-}
-```
+import { StyleSheet, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { Box, FlatList, HStack, Text, VStack } from 'native-base'
 
-จากนั้นใน HomePage Component เราจะเรียกใช้ function ตอน component render เสร็จสมบูรณ์ 
+// เรียกใช้งาน useDispatch
+import { useDispatch, useSelector } from 'react-redux'
 
-```js
-componentDidMount() {
-    this.props.loadExistBarcodeData();
-}
-```
+import { loadBarcodeHistories } from '../../services/db.service'
 
-## A. ไฟล์เต็ม `services/db.service.js`
+const HomePage = () => {
 
-```js
-import * as SQLite from 'expo-sqlite';
+    const barcodeHistories = useSelector(state => state.barcode.barcodeHistories)
 
-const dbName = 'barcodeDB.db';
-const tableName = 'BarcodeHistory';
-const db = SQLite.openDatabase(dbName);
+    // เรียกใช้ dispatch สำหรับการใช้ thunk
+    const dispatch = useDispatch();
 
-export default class DBService {
+    // ทำการ dispatch action ของ thunk เพื่อโหลดข้อมูลจาก SQLite ตอนเริ่มแสดงหน้า HomePage
+    useEffect(() => {
+      dispatch(loadBarcodeHistories())
 
-    init() {
-
-        return new Promise((resolve, reject) => {
-            db.transaction(tx => {
-                tx.executeSql(
-                    `CREATE TABLE IF NOT EXISTS ${tableName} (id INTEGER PRIMARY KEY NOT NULL, barcodeData text);`,
-                    [],
-                    () => {
-                        console.log('db ready');
-                        resolve();
-                    }
-                );
-            });
-        });
-    }
-
-    saveBarcode(barcodeData: String) {
-        return new Promise((resolve, reject) => {
-            db.transaction(
-                tx => {
-                    tx.executeSql(`INSERT INTO ${tableName} (barcodeData) values (?)`, [barcodeData]);
-                    tx.executeSql(
-                        `SELECT * FROM ${tableName}`,
-                        [],
-                        (tx, { rows }) => {
-                            // console.log(JSON.stringify(rows));
-                            resolve([...rows._array]);
-                        }
-                    );
-                }
-            );
-        })
-    }
-
-    loadBarcode() {
-        return new Promise((resolve, reject) => {
-            db.transaction(
-                tx => {
-                    tx.executeSql(
-                        `SELECT * FROM ${tableName}`,
-                        [],
-                        (tx, { rows }) => {
-                            // console.log(JSON.stringify(rows));
-                            resolve([...rows._array]);
-                        }
-                    );
-                }
-            );
-        })
-    }
-
-}
-```
-
-## B. ไฟล์เต็ม `redux/actions.js`
-
-```js
-import DBService from "../services/db.service";
-
-const Types = {
-    BARCODE_SCANNED: 'BARCODE_SCANNED',
-    BARCODE_DATA_LOADED: 'BARCODE_DATA_LOADED',
-}
-
-const barcodeScanned = async (dispatch,barcodeData) => {
-
-    let db = new DBService();
-    let rows = await db.saveBarcode(barcodeData);
+    //   ถ้า dispatch เป็นตัวเดิม กลไก useEffect จะไม่ทำงานอีก
+    }, [dispatch])
     
-    dispatch({
-        type: Types.BARCODE_DATA_LOADED,
-        payload: rows
-    })
+
+    console.log(barcodeHistories);
+
+    return (
+        <>
+            {
+                barcodeHistories.length > 0 ? (
+                    <FlatList
+                        data={barcodeHistories}
+                        renderItem={({ item }) => (
+                            <Box borderBottomWidth="1" paddingLeft={5} paddingBottom={5} paddingTop={5}>
+                                <VStack space={1}>
+                                    <Text>id: {item.id}</Text>
+                                    <Text>code: {item.barcodeData}</Text>
+                                </VStack>
+                            </Box>
+                        )}
+                    />
+                ) : (
+                    <Box padding="10">
+                        <Text>Nothing here...</Text>
+                    </Box >
+                )
+            }
+
+        </>
+    )
 }
 
-const requestBarcodeData = async (dispatch) => {
-    let db = new DBService();
-    let rows = await db.loadBarcode();
-    
-    dispatch({
-        type: Types.BARCODE_DATA_LOADED,
-        payload: rows
-    })
-}
+export default HomePage
 
-
-export default {
-    Types,
-    barcodeScanned,
-    requestBarcodeData,
-}
-```
-
-## C. ไฟล์เต็ม `pages/home-page/HomePage.js`
-
-```js
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Content, List, ListItem, Text, Body, Button, Icon } from 'native-base';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import actions from '../../redux/actions';
-
-export class HomePage extends Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: 'Home',
-            headerRight: (
-                <Button transparent
-                    onPress={() => navigation.navigate('ScanPopup')}
-                >
-                    <Icon name='barcode' />
-                </Button>
-            )
-        }
-    };
-
-    componentDidMount() {
-        this.props.loadExistBarcodeData();
-    }
-
-    render() {
-
-        const { barcodes } = this.props;
-
-        // console.log(barcodes);
-
-        if (!barcodes) {
-            return (
-                <View style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text>Scan something...</Text>
-                </View>
-            );
-        }
-
-        return (
-
-            <Content>
-                <List>
-                    {
-                        barcodes.map((item, index) => {
-                            return (
-                                <ListItem key={index} button={true}>
-                                    <Text>{item.barcodeData}</Text>
-                                </ListItem>
-                            )
-                        })
-                    }
-                </List>
-            </Content>
-
-        )
-    }
-}
-
-const mapStateToProps = (state) => ({
-    barcodeData: state.app.scannedBarcode,
-    barcodes: state.app.barcodes  
-})
-
-const mapDispatchToProps = dispatch => {
-    return {
-        loadExistBarcodeData: () => actions.requestBarcodeData(dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
-
+const styles = StyleSheet.create({})
 ```

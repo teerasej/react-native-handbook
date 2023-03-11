@@ -7,9 +7,7 @@
 2. รันคำสั่งด้านล่าง เพื่อรัน Expo Server
 
 ```bash
-expo start
-หรือ
-yarn start
+npx expo start
 ```
 
 3. รอจนระบบพร้อมทำงาน

@@ -4,5 +4,5 @@
 รันคำสั่งติดตั้ง plugin ใน terminal
 
 ```bash
-expo install expo-sqlite
+npx expo install expo-sqlite
 ```
