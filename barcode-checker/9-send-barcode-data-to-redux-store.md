@@ -49,7 +49,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner'
 
 // เรียกใช้ useDispatch hook
 import { useDispatch } from 'react-redux'
-// เรียกใช้ action function ในการสร้าง action object เพื่อส่งให้กับ redux 
+// เรียกใช้ reducer function ในการสร้าง action object เพื่อส่งให้กับ redux 
 import { barcodeScanned } from '../../redux/barcodeDataSlice'
 
 const ScanPage = () => {
