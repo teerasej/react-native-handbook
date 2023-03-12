@@ -9,7 +9,7 @@
 cd nextflow-barcode-checker-app
 ```
 
-หรือจะเปิดโฟลเดอร์โปรเจค **extflow-barcode-checker-app** ขึ้นมาใน Terminal หรือ Visual Studio Code ก็ได้
+หรือจะเปิดโฟลเดอร์โปรเจค **nextflow-barcode-checker-app** ขึ้นมาใน Terminal หรือ Visual Studio Code ก็ได้
 
 จากนั้นให้ copy คำสั่ง ด้านล่างไปรันใน Terminal
 
