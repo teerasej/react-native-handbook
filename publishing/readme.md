@@ -1,5 +1,7 @@
 # การ Publish Application File
 
+สมัคร Expo developer account ฟรี https://expo.dev/signup 
+
 ## Expo Managed Workflow
 
 - [การเตรียมโปรเจค](1-prepare-publish.md)

@@ -3,9 +3,45 @@
 
 > [App Signing for Android](https://docs.expo.io/versions/latest/distribution/app-signing/)
 
+## ขั้นตอนทั่วไป
 
+### 1. รันคำสั่ง build android 
 
-## 1. รันคำสั่งสร้างไฟล์ Android App Bundle  
+```
+eas build -p android
+```
+
+### 2. กำหนดข้อมูลตามขั้นตอน
+
+ตั้งชื่อ App ID
+
+```
+? What would you like your Android application id to be? › com.teerasej.nextflowchatgptapp
+```
+
+สร้าง หรือเลือก android keystore
+
+```
+Generate a new Android Keystore?
+```
+
+### 3. รอให้ระบบ build จนเสร็จ
+
+ใช้คำสั่งด้านล่างเพื่อดูรายการ build ที่ทำงานอยู่ได้
+
+```bash
+eas build:list
+```
+
+ใช้คำสั่งด้านล่าง เพื่อเปิดไปยัง Dashboard เพื่อดูสถานะของการ build และดาวน์โหลดไฟล์ได้ 
+
+```bash
+eas build:dashboard
+```
+
+## ภาคผนวก
+
+### 1. รันคำสั่งสร้างไฟล์ Android App Bundle  
 
 รันคำสั่ง ด้านล่างเพื่อเริ่มกระบวนการ 
 
@@ -35,7 +71,7 @@ Waiting for build to complete. You can press Ctrl+C to exit.
 Successfully built standalone app: https://expo.io/artifacts/e5cbb0dd-a798-4dd2-95c5-fca3fd873137
 ```
 
-### หากใช้ Expo สร้าง Android Keystore 
+#### หากใช้ Expo สร้าง Android Keystore 
 
 หลังจากการสร้างเสร็จสมบูรณ์ ให้รันคำสั่งด้านล่าง 
 
@@ -48,9 +84,9 @@ expo fetch:android:keystore
 - เพราะการส่งแอพเวอร์ชั่นอัพเดตรอบต่อไปต้องใช้ keystore เดิม **ห้ามหาย**
 
 
-## 2. สร้างไฟล์ Certificate และ Keystore 
+### 2. สร้างไฟล์ Certificate และ Keystore 
 
-### Certificate
+#### Certificate
 
 รันคำสั่งสร้างไฟล์​ Certificate (ส่วนนี้สามารถเอาไปอัพโหลดขึ้น Google Play Console ได้)
 
@@ -60,7 +96,7 @@ fetch:android:upload-cert
 
 เราจะได้ไฟล์นามสกุล `.pem` ที่ต้องอัพโหลดไปกับการ release เวอร์ชั่นใหม่ของแอพพลิเคชั่นทุกครั้ง 
 
-### Keystore 
+#### Keystore 
 
 รันคำสั่งด้านล่าง เพื่อดาวน์โหลด keystore ที่ Expo สร้างให้มาเก็บไว้
 
@@ -68,7 +104,7 @@ fetch:android:upload-cert
 expo fetch:android:keystore
 ```
 
-## 3. รันคำสั่ง build:android ปกติ ถ่้าต้องการ build ใหม่ 
+### 3. รันคำสั่ง build:android ปกติ ถ่้าต้องการ build ใหม่ 
 
 ```bash
 expo build:android -t app-bundle

@@ -1,7 +1,37 @@
 
 # 1. การเตรียมโปรเจค
 
-## 1. กำหนดค่าเบื้องต้นใน `app.json`
+## ติดตั้ง eas-cli 
+
+รันคำสั่งใน terminal หรือ command prompt
+
+```bash
+# Windows
+npm install -g eas-cli
+
+# MacOS
+sudo npm install -g eas-cli
+```
+
+## 2. รันคำสั่ง setup โปรเจค
+
+รันคำสั่งด้านล่าง ภายใน root directory ของโปรเจค React Native
+
+```
+eas init
+```
+
+## 3. ตอบคำถาม 
+
+สร้างโปรเจค build ใหม่หรือไม่
+
+```
+Would you like to create a project for [@user]/nextflow-chatgpt-app? › (Y/n)
+```
+
+## ภาคผนวก
+
+### กำหนดค่าเบื้องต้นใน `app.json`
 
 เปิดไฟล์ `app.json` 
 
