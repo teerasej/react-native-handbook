@@ -1,7 +1,6 @@
 
-# Setup Project
+# 1. สร้างโปรเจค 
 
-## 1. สร้างโปรเจค 
 
 ```bash
 npx create-expo-app nextflow-chatgpt-app

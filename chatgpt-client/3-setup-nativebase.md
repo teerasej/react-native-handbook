@@ -19,8 +19,6 @@ export default function App() {
     </NativeBaseProvider>
   );
 }
-
-
 ```
 
 

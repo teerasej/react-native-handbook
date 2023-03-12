@@ -22,6 +22,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 ## Function Component
 
+- **AI:** [เรียกใช้ ChatGPT](chatgpt-client/README.md)
 - **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api-axios.md)
 
 ## Class Component
