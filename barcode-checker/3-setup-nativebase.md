@@ -1,5 +1,5 @@
 
-# 4. Setup NativeBase
+# 3. Setup NativeBase
 
 ## เขียน Logic ให้แน่ใจว่าตัว App โหลด font ของ Native base UI พร้อมใช้งานได้แน่นอน
 
