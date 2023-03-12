@@ -5,7 +5,7 @@
 
 สร้างไฟล์ `pages/scan-page/ScanPage.js`
 
-```js
+```jsx
 // pages/scan-page/ScanPage.js
 
 import { StyleSheet, View } from 'react-native'
@@ -64,7 +64,7 @@ export default function App() {
 ## 3. ใส่ปุ่มแสกนเข้าไปที่ส่วนหัวด้านขวา ของ HomePage Header
 
 
-```js
+```jsx
 // App.js
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
@@ -120,7 +120,7 @@ export default function App() {
 เปิดไฟล์​ `App.js`
 
 
-```js
+```jsx
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NativeBaseProvider, Box, IconButton, Icon } from "native-base";

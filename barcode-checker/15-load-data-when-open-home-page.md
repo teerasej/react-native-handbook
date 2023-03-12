@@ -163,7 +163,7 @@ export default barcodeDataSlice.reducer
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
-```js
+```jsx
 import { StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { Box, FlatList, HStack, Text, VStack } from 'native-base'

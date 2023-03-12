@@ -3,7 +3,7 @@
 
 เปิดไฟล์​ `App.js` 
 
-```js
+```jsx
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NativeBaseProvider, Box, IconButton, Icon, Center } from "native-base";

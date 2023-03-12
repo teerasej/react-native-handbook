@@ -5,7 +5,7 @@
 
 เปิดไฟล์ `pages/scan-page/ScanPage.js`
 
-```js
+```jsx
 // pages/scan-page/ScanPage.js
 
 import { StyleSheet, View } from 'react-native'

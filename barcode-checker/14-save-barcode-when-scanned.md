@@ -137,7 +137,7 @@ export default barcodeDataSlice.reducer
 เปิดไฟล์ `pages/scan-page/ScanPage.js`
 
 
-```js
+```jsx
 import { StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Box, HStack, Text } from 'native-base'
@@ -221,7 +221,7 @@ const mapDispatchToProps = dispatch => {
 
 เปิดไฟล์ `pages/home-page/HomePage.js`
 
-```js
+```jsx
 import { StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 // import component ที่จำเป็น

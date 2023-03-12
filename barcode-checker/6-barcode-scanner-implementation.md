@@ -34,7 +34,7 @@ npx expo install expo-barcode-scanner
 
 เปิดไฟล์ `pages/scan-page/ScanPage.js`
 
-```js
+```jsx
 // pages/scan-page/ScanPage.js
 
 import { StyleSheet, View } from 'react-native'
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({})
 
 ## 4. สร้าง function รับค่าที่เป็นข้อมูล Barcode หลังจาก scan ได้
 
-```js
+```jsx
 // pages/scan-page/ScanPage.js
 
 import { StyleSheet, View } from 'react-native'

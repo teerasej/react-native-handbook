@@ -5,7 +5,7 @@
 
 เปิดไฟล์ `App.js`
 
-```js
+```jsx
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NativeBaseProvider, Box } from "native-base";
@@ -44,7 +44,7 @@ export default function App() {
 
 ในที่นี้เราไม่จำเป็นต้องใช้ header ของ Home page แล้ว เราจะไปใช้ของ React Navigator เอง
 
-```js
+```jsx
 // pages/home-page/HomePage.js
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
