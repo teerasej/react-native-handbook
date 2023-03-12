@@ -1,0 +1,18 @@
+
+# Clone Project
+
+## 1. Clone Project 
+
+```bash
+git clone -b starter https://github.com/teerasej/nextflow-react-native-tab-nav 
+```
+
+## 2. ติดตั้ง package 
+
+```bash
+cd nextflow-react-native-tab-nav 
+npm install
+```
+
+
+
