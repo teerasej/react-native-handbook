@@ -28,7 +28,7 @@ const barcodeDataSlice = createSlice({
     }
 });
 
-// กำหนด action สำหรับส่งไปเรียกใช้ที่ส่วนอื่นของแอพ
+// export reducer สำหรับไปเรียกใช้ที่ component ที่ต้องการ
 export const { barcodeScanned } = barcodeDataSlice.actions
 
 export default barcodeDataSlice.reducer
