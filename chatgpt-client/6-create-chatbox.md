@@ -48,7 +48,9 @@ export default ChatBox
 
 import { StatusBar } from 'expo-status-bar';
 
-import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
+// import KeyboardAvoidingView
+import { NativeBaseProvider, Box, HStack, Text, VStack, KeyboardAvoidingView } from "native-base";
+
 import ChatHistory from './components/ChatHistory';
 
 // import component chat box
@@ -66,13 +68,19 @@ export default function App() {
           </Text>
         </HStack>
 
-        <VStack w="100%" flex={1}>
-          <ChatHistory flex={1}/>
+        {/* ครอบ component เพื่อให้จัดการเรื่อง keyboard layout */}
+        <KeyboardAvoidingView behavior='padding' flex={1}>
+          <VStack w="100%" flex={1}>
+            <ChatHistory flex={1}/>
 
-          {/* แสดง chatbox โดยไม่กำหนดค่า flex เพื่อให้ ChatHistory กินพื้นที่ที่เหลือทั้งหมด */}
-          <ChatBox/>
+            {/* แสดง chatbox โดยไม่กำหนดค่า flex เพื่อให้ ChatHistory กินพื้นที่ที่เหลือทั้งหมด */}
+            <ChatBox/>
 
-        </VStack>
+          </VStack>
+        </KeyboardAvoidingView>
+        {/* กันพื้นที่ด้านล่างออกจากการตกขอบจอ */}
+        <Box safeAreaBottom />
+
       <StatusBar style="auto" />
     </NativeBaseProvider>
   );
