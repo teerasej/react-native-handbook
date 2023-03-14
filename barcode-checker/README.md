@@ -16,12 +16,12 @@
 ## React Navigation
 
 5. [เพิ่มระบบ Navigation](5-add-navigation.md)
-6. [ทำหน้า Scan PopUp](6-create-scan-page.md)
+6. [ทำหน้า Scan PopUp](6-barcode-scanner-implementation.md)
 
 
 ## Plugin: Barcode Scanner
 
-7. [สร้างระบบ Scan Barcode](7-barcode-scanner-implementation.md)
+7. [สร้างระบบ Scan Barcode](7-create-scan-page.md)
 
 ## Redux
 
