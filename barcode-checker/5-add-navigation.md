@@ -1,6 +1,12 @@
 
 # 6. เพิ่มระบบ Navigation
 
+ถ้าต้องการ สามารถ clone โปรเจคได้จากคำสั่งด้านล่าง
+
+```bash
+git clone -b starter-with-redux https://github.com/teerasej/nextflow-react-native-barcode-checker-2
+```
+
 ## 1. สร้างระบบ Navigation 
 
 เปิดไฟล์ `App.js`
