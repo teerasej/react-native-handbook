@@ -1,6 +1,8 @@
 
 # 1. การเตรียมโปรเจค
 
+สมัคร Expo Dev Account https://expo.dev/signup
+
 ## ติดตั้ง eas-cli 
 
 รันคำสั่งใน terminal หรือ command prompt
