@@ -38,7 +38,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - **Counter + Redux:** [แบบ Function component](counter-redux-function/readme.md) | [แบบ Class Component](counter-redux/readme.md)
 - **Note Application**: [แบบ Function component](note-app-function/README.md) | [แบบ Class Component](note-app/README.md)
-- **Barcode Checker** [แบบ Class Component](barcode-checker/README.md)
+- **Barcode Checker** [แบบ Function Component](barcode-checker/README.md)
 - **Branch Locator** [แบบ Class Component](branch-locator/README.md)
 
 # Publishing 
