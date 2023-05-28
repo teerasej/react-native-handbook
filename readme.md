@@ -5,6 +5,10 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - [Slide](https://nextflowth-my.sharepoint.com/:b:/g/personal/teerasej_nextflowth_onmicrosoft_com/ERTJ6PlvH91KoFmHI9LwtZ0BFIaPF28IVtiRdksuCImL7Q?e=HD9iDy)
 
+# Setup
+
+- [Setup](setup.md)
+
 # Reference 
 
 - [Node Handbook](https://github.com/teerasej/node-handbook)
