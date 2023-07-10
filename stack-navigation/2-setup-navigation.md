@@ -1,8 +1,7 @@
 
-# 2. Setup Tab Navigation 
+# 2. Setup Stack Navigation 
 
-เราจะทำการเรียกใช้ function และ component ที่ `@react-navigation/native` เตรียมไว้ในการ setup แผนที่ Tab Navigation ของแอพเราขึ้นมา
-
+เราจะทำการเรียกใช้ function และ component ที่ `@react-navigation/native` เตรียมไว้ในการ setup แผนที่ของแอพเราขึ้นมา
 
 ```jsx
 // App.js
