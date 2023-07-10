@@ -2,12 +2,12 @@
 # 2. Create Project
 
 ## 1. สร้างโปรเจค 
-
+คำสั่งสร้างโปรเจค
 ```bash
-// คำสั่งสร้างโปรเจค
 npx create-expo-app nextflow-my-app
-
-// คำสั่งเปิดเข้าไปใน directory ของโปรเจค
+```
+คำสั่งเปิดเข้าไปใน directory ของโปรเจค
+```bash
 cd nextflow-my-app
 ```
 
