@@ -4,7 +4,11 @@
 ## 1. สร้างโปรเจค 
 
 ```bash
+// คำสั่งสร้างโปรเจค
 npx create-expo-app nextflow-my-app
+
+// คำสั่งเปิดเข้าไปใน directory ของโปรเจค
+cd nextflow-my-app
 ```
 
 ## 2. ติดตั้ง Node Module 
