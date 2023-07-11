@@ -9,6 +9,10 @@
 - [การสร้างไฟล์สำหรับ iOS](3-publish-ios.md)
 - [การแปลง Expo Managed Workflow ไปเป็น bare workflow](4-managed-to-bare.md)
 
+## Expo Build locally
+
+- [Build in local](../publishing/local-build/readme.md)
+
 ## Expo bare workflow
 
 การใช้งาน bare workflow จะเป็นการพัฒนา React Native Application แบบปกติ เป็นการรันผ่านระบบ Native อย่าง Xcode หรือ Android Studio โดยตรง

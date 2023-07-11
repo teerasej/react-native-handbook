@@ -4,7 +4,7 @@
 
 ## 1. สร้างไฟล์ `components/ChatBox.js`
 
-ใช้ snippet rnfe ได้
+ใช้ snippet `rnfe` ได้
 
 ```jsx
 import { View, Text } from 'react-native'
