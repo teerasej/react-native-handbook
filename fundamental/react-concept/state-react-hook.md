@@ -99,16 +99,16 @@ import { View, Text, Button } from 'react-native'
 export default function CounterView() {
 
     const [counter, setCounter] = useState(0)
-    let count = 0
+    
 
     const increase = () => {
-        counter++
+        setCounter(counter + 1)
         console.log('count:', counter)
     }
 
     return (
         <View>
-            <Text>{count}</Text>
+            <Text>{counter}</Text>
             <Button title="เพิ่ม" onPress={increase}></Button>
         </View>
     )
