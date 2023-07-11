@@ -29,6 +29,7 @@
 # Windows
 npm install -g expo
 npm install -g @expo/ngrok@^4.1.0
+npm install -g eas-cli
 ```
 
 #### MacOS
@@ -37,6 +38,7 @@ npm install -g @expo/ngrok@^4.1.0
 # macOS
 sudo npm install -g expo
 sudo npm install -g @expo/ngrok@^4.1.0
+sudo npm install -g eas-cli
 ```
 
 ## สำหรับอุปกรณ์พกพา
