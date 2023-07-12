@@ -21,12 +21,11 @@
 
 ### การติดตั้งระบบ
 
-เปิดโปรแกรม Terminal (MacOS) หรือ Command Prompt (Windows 11) และรันคำสั่งด้านล่าง 
+เปิดโปรแกรม Terminal (MacOS) หรือ Command Prompt (Windows 11) และรันคำสั่งด้านล่าง ทีละคำสั่ง
 
 #### Windows 11+
 
 ```bash
-# Windows
 npm install -g expo
 npm install -g @expo/ngrok@^4.1.0
 npm install -g eas-cli
@@ -34,11 +33,20 @@ npm install -g eas-cli
 
 #### MacOS
 
+1. ติดตั้ง[โปรแกรม Xcode ผ่าน App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12/)
+2. รันคำสั่งด้านล่าง ในโปรแกรม Terminal ทีละคำสั่ง
+
 ```bash
-# macOS
 sudo npm install -g expo
 sudo npm install -g @expo/ngrok@^4.1.0
 sudo npm install -g eas-cli
+```
+
+3. ทำการติดตั้ง homebrew ผ่านโปรแกรม Terminal ด้วยคำสั่งที่อยู่ใน[เว็บ Homebrew นี้](https://brew.sh/index_th)
+4. รันคำสั่งด้านล่าง ในโปรแกรม Terminal ทีละคำสั่ง
+
+```bash
+brew cask install fastlane
 ```
 
 ## สำหรับอุปกรณ์พกพา
