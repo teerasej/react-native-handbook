@@ -1,7 +1,7 @@
 
 # 4. สร้าง และใช้งานหน้า HomePage
 
-## 1. สร้าง HomePage.js
+## 1. สร้าง pages/home-page/HomePage.js
 
 > ใช้ snippet rnfes ได้
 
