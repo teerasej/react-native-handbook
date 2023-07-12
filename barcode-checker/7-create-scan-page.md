@@ -90,7 +90,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" 
           component={HomePage} 
-          options={() => ({ 
+          options={() => { 
             title: 'My home',
 
             {/* กำหนด function ที่จะ return component ที่จะแสดงเป็นปุ่มด้านขวาของ react navigation header */}
@@ -100,7 +100,7 @@ export default function App() {
                 borderRadius="full"
               />
             ) 
-          })} 
+          }} 
           />
 
           <Stack.Screen name="Scan" component={ScanPage} />
