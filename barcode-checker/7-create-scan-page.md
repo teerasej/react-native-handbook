@@ -90,17 +90,15 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Home" 
           component={HomePage} 
-          options={() => ({ 
+          options={() => { 
             title: 'My home',
-
-            {/* กำหนด function ที่จะ return component ที่จะแสดงเป็นปุ่มด้านขวาของ react navigation header */}
             headerRight: () => (
               <IconButton 
                 icon={<Icon as={FontAwesome} name="qrcode"/>}
                 borderRadius="full"
               />
             ) 
-          })} 
+          }} 
           />
 
           <Stack.Screen name="Scan" component={ScanPage} />
@@ -142,11 +140,9 @@ export default function App() {
           <Stack.Screen name="Home" 
           component={HomePage} 
           
-          {/* เพิ่ม object navigation เพื่อเรียกใช้ในคำสั่งของ onPress ของ IconButton  */}
           options={({ navigation }) => ({ 
             title: 'My home',
             headerRight: () => (
-               {/* เรียกใช้ navigate function เพื่อเปิดไปยัง Screen ที่ชื่อว่า Scan */}
               <IconButton 
                 icon={<Icon as={FontAwesome} name="qrcode"/>}
                 borderRadius="full"
