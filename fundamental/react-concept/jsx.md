@@ -171,13 +171,13 @@ const styles = StyleSheet.create({
   ```
 
 
-## 5. การนำ JSX Component ของ module อื่นๆ มาใช้งาน
+## 4. การนำ JSX Component ของ module อื่นๆ มาใช้งาน
 
 - JSX Component พื้นฐาน จะมีให้จาก react-native module 
 - การจะเรียกใช้ component ต้องมีการเขียนคำสั่ง import พร้อมระบุชื่อให้ถูกต้อง 
 - ดูรายละเอียดเพิ่มเติมได้จาก [React Native API](https://facebook.github.io/react-native/docs/activityindicator)
 
-### 5.1 SafeArea
+### 4.1 SafeArea
 
 ทำการเรียกใช้งาน SafeArea จาก `react-native` module
 
@@ -269,7 +269,7 @@ import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView  } from 'react-native';
 ```
 
-### 5.2 Button
+### 4.2 Button
 
 เพิ่ม `Button` Component ลงใน JSX ของ App Component 
 
@@ -323,7 +323,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 ```
 
-## 6. ใช้ StyleSheet กับปุ่ม Button component 
+## 5. ใช้ StyleSheet กับปุ่ม Button component 
 
 เพิ่มค่า **signInButton** ลงไปใน `StyleSheet.create({})` ดังด้านล่าง
 
