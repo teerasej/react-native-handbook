@@ -45,6 +45,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 - **Note Application**: [แบบ Function component](note-app-function/README.md) | [แบบ Class Component](note-app/README.md)
 - **Barcode Checker** [แบบ Function Component](barcode-checker/README.md)
 - **Branch Locator** [แบบ Class Component](branch-locator/README.md)
+- [Local Notification](local-notitication/README.md)
 
 # Publishing 
 
