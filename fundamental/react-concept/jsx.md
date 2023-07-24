@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
 
 ```jsx
   import React from 'react';
-  import { View, Text, StyleSheet } from 'react-native';
+  import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
     return (
@@ -255,7 +255,6 @@ export default function App() {
 
   });
 
-  export default App;
 
 ```
 
