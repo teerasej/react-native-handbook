@@ -1,6 +1,8 @@
 
 # อัพเดตส่วนของ User Interface ด้วย State และ React Hook
 
+สามารถดาวน์โหลดไฟล์โปรเจค [มาจาก Github repository ที่นี่](https://github.com/teerasej/temp-counterapp/tree/master) เพื่อนำมาใช้งานต่อได้
+
 
 ## 1. สร้างไฟล์ `CounterView.js`
 
