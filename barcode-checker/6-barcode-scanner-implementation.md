@@ -1,7 +1,13 @@
 
 # 6. สร้างระบบ Scan Barcode
 
+## อ้างอิง
+
 > [Expo Barcode Scanner](https://docs.expo.io/versions/latest/sdk/bar-code-scanner/)
+
+## โปรเจคเริ่มต้น
+
+สามารถ[ดาวน์โหลด zip file ของโปรเจคจาก Git repo](https://github.com/teerasej/nextflow-react-native-barcode-checker-2/tree/start-barcode-implementation-page) มาทำเฉพาะขั้นตอนนี้ได้
 
 ## 1. ติดตั้ง Plugin 
 
