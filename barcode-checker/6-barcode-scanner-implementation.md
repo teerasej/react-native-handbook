@@ -1,5 +1,5 @@
 
-# 8. สร้างระบบ Scan Barcode
+# 6. สร้างระบบ Scan Barcode
 
 > [Expo Barcode Scanner](https://docs.expo.io/versions/latest/sdk/bar-code-scanner/)
 
