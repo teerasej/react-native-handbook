@@ -6,10 +6,10 @@
    - จะมีการกรอกเบอร์โทรศัพท์ และรับ SMS-OTP เพื่อยืนยันตัวตน
 2. [สร้างและใช้ OpenAI API Key](https://platform.openai.com/account/api-keys) 
 
-## 1. สร้าง async action ชื่อ fetchOpenAI
+## 1. สร้าง async action ชื่อ askAI
 
 ```js
-// redux/chatHistorySlice.js
+// redux/chatSlice.js
 
 // import createAsyncThunk เพื่อสร้าง Async action
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
@@ -19,10 +19,10 @@ import axios from 'axios';
 // นำ key ของ OpenAI มาใช้งาน
 const key = '';
 
-// สร้าง AsyncThunk ชื่อ fetchOpenAI
-export const fetchOpenAI = createAsyncThunk(
+// สร้าง AsyncThunk ชื่อ askAI
+export const askAI = createAsyncThunk(
   // ตั้งชื่อ async thunk
-  'user/fetchOpenAI',
+  'user/askAI',
 
   // รับค่าที่เข้ามาใช้่งาน ในที่นี้คือ prompt message
   async (prompt) => {
@@ -62,7 +62,7 @@ const initialState = {
   chatHistory: []
 }
 
-const chatHistorySlice = createSlice({
+const chatSlice = createSlice({
   name: 'chatroom',
   initialState,
   reducers: {
@@ -82,7 +82,7 @@ const chatHistorySlice = createSlice({
   extraReducers: (builder) => {
     // กำหนด case ที่จะทำงานจากกลไกของ async thunk
     builder
-      .addCase(fetchOpenAI.fulfilled, (state, action) => {
+      .addCase(askAI.fulfilled, (state, action) => {
         console.log('succeeded');
 
         // ถ้าได้การทำงานของ Async thunk สมบูรณ์ ค่าที่ return ออกมาจะอยู่ใน payload 
@@ -95,7 +95,7 @@ const chatHistorySlice = createSlice({
         
       })
       // ในกรณีที่ Async Thunk ล้มเหลวจะเข้าเคสนี้
-      .addCase(fetchOpenAI.rejected, (state, action) => {
+      .addCase(askAI.rejected, (state, action) => {
         console.log('failed');
         // แสดงข้อความ error ที่ได้
         console.error(action.error.message);
@@ -104,9 +104,9 @@ const chatHistorySlice = createSlice({
 });
 
 // export reducer สำหรับไปเรียกใช้ที่ component ที่ต้องการ
-export const { addUserMessage } = chatHistorySlice.actions
+export const { addUserMessage } = chatSlice.actions
 
-export default chatHistorySlice.reducer
+export default chatSlice.reducer
 ```
 
 ## 2. เรียกใช้ async thunk ใน ChatBox 
@@ -121,7 +121,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 
 // เรียกใช้ async thunk function ในการสร้าง action object เพื่อส่งให้กับ redux
-import { addUserMessage, fetchOpenAI } from './../redux/chatHistorySlice';
+import { addUserMessage, askAI } from './../redux/chatSlice';
 
 const ChatBox = () => {
 
@@ -147,7 +147,7 @@ const ChatBox = () => {
                         dispatch(action);
 
                         // Dispatch Async thunk action โดยการส่งข้อความเป็น prompt
-                        const asyncThunkAction = fetchOpenAI(chatMessage);
+                        const asyncThunkAction = askAI(chatMessage);
                         dispatch(asyncThunkAction);
 
                         setChatMessage("");

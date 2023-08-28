@@ -11,7 +11,7 @@ import React from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistory = () => {
+const ChatHistoryComp = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
 
@@ -37,7 +37,7 @@ const ChatHistory = () => {
   )
 }
 
-export default ChatHistory
+export default ChatHistoryComp
 ```
 
 ## 2. ควบคุมให้ FlatList เลื่อนลงมาล่างสุดเสมอ
@@ -50,7 +50,7 @@ import React, { useRef } from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistory = () => {
+const ChatHistoryComp = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
 
@@ -81,7 +81,7 @@ const ChatHistory = () => {
   )
 }
 
-export default ChatHistory
+export default ChatHistoryComp
 ```
 
 ## 3. กันปัญหาเรื่อง error: Invariant Violation
@@ -96,7 +96,7 @@ import React, { useRef, useState } from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistory = () => {
+const ChatHistoryComp = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
   const flatListRef = useRef();
@@ -133,5 +133,5 @@ const ChatHistory = () => {
   )
 }
 
-export default ChatHistory
+export default ChatHistoryComp
 ```

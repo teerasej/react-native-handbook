@@ -10,7 +10,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { FlatList } from 'native-base'
 
-const ChatHistory = () => {
+const ChatHistoryComp = () => {
   return (
     <>
         {/* ใส่ FlatList สำหรับแสดง Chat history */}
@@ -19,7 +19,7 @@ const ChatHistory = () => {
   )
 }
 
-export default ChatHistory
+export default ChatHistoryComp
 ```
 
 ## 2. นำ ChatHistory มาแสดงใน App.js
@@ -33,7 +33,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
 
 // import component chat history
-import ChatHistory from './components/ChatHistory';
+import ChatHistoryComp from './components/ChatHistoryComp';
 
 export default function App() {
 
@@ -50,7 +50,7 @@ export default function App() {
         <VStack w="100%" flex={1}>
           
           {/* แสดง chathistory โดยกำหนดกินพื้นที่ 1 ช่องจากทั้งหมด */}
-          <ChatHistory flex={1}/>
+          <ChatHistoryComp flex={1}/>
 
         </VStack>
       <StatusBar style="auto" />

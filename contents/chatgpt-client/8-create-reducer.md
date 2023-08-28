@@ -2,10 +2,10 @@
 # 8. สร้าง Slice
 
 
-สร้างไฟล์ `redux/chatHistorySlice.js`
+สร้างไฟล์ `redux/chatSlice.js`
 
 ```jsx
-// redux/chatHistorySlice.js
+// redux/chatSlice.js
 // ใช้ snippet rxslice
 
 import { createSlice } from '@reduxjs/toolkit'
@@ -16,9 +16,9 @@ const initialState = {
 }
 
 // สร้าง slice จาก function 
-const chatHistorySlice = createSlice({
+const chatSlice = createSlice({
   // กำหนดชื่อของ slice
-  name: 'chatroom',
+  name: 'chatSlice',
   // กำหนด state เริ่มต้นของ slice 
   initialState,
 
@@ -27,9 +27,9 @@ const chatHistorySlice = createSlice({
 });
 
 // กำหนด action สำหรับส่งไปเรียกใช้ที่ส่วนอื่นของแอพ
-export const {} = chatHistorySlice.actions
+export const {} = chatSlice.actions
 
-export default chatHistorySlice.reducer
+export default chatSlice.reducer
 ```
 
 
@@ -40,13 +40,13 @@ export default chatHistorySlice.reducer
 
 import { configureStore } from '@reduxjs/toolkit'
 // import slice ที่ต้องการ
-import chatHistorySlice from './chatHistorySlice.js'
+import chatSlice from './chatSlice.js'
 
 
 export default configureStore({
   reducer: {
     // กำหนด slice ให้เป็น reducer ของ store 
-    chatroom: chatHistorySlice
+    chatSlice: chatSlice
   }
 })
 ```

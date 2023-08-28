@@ -12,14 +12,14 @@
 ## 1. สร้าง Reducer function
 
 ```js
-// redux/chatHistorySlice.js
+// redux/chatSlice.js
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     chatHistory: []
 }
  
-const chatHistorySlice = createSlice({
+const chatSlice = createSlice({
   name: 'chatroom',
   initialState,
   reducers: {
@@ -43,9 +43,9 @@ const chatHistorySlice = createSlice({
 });
 
 // export reducer สำหรับไปเรียกใช้ที่ component ที่ต้องการ
-export const { addUserMessage } = chatHistorySlice.actions
+export const { addUserMessage } = chatSlice.actions
 
-export default chatHistorySlice.reducer
+export default chatSlice.reducer
 ```
 
 ## 2. ส่งข้อมูล message ที่กดส่งจาก Input ไปที่ slice
@@ -63,7 +63,7 @@ import { FontAwesome } from '@expo/vector-icons';
 // เรียกใช้ useDispatch hook
 import { useDispatch } from 'react-redux';
 // เรียกใช้ reducer function ในการสร้าง action object เพื่อส่งให้กับ redux
-import { addUserMessage } from './../redux/chatHistorySlice';
+import { addUserMessage } from './../redux/chatSlice';
 
 const ChatBox = () => {
 
