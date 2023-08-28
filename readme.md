@@ -16,40 +16,40 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 # Fundamental
 
-1. [React Fundamental](fundamental/react-concept/README.md)
-2. [Stack Navigation](stack-navigation/readme.md)
-3. [Tab Navigation](tab-navigation/readme.md)
+1. [React Fundamental](contents/fundamental/react-concept/README.md)
+2. [Stack Navigation](contents/stack-navigation/readme.md)
+3. [Tab Navigation](contents/tab-navigation/readme.md)
 
 
 # Example part 
 
-1. [User Interface Module](note-app/3-setup-ui.md)
-2. [React Navigation & Redux](fundamental/react-nav-redux/README.md)
-3. [Connect Web API](fundamental/react-web-api/README.md)
-4. [SQLite](fundamental/react-sqlite/README.md)
+1. [User Interface Module](contents/note-app/3-setup-ui.md)
+2. [React Navigation & Redux](contents/fundamental/react-nav-redux/README.md)
+3. [Connect Web API](contents/fundamental/react-web-api/README.md)
+4. [SQLite](contents/fundamental/react-sqlite/README.md)
 
 ## Function Component
 
-- **AI:** [เรียกใช้ ChatGPT](chatgpt-client/README.md)
-- **Web API:** [ดึงข้อมูลจาก Web API](example-part/web-api-axios.md)
+- **AI:** [เรียกใช้ ChatGPT](contents/chatgpt-client/README.md)
+- **Web API:** [ดึงข้อมูลจาก Web API](contents/example-part/web-api-axios.md)
 
 ## Class Component
 
-- **SQLite Database:** [บันทึกข้อมูล](example-part/save-data-sqlite.md)
-- **JWT Sign in:** [Login with JWT](example-part/login-with-jwt.md)
-- **Google Map:** [Pin Marker on Map](example-part/pin-marker-on-map.md)
+- **SQLite Database:** [บันทึกข้อมูล](contents/example-part/save-data-sqlite.md)
+- **JWT Sign in:** [Login with JWT](contents/example-part/login-with-jwt.md)
+- **Google Map:** [Pin Marker on Map](contents/example-part/pin-marker-on-map.md)
 
 # + Workshop 
 
-- **Counter + Redux:** [แบบ Function component](counter-redux-function/readme.md) | [แบบ Class Component](counter-redux/readme.md)
-- **Note Application**: [แบบ Function component](note-app-function/README.md) | [แบบ Class Component](note-app/README.md)
-- **Barcode Checker** [แบบ Function Component](barcode-checker/README.md)
-- **Branch Locator** [แบบ Class Component](branch-locator/README.md)
-- [Local Notification](local-notitication/README.md)
+- **Counter + Redux:** [แบบ Function component](contents/counter-redux-function/readme.md) | [แบบ Class Component](contents/counter-redux/readme.md)
+- **Note Application**: [แบบ Function component](contents/note-app-function/README.md) | [แบบ Class Component](note-app/README.md)
+- **Barcode Checker** [แบบ Function Component](contents/barcode-checker/README.md)
+- **Branch Locator** [แบบ Class Component](contents/branch-locator/README.md)
+- [Local Notification](contents/local-notitication/README.md)
 
 # Publishing 
 
-- [การ Publish Application File](publishing/readme.md)
+- [การ Publish Application File](contents/publishing/readme.md)
 
 # Performance 
 
