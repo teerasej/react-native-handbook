@@ -59,6 +59,41 @@ yarn start
 3. แอพ Expo จะพยายาม sync โค้ดจากคอมพิวเตอร์ของเรา ในที่นี้ควรให้แน่ใจว่าคอมพิวเตอร์ และอุปกรณ์ของเรา อยู่บนเครือข่ายเดียวกัน
 4. หากติดปัญหาในการเชื่อมต่อ ให้ลองสลับการตั้งค่าในส่วน **Connection** จาก เป็น **Tunnel** หรือ **Local**
 
+## 3. ทดสอบรันแบบ Web 
+
+> ⚠️ ในการรันแบบ Web ตัว UI component ที่นำมาใช้ต้องรองรับการรันแบบเว็บด้วยนะ ให้ศึกษาเพิ่มเติมในคู่มือของ UI นั้นๆ ครับ
+
+1. หลังจากรันคำสั่ง `npx expo start` แล้ว จะสังเกตจากเมนูของ Expo server ว่า เราสามารถกดปุ่มลัดชื่อ `w` เพื่อรันแบบ web 
+2. ถ้ากดปุ่มแล้วระบบพบว่า ต้องมีการติดตั้ง package เพิ่มเติม จะมีการแสดงข้อความมาประมาณด้านล่าง 
+   
+```
+It looks like you're trying to use web support but don't have the required dependencies installed.
+
+Please install react-native-web@~0.19.6, react-dom@18.2.0, @expo/webpack-config@^19.0.0 by running:
+
+npx expo install react-native-web@~0.19.6 react-dom@18.2.0 @expo/webpack-config@^19.0.0
+
+If you're not using web, please ensure you remove the "web" string from the platforms array in the
+project Expo config.
+```
+
+3. ปิด Expo server ลงโดยใช้ปุ่ม Ctrl + C หรือ Cmd + C 
+4. หลังจากปิด Expo server แล้ว เราสามารถเอาคำสั่ง `npx expo install ...` ที่แสดงขึ้นมาในคำแนะนำด้านบนมารัน เพื่อติดตั้ง package ที่จำเป็น เช่นในตัวอย่างคือ 
+
+```
+npx expo install react-native-web@~0.19.6 react-dom@18.2.0 @expo/webpack-config@^19.0.0
+```
+> ให้แน่ใจว่าได้ใช้คำสั่งจากที่แสดงในเครื่องของตัวเอง ห้าม copy คำสั่งด้านบนไปใช้ เพราะเลขเวอร์ชั่นจะเปลี่ยนไปตามความเหมาะสมของระบบตอนนั้น
+
+5. หลังจากรันคำสั่งติดตั้งเรียบร้อย ให้ใช้คำสั่ง `npx expo start` ขึ้นมาอีกครั้ง
+6. หลังจาก Expo server เปิดทำงานเสร็จสมบูรณ์ ให้กดปุ่ม w เพื่อรันแบบ Web 
+
+
+
+
+
+
+
 ## หากติดปัญหาในการเชื่อมต่อ 
 
 ให้ลองสลับการตั้งค่าในส่วน **Connection** จาก เป็น **Tunnel** หรือ **Local**
