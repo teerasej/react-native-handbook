@@ -1,6 +1,8 @@
 
 # 3. Setup NativeBase
 
+ในที่นี้เราใช้ UI Framework ที่ชื่อ [Nativebase](https://nativebase.io/) 
+
 ทำการเขียนส่วนของ App.js ใหม่ โดยใช้ `NativeBaseProvider` component 
 
 ```jsx
