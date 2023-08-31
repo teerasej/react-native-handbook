@@ -28,7 +28,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
 import ChatHistoryComponent from './components/ChatHistoryComponent';
-import ChatBox from './components/ChatBox';
+import ChatBoxComponent from './components/ChatBoxComponent';
 
 // เรียกใช้ provider และ store
 import { Provider } from 'react-redux';
@@ -49,7 +49,7 @@ export default function App() {
 
         <VStack w="100%" flex={1}>
           <ChatHistoryComponent flex={1} />
-          <ChatBox />
+          <ChatBoxComponent />
         </VStack>
         <StatusBar style="auto" />
       </NativeBaseProvider>

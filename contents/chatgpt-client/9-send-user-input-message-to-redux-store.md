@@ -50,11 +50,11 @@ export default chatSlice.reducer
 
 ## 2. ส่งข้อมูล message ที่กดส่งจาก Input ไปที่ slice
 
-เปิดไฟล์ `components/ChatBox.js`
+เปิดไฟล์ `components/ChatBoxComponent.js`
 
 
 ```jsx
-// components/ChatBox.js
+// components/ChatBoxComponent.js
 import { View, Text } from 'react-native'
 import React, { useState } from 'react'
 import { HStack, Icon, IconButton, Input } from 'native-base'
@@ -65,7 +65,7 @@ import { useDispatch } from 'react-redux';
 // เรียกใช้ reducer function ในการสร้าง action object เพื่อส่งให้กับ redux
 import { addUserMessage } from './../redux/chatSlice';
 
-const ChatBox = () => {
+const ChatBoxComponent = () => {
 
     const [chatMessage, setChatMessage] = useState("")
 
@@ -101,5 +101,5 @@ const ChatBox = () => {
     )
 }
 
-export default ChatBox
+export default ChatBoxComponent
 ```

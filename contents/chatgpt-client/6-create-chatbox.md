@@ -2,7 +2,7 @@
 # 6. สร้าง Chat box UI
 
 
-## 1. สร้างไฟล์ `components/ChatBox.js`
+## 1. สร้างไฟล์ `components/ChatBoxComponent.js`
 
 ใช้ snippet `rnfe` ได้
 
@@ -17,7 +17,7 @@ import { HStack, Icon, IconButton, Input } from 'native-base'
 import { FontAwesome } from '@expo/vector-icons';
 
 
-const ChatBox = () => {
+const ChatBoxComponent = () => {
 
     return (
         <>
@@ -38,10 +38,10 @@ const ChatBox = () => {
     )
 }
 
-export default ChatBox
+export default ChatBoxComponent
 ```
 
-## 2. นำ ChatBox มาแสดงใน App.js
+## 2. นำ ChatBoxComponent มาแสดงใน App.js
 
 ```jsx
 // App.js
@@ -54,7 +54,7 @@ import { NativeBaseProvider, Box, HStack, Text, VStack, KeyboardAvoidingView } f
 import ChatHistoryComponent from './components/ChatHistoryComponent';
 
 // import component chat box
-import ChatBox from './components/ChatBox';
+import ChatBoxComponent from './components/ChatBoxComponent';
 
 export default function App() {
 
@@ -74,7 +74,7 @@ export default function App() {
             <ChatHistoryComponent flex={1}/>
 
             {/* แสดง chatbox โดยไม่กำหนดค่า flex เพื่อให้ ChatHistory กินพื้นที่ที่เหลือทั้งหมด */}
-            <ChatBox/>
+            <ChatBoxComponent/>
 
           </VStack>
         </KeyboardAvoidingView>

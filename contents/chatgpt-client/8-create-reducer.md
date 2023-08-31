@@ -46,7 +46,7 @@ import chatSlice from './chatSlice.js'
 export default configureStore({
   reducer: {
     // กำหนด slice ให้เป็น reducer ของ store 
-    chatSlice: chatSlice
+    chatroom: chatSlice
   }
 })
 ```

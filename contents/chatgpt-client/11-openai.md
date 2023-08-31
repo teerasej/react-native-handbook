@@ -109,10 +109,10 @@ export const { addUserMessage } = chatSlice.actions
 export default chatSlice.reducer
 ```
 
-## 2. เรียกใช้ async thunk ใน ChatBox 
+## 2. เรียกใช้ async thunk ใน ChatBoxComponent 
 
 ```jsx
-// components/ChatBox.js
+// components/ChatBoxComponent.js
 
 import { View, Text } from 'react-native'
 import React, { useState } from 'react'
@@ -123,7 +123,7 @@ import { useDispatch } from 'react-redux';
 // เรียกใช้ async thunk function ในการสร้าง action object เพื่อส่งให้กับ redux
 import { addUserMessage, askAI } from './../redux/chatSlice';
 
-const ChatBox = () => {
+const ChatBoxComponent = () => {
 
     const [chatMessage, setChatMessage] = useState("")
     const dispatch = useDispatch();
@@ -158,5 +158,5 @@ const ChatBox = () => {
     )
 }
 
-export default ChatBox
+export default ChatBoxComponent
 ```
