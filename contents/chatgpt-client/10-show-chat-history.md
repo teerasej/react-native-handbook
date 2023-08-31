@@ -50,7 +50,7 @@ import React, { useRef } from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistoryComp = () => {
+const ChatHistoryComponent = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
 
@@ -81,7 +81,7 @@ const ChatHistoryComp = () => {
   )
 }
 
-export default ChatHistoryComp
+export default ChatHistoryComponent
 ```
 
 ## 3. กันปัญหาเรื่อง error: Invariant Violation

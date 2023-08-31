@@ -1,7 +1,7 @@
 
 # 5. สร้าง Chat history UI
 
-## 1. สร้างไฟล์ `components/ChatHistory.js`
+## 1. สร้างไฟล์ `components/ChatHistoryComponent.js`
 
 ใช้ snippet rnfe ได้
 
@@ -10,7 +10,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { FlatList } from 'native-base'
 
-const ChatHistoryComp = () => {
+const ChatHistoryComponent = () => {
   return (
     <>
         {/* ใส่ FlatList สำหรับแสดง Chat history */}
@@ -19,10 +19,10 @@ const ChatHistoryComp = () => {
   )
 }
 
-export default ChatHistoryComp
+export default ChatHistoryComponent
 ```
 
-## 2. นำ ChatHistory มาแสดงใน App.js
+## 2. นำ ChatHistoryComponent มาแสดงใน App.js
 
 ```jsx
 // App.js
@@ -33,7 +33,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
 
 // import component chat history
-import ChatHistoryComp from './components/ChatHistoryComp';
+import ChatHistoryComponent from './components/ChatHistoryComponent';
 
 export default function App() {
 
@@ -50,7 +50,7 @@ export default function App() {
         <VStack w="100%" flex={1}>
           
           {/* แสดง chathistory โดยกำหนดกินพื้นที่ 1 ช่องจากทั้งหมด */}
-          <ChatHistoryComp flex={1}/>
+          <ChatHistoryComponent flex={1}/>
 
         </VStack>
       <StatusBar style="auto" />

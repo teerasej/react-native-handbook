@@ -27,7 +27,7 @@ export default configureStore({
 import { StatusBar } from 'expo-status-bar';
 
 import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
-import ChatHistoryComp from './components/ChatHistoryComponent';
+import ChatHistoryComponent from './components/ChatHistoryComponent';
 import ChatBox from './components/ChatBox';
 
 // เรียกใช้ provider และ store

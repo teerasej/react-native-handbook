@@ -51,7 +51,7 @@ import { StatusBar } from 'expo-status-bar';
 // import KeyboardAvoidingView
 import { NativeBaseProvider, Box, HStack, Text, VStack, KeyboardAvoidingView } from "native-base";
 
-import ChatHistoryComp from './components/ChatHistoryComponent';
+import ChatHistoryComponent from './components/ChatHistoryComponent';
 
 // import component chat box
 import ChatBox from './components/ChatBox';
