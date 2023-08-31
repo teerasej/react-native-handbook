@@ -27,7 +27,7 @@ export default configureStore({
 import { StatusBar } from 'expo-status-bar';
 
 import { NativeBaseProvider, Box, HStack, Text, VStack } from "native-base";
-import ChatHistoryComp from './components/ChatHistoryComp';
+import ChatHistoryComp from './components/ChatHistoryComponent';
 import ChatBox from './components/ChatBox';
 
 // เรียกใช้ provider และ store
@@ -48,7 +48,7 @@ export default function App() {
         </HStack>
 
         <VStack w="100%" flex={1}>
-          <ChatHistoryComp flex={1} />
+          <ChatHistoryComponent flex={1} />
           <ChatBox />
         </VStack>
         <StatusBar style="auto" />
