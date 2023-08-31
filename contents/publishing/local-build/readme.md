@@ -86,7 +86,7 @@ nextflow.in.th
 th.in.nextflow.app.hr.mainapp
 ```
 
-## เพ่ิมเติม
+## เพิ่มเติม
 
 https://docs.expo.dev/workflow/prebuild/ 
 
