@@ -2,10 +2,12 @@
 # 8. สร้าง Reducer Slice
 
 
-สร้างไฟล์ `redux/chatSlice.js`
+## 8.1 สร้าง Reducer Slice สำหรับเก็บ chat history และจัดการเกี่ยวกับ action ที่เกิดกับ chat feature ของแอพ
+
+สร้างไฟล์ `src/redux/chatSlice.js`
 
 ```jsx
-// redux/chatSlice.js
+// src/redux/chatSlice.js
 // ใช้ snippet rxslice
 
 import { createSlice } from '@reduxjs/toolkit'
@@ -36,10 +38,10 @@ export default chatSlice.reducer
 ```
 
 
-## 4. เพิ่ม slice เข้าเป็น Reducer ของ Store
+## 8.2 เพิ่ม slice เข้าเป็น Reducer ของ Store
 
 ```jsx
-// redux/store.js
+// src/redux/store.js
 
 import { configureStore } from '@reduxjs/toolkit'
 // import slice ที่ต้องการ
