@@ -4,14 +4,14 @@
 ## 1. ใช้ useSelector เพื่อดึงข้อมูลจาก slice's state มาใช้กับ FlatList
 
 ```jsx
-// components/ChatHistory.js
+// components/ChatHistoryComponent.js
 
 import { View, Text } from 'react-native'
 import React from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistoryComp = () => {
+const ChatHistoryComponent = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
 
@@ -37,7 +37,7 @@ const ChatHistoryComp = () => {
   )
 }
 
-export default ChatHistoryComp
+export default ChatHistoryComponent
 ```
 
 ## 2. ควบคุมให้ FlatList เลื่อนลงมาล่างสุดเสมอ
@@ -96,7 +96,7 @@ import React, { useRef, useState } from 'react'
 import { FlatList, HStack } from 'native-base'
 import { useSelector } from 'react-redux'
 
-const ChatHistoryComp = () => {
+const ChatHistoryComponent = () => {
 
   const chatHistory = useSelector(state => state.chatroom.chatHistory)
   const flatListRef = useRef();
@@ -133,5 +133,5 @@ const ChatHistoryComp = () => {
   )
 }
 
-export default ChatHistoryComp
+export default ChatHistoryComponent
 ```

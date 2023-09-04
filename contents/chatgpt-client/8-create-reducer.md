@@ -1,5 +1,5 @@
 
-# 8. สร้าง Slice
+# 8. สร้าง Reducer Slice
 
 
 สร้างไฟล์ `redux/chatSlice.js`
@@ -12,7 +12,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // กำหนดค่าเริ่มต้นของข้อมูลที่ชื่อ chatHistory เป็นค่า undefined
 const initialState = {
-    chatHistory: []
+    // สร้าง item ที่เป็นตัวแทนของข้อความ
+    chatHistory: [
+      { sender: 'Me', text:'Oh yeah!'}
+    ]
 }
 
 // สร้าง slice จาก function 
@@ -45,7 +48,7 @@ import chatSlice from './chatSlice.js'
 
 export default configureStore({
   reducer: {
-    // กำหนด slice ให้เป็น reducer ของ store 
+    // กำหนด slice ให้เป็น reducer ของ store โดยตั้งชื่อ slice นี้ ว่า chatroom 
     chatroom: chatSlice
   }
 })

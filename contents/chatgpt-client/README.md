@@ -17,6 +17,6 @@
 
 7. [เพิ่มระบบ Redux](7-add-redux.md)
 8. [สร้าง Slice](8-create-reducer.md)
-9. [สร้าง action ที่จะส่งข้อความ User เข้าไปใน Chat history](9-send-user-input-message-to-redux-store.md)
-10. [แสดงข้อความใน Chat History component](10-show-chat-history.md)
+9. [แสดงข้อความใน Chat History component](9-show-chat-history.md)
+10. [สร้าง action ที่จะส่งข้อความ User เข้าไปใน Chat history](10-send-user-input-message-to-redux-store.md)
 11. [เรียกใช้ OpenAI API](11-openai.md)
