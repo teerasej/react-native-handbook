@@ -6,13 +6,15 @@
    - จะมีการกรอกเบอร์โทรศัพท์ และรับ SMS-OTP เพื่อยืนยันตัวตน
 2. หลังจากได้ account และ login เข้าไปใน Dashboard ได้แล้ว ให้[เข้าไปสร้าง OpenAI API Key ขึ้นมา และ copy มาเตรียมใช้งาน](https://platform.openai.com/account/api-keys) 
 
-## 1. สร้าง async action ชื่อ askAI
+## 1. สร้าง async thunk ชื่อ askAI
+
+สร้างไฟล์​ `src/redux/askAIThunk.js`
 
 ```js
-// redux/chatSlice.js
+// src/redux/askAIThunk.js
 
-// import createAsyncThunk เพื่อสร้าง Async action
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+// import createAsyncThunk 
+import { createAsyncThunk } from '@reduxjs/toolkit'
 // import axios ในการส่ง request
 import axios from 'axios';
 
@@ -57,6 +59,17 @@ export const askAI = createAsyncThunk(
 
   }
 );
+
+```
+
+## 2. กำหนด extraReducer ลงใน Slice ที่ต้องการให้รับข้อมูลจาก thunk ในกรณีต่างๆ 
+
+```js
+// redux/chatSlice.js
+import { createSlice } from '@reduxjs/toolkit'
+
+// import askAI thunk เพื่อมากำหนด case ใน extraReducer
+import { askAI } from './askAIThunk';
 
 const initialState = {
   chatHistory: []
@@ -119,9 +132,10 @@ import React, { useState } from 'react'
 import { HStack, Icon, IconButton, Input } from 'native-base'
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
+import { addUserMessage } from './../redux/chatSlice';
 
 // เรียกใช้ async thunk function ในการสร้าง action object เพื่อส่งให้กับ redux
-import { addUserMessage, askAI } from './../redux/chatSlice';
+import { askAI } from '../../redux/askAIThunk';
 
 const ChatBoxComponent = () => {
 
