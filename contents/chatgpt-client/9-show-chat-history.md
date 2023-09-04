@@ -1,5 +1,5 @@
 
-# 10. แสดงข้อความใน Chat History component
+# 9. แสดงข้อความใน Chat History component
 
 ## 1. ใช้ useSelector เพื่อดึงข้อมูลจาก slice's state มาใช้กับ FlatList
 

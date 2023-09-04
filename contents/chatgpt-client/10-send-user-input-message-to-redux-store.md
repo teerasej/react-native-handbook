@@ -1,5 +1,5 @@
 
-# 9. สร้าง action ที่จะส่งข้อความ User เข้าไปใน Chat history
+# 10. สร้าง action ที่จะส่งข้อความ User เข้าไปใน Chat history
 
 ## ดาวน์โหลดโปรเจค
 
