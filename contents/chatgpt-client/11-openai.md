@@ -6,6 +6,12 @@
    - จะมีการกรอกเบอร์โทรศัพท์ และรับ SMS-OTP เพื่อยืนยันตัวตน
 2. หลังจากได้ account และ login เข้าไปใน Dashboard ได้แล้ว ให้[เข้าไปสร้าง OpenAI API Key ขึ้นมา และ copy มาเตรียมใช้งาน](https://platform.openai.com/account/api-keys) 
 
+## เรียนรู้เพิ่มเติม
+
+- [เริ่มต้นเรียนรู้ ใช้งาน Azure OpenAI Service](https://learn.nextflow.in.th/azure-openai-service)
+- [เริ่มต้นเรียนรู้ ทำแอพ AI ด้วย Semantic Kernel ฉบับคนใช้ Python
+](https://learn.nextflow.in.th/getting-started-with-semantic-kernel)
+
 ## 1. สร้าง async thunk ชื่อ askAI
 
 สร้างไฟล์​ `src/redux/askAIThunk.js`
