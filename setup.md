@@ -28,7 +28,11 @@
    1. [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools)
    2. [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools)
 
-### การติดตั้งระบบ
+## 2. สมัคร Account ที่ควรมี
+
+[สมัคร Github Account](https://github.com/signup) ให้เรียบร้อย
+
+## 3. การติดตั้งระบบ
 
 เปิดโปรแกรม Terminal (MacOS) หรือ Command Prompt (Windows 11) และรันคำสั่งด้านล่าง ทีละคำสั่ง
 
@@ -58,7 +62,7 @@ sudo npm install -g eas-cli
 brew cask install fastlane
 ```
 
-## 2. สำหรับอุปกรณ์พกพา
+## 4. สำหรับอุปกรณ์พกพา
 
 อุปกรณ์พกพาจะถูกใช้ในการพรีวิว และทดสอบแอพพลิเคชั่นที่กำลังพัฒนาบนคอมพิวเตอร์ 
 
@@ -66,7 +70,7 @@ brew cask install fastlane
 - [ระบบ Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www)
 
 
-## 3. ทดสอบการติดตั้ง 
+## 5. ทดสอบการติดตั้ง 
 
 [คลิกดูวิธีทดสอบการสร้างโปรเจค และพรีวิวบนมือถือที่นี่ ](https://nextflow.in.th/2023/react-native-validate-setup-machine/)
 
