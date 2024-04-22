@@ -21,7 +21,12 @@
    - เสร็จแล้วติดตั้งส่วนเสริม 
      1. [Nextflow React Native Extension Pack](https://marketplace.visualstudio.com/items?itemName=teerasej.nextflow-react-native-pack) 
      2. [Expo Tools](https://marketplace.visualstudio.com/items?itemName=expo.vscode-expo-tools)
-
+4. Web Browser สามารถเลือกระหว่าง 2 อย่างนี้ 
+   1. Google Chrome ([Download](https://www.google.com/chrome/))
+   2. Microsoft Edge ([Download](https://www.microsoft.com/en-us/edge/download))
+5. แล้วก็ติดตั้ง Extension บน Web Browser ตามรายการต่อไปนี้ 
+   1. [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools)
+   2. [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools)
 
 ### การติดตั้งระบบ
 
