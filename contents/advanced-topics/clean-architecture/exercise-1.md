@@ -3,6 +3,10 @@
 
 [Run with tunnel](https://github.com/teerasej/react-native-handbook/blob/master/contents/main/run-application.md)
 
+
+```
+npx expo start --tunnel
+```
 ### 1. Set up a new React Native project
 Create a new React Native project with expo using the following command:
 
