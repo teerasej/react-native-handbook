@@ -8,4 +8,4 @@
 3. [Advanced Redux techniques](advanced-redux/normalizer.md)
 4. [Use Context API](context-api/README.md)
 5. [Optimizing Render Cycle](optimizing-render-cycle/README.md)
-6. [React Memo](react-memo/README.md)
+6. [React Memo](/contents/advanced-topics/optimizing-render-cycle/react-memo/README.md)
