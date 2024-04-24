@@ -1,5 +1,5 @@
 
-# Create a modular React Native application
+# Create a clean architecture React Native application
 
 [Run with tunnel](https://github.com/teerasej/react-native-handbook/blob/master/contents/main/run-application.md)
 
