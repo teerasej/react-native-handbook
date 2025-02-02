@@ -9,10 +9,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 
 - [Setup](setup.md)
 
-# Reference 
 
-- [Node Handbook](https://github.com/teerasej/node-handbook)
-- [React Handbook](https://github.com/teerasej/react-handbook)
 
 # Fundamental
 
@@ -63,3 +60,8 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 # Advanced Topics
 
 - [Advanced Topics Exercise](/contents/advanced-topics/README.md)
+
+# Reference 
+
+- [Node Handbook](https://github.com/teerasej/node-handbook)
+- [React Handbook](https://github.com/teerasej/react-handbook)
