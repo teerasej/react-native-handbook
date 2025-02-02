@@ -5,30 +5,62 @@
 - เราสามารถกำหนด Function ที่ return ค่า เป็น JSX สำหรับการสร้าง Tag Component ของเราได้
 - Function component จะดูเหมือน function ของ javascript ทั่วไปมาก แต่มันเป็น function ที่ return ค่าออกมาเป็น JSX โดยตรง
 
-## 1. สร้าง Component ใหม่ ด้วยการเขียนแบบ Function
+## 0. Reset ไฟล์ index.tsx
 
-เริ่มจากในไฟล์​ App.js ให้ลองสร้าง Function component แบบด้านล่าง
+เปิดไฟล์ `app/index.tsx`
+
+> **ให้แทนที่ทั้งไฟล์นี้ด้วยโค้ดด้านล่าง**
 
 ```jsx
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+// app/index.tsx
+
+import React from "react";
+import { Text, View } from "react-native";
+
+export default function Index() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Edit app/index.tsx to edit this screen.</Text>
+    </View>
+  );
+}
+```
+
+## 1. สร้าง Component ใหม่ ด้วยการเขียนแบบ Function
+
+เริ่มจากในไฟล์​ `app/index.tsx` ให้ลองสร้าง Function component แบบด้านล่าง
+
+```jsx
+// app/index.tsx
+
+import React from "react";
+import { Text, View } from "react-native";
 
 // สร้าง 'Hello' component ในรูปแบบ Function component
 let Hello = () => {
   return (
-    <Text style={styles.helloText}>Hello</Text>
+    <Text>Hello</Text>
   )
 }
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
 
+export default function Index() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {/* ใช้งาน Hello component */}
       <Hello/>
-      
-      <Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}/>
     </View>
   );
 }
@@ -36,94 +68,110 @@ export default function App() {
 
 ## 2. เขียน Component แยกไฟล์
 
-เริ่มจากสร้างไฟล์ `Hello.js` และเขียนโค้ดด้านล่าง
+เริ่มจากสร้างไฟล์ `app/Hello.tsx` และเขียนโค้ดด้านล่าง
 
 ใช้ snippet ชื่อ **rnfs** ได้ 
 
 ```jsx
+// app/Hello.tsx
+
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 
 export default function Hello() {
-    return (
-        <View>
-            <Text style={styles.helloText}>Hello</Text>
-        </View>
-    )
-}
-
-const styles = StyleSheet.create({
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  }
-});
-
-```
-
-และกลับมาที่ไฟล์ `App.js` แล้วเขียนคำสั่ง Import component มาจากไฟล์ `Hello.js`
-
-```js
-import Hello from "./Hello";
-```
-
-จะเห็นว่าเราได้หน้าตาแอพเหมือนเดิม แต่ตอนนี้เราแยก component ไปไว้อีกไฟล์ต่างหากแล้ว เราจึงสามารถเอาไปใช้ในไฟล์อื่นนอกเหนือจาก App.js ได้อีก (ทางเทคนิคเราเรียกไฟล์พวกนี้ว่า **module**) 
-
-## A. ไฟล์เต็ม App.js
-
-```jsx
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import Hello from "./Hello";
-
-
-export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Hello/>
-      <Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}/>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  },
-  signInButton: {
-    color: 'orange'
-  }
-});
-
-```
-
-## B. ไฟล์เต็ม Hello.js
-
-```jsx
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
-export default function Hello() {
-    return (
-        <View>
+    <View>
             <Text style={styles.helloText}>Hello</Text>
         </View>
-    )
+  )
 }
 
 const styles = StyleSheet.create({
     helloText: {
-        fontSize: 30,
-        color: 'green'
-      }
-})
+      fontSize: 30,
+      color: 'green'
+    }
+  });
+
+```
+
+และกลับมาที่ไฟล์ `app/index.tsx` แล้วเขียนคำสั่ง Import component มาจากไฟล์ `Hello.tsx`
+
+```js
+// app/index.tsx
+
+import React from "react";
+import { Text, View } from "react-native";
+import Hello from "./Hello";
+
+
+
+export default function Index() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {/* ใช้งาน Hello component */}
+      <Hello/>
+    </View>
+  );
+}
+```
+
+จะเห็นว่าเราได้หน้าตาแอพเหมือนเดิม แต่ตอนนี้เราแยก component ไปไว้อีกไฟล์ต่างหากแล้ว เราจึงสามารถเอาไปใช้ในไฟล์อื่นนอกเหนือจาก app/index.tsx ได้อีก (ทางเทคนิคเราเรียกไฟล์พวกนี้ว่า **module**) 
+
+## A. ไฟล์เต็ม app/index.tsx
+
+```jsx
+// app/index.tsx
+
+import React from "react";
+import { Text, View } from "react-native";
+import Hello from "./Hello";
+
+
+
+export default function Index() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {/* ใช้งาน Hello component */}
+      <Hello/>
+    </View>
+  );
+}
+```
+
+## B. ไฟล์เต็ม Hello.tsx
+
+```jsx
+// app/Hello.tsx
+
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+
+export default function Hello() {
+  return (
+    <View>
+            <Text style={styles.helloText}>Hello</Text>
+        </View>
+  )
+}
+
+const styles = StyleSheet.create({
+    helloText: {
+      fontSize: 30,
+      color: 'green'
+    }
+  });
 
 ```

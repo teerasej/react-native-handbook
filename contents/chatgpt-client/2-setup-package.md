@@ -14,13 +14,13 @@ cd nextflow-chatgpt-app
 จากนั้นให้ copy คำสั่ง ด้านล่างไปรันใน Terminal
 
 ```bash
-npm install react-redux react-hook-form @react-navigation/native @react-navigation/native-stack native-base @reduxjs/toolkit axios
+npm install react-redux @reduxjs/toolkit axios
 ```
 
 หรือ
 
 ```bash
-yarn add react-redux react-hook-form @react-navigation/native @react-navigation/native-stack native-base @reduxjs/toolkit axios
+yarn add react-redux @reduxjs/toolkit axios
 ```
 
 ## 2.2 ติดตั้ง package สำหรับใช้งาน Nativebase 

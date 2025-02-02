@@ -1,7 +1,7 @@
 
 # 3. Setup NativeBase
 
-ในที่นี้เราใช้ UI Framework ที่ชื่อ [Nativebase](https://nativebase.io/) 
+ในที่นี้เราใช้ UI Framework ที่ชื่อ [GlueStack-ui](https://gluestack.io/ui/docs/home/overview/quick-start) 
 
 ทำการเขียนส่วนของ App.js ใหม่ โดยใช้ `NativeBaseProvider` component 
 

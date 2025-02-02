@@ -1,19 +1,80 @@
 
-# 1. สร้างโปรเจค 
+# 1. สร้างโปรเจค
 
+## 1. สร้างโปรเจค 
+1. คำสั่งสร้างโปรเจค
+```bash
+npm create gluestack@latest
+```
+2. เลือก template **Expo**
+3. กำหนดชื่อโปรเจคเป็น
 
 ```bash
-npx create-expo-app nextflow-chatgpt-app
+my-gpt-app
 ```
 
-อาจจะมีการแจ้งให้ติดตั้ง package เพิ่มเติม ให้พิมพ์ `y` และกด enter
+4. รอให้โปรเจคสร้างเสร็จ
+
+
+## 2. ติดตั้ง Node Module 
+
+1. ใช้คำสั่งเปิดเข้าไปใน directory ของโปรเจค
+```bash
+cd my-gpt-app
+```
+
+2. ติดตั้ง Node Module ด้วยคำสั่ง
+```bash
+npm install @types/react @types/react-native --save-dev
+```
+
+3. เปิดไฟล์ `tsconfig.json` และเพิ่ม `"jsx": "react-native"` ในส่วน `compilerOptions`
+
+```json
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "tailwind.config": ["./tailwind.config.js"]
+    },
+    "jsx":"react-native"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ]
+}
+```
+
+npm config set legacy-peer-deps true  
+
+2. ติดตั้ง Node Module ด้วยคำสั่ง
+```bash
+npm install @react-navigation/native @react-navigation/native-stack native-base
+```
+
+หรือ
 
 ```bash
-# ตัวอย่างข้อความที่แจ้งให้ติดตั้ง package เพ่ิมเติม 
-Need to install the following packages:
-  create-expo-app
-Ok to proceed? (y) 
+yarn add @react-navigation/native @react-navigation/native-stack native-base
 ```
+
+### Reference
+
+- Nativebase
+
+## 3. ติดตั้ง package สำหรับใช้งาน Nativebase 
+
+```bash
+npx expo install react-native-svg react-native-safe-area-context expo-font react-native-screens
+```
+
+
 
 
 

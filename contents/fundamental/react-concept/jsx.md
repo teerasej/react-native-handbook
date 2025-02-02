@@ -11,15 +11,28 @@
 
 ### ทดลองกำหนด User Interface เพิ่มเติม
 
-เปิดไฟล์ `App.js`
+เปิดไฟล์ `app/index.tsx`
 
-จะเห็นว่ามี Component ตัวหนึ่งชื่อ **App** อยู่
+จะเห็นว่ามี Component ตัวหนึ่งชื่อ **Home** อยู่ 
+
+> **ให้แทนที่ทั้งไฟล์นี้ด้วยโค้ดด้านล่าง**
 
 ```jsx
-export default function App() {
+// app/index.tsx
+
+import React from "react";
+import { Text, View } from "react-native";
+
+export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Edit app/index.tsx to edit this screen.</Text>
     </View>
   );
 }
@@ -34,10 +47,18 @@ export default function App() {
 จะกลายเป็นแบบนี้ 
 
 ```jsx
-export default function App() {
+import React from "react";
+import { Text, View } from "react-native";
+
+export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Text>Hello</Text>
     </View>
   );
@@ -52,36 +73,69 @@ export default function App() {
 - การเขียน StyleSheet object จะเป็นเหมือนการเขียน JavaScript object นั่นคือคล้ายกับการกำหนดค่า CSS 
 - การนำมาใช้ จะเป็นการกำหนดค่าลงในค่า `style` attribute ของ JSX Component โดยตรง
 
-### ทดสอบ
+### 2.1 ใช้งาน StyleSheet object ใน React Native
 
-เพิ่มค่า **helloText** ลงไปใน `StyleSheet.create({})` ดังด้านล่าง
+1. เราจะเรียกใช้ StyleSheet จาก react-native module และย้ายค่า CSS ออกมาจาก View component มาไว้ที่ StyleSheet object ชื่อ `styles` แทน 
+2. นำค่า `styles.container` มาใช้งานใน `style` attribute ของ View component
 
 ```js
+// app/index.tsx
+import React from "react";
+
+// import StyleSheet มาจาก react-native
+import { Text, View, StyleSheet } from "react-native";
+
+export default function Index() {
+  return (
+    // นำค่า styles.container มาใช้งาน
+    <View
+      style={styles.container}
+    >
+      <Text>Hello</Text>
+    </View>
+  );
+}
+
+// สร้าง StyleSheet object ชื่อ styles และกำหนดค่าให้กับ property ชื่อ container 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  helloText: {
-    fontSize: 30,
-    color: 'green'
+    justifyContent: "center",
+    alignItems: "center",
   }
 });
 ```
 
-ขึ้นมาที่ JSX ของ App Component และกำหนดค่า `styles.helloText` ลงไปใน `style` attribute ของ Component
+### 2.2 ทดลองเพิ่ม Style ให้กับ Text Component
+
+1. เพิ่มค่า `styles.text` ลงไปใน `StyleSheet.create({})` ดังด้านล่าง
+2. นำค่า `styles.text` มาใช้งานใน `style` attribute ของ Text component
 
 ```jsx
-export default function App() {
+// app/index.tsx
+
+import React from "react";
+import { Text, View, StyleSheet } from "react-native";
+
+export default function Index() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text style={styles.helloText}>Hello</Text>
+      <Text style={styles.text}>Hello</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: 'purple',
+    fontSize: 24,
+  }
+});
 ```
 
 ทดสอบดูผลการทำงาน
@@ -91,12 +145,12 @@ export default function App() {
 ทำการปรับ User Interface และใช้ Flex stylesheet ตามภาพด้านล่าง
 
 ```jsx
-// App.js
+// app/index.tsx
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text, View, StyleSheet } from "react-native";
 
-export default function App() {
+export default function Index() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -129,13 +183,13 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 8,
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
   contentText: {
     fontSize: 24,
-    color: 'white',
+    color: 'black',
   },
   footer: {
     flex: 1,
@@ -147,10 +201,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'white',
   },
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  }
 });
 ```
 
@@ -182,17 +232,17 @@ const styles = StyleSheet.create({
 ทำการเรียกใช้งาน SafeArea จาก `react-native` module
 
 ```jsx
-  import React from 'react';
-  import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+// app/index.tsx
 
-export default function App() {
-    return (
-      <View style={styles.container}>
-        {/* SafeArea ด้านบน */}
-        <SafeAreaView style={styles.safeAreaTop}>
-        </SafeAreaView>
-        {/* SafeArea ด้านส่วนที่เหลือ  */}
-        <SafeAreaView style={styles.safeAreaBottom}>
+import React from "react";
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function Index() {
+  return (
+    <View style={styles.container}>
+
+      {/* SafeArea ครอบ View ทั้งหมด */}
+      <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Header</Text>
           </View>
@@ -203,59 +253,51 @@ export default function App() {
             <Text style={styles.footerText}>Footer</Text>
           </View>
         </SafeAreaView>
-      </View>
-    );
-  };
+    </View>
+  );
+}
 
-  const styles = StyleSheet.create({
-    // เพิ่ม Stylesheet สำหรับ SafeArea ด้านบน กำหนด flex เป็น 0 เพื่อไม่ให้กินพื้นที่ลงมาด้านล่าง
-    safeAreaTop: {
-      flex: 0,
-      backgroundColor: 'red',
-    },
-    // เพิ่ม Stylesheet สำหรับ SafeArea ด้านล่าง กำหนด flex เป็น 1 เพื่อให้กินพื้นที่ด้านล่างทั้งหมด
-    safeAreaBottom: {
-      flex: 1,
-      backgroundColor: 'green',
-    },
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-    },
-    header: {
-      flex: 1,
-      backgroundColor: 'red',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headerText: {
-      fontSize: 24,
-      color: 'white',
-    },
-    content: {
-      flex: 18,
-      backgroundColor: 'white',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-    },
-    contentText: {
-      fontSize: 24,
-      color: 'black',
-    },
-    footer: {
-      flex: 1,
-      backgroundColor: 'green',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    footerText: {
-      fontSize: 24,
-      color: 'white',
-    },
-
-  });
-
-
+const styles = StyleSheet.create({
+  // เพิ่ม Stylesheet สำหรับ SafeArea ด้านล่าง กำหนด flex เป็น 1 เพื่อให้กินพื้นที่ด้านล่างทั้งหมด
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  header: {
+    flex: 1,
+    backgroundColor: 'purple',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+  content: {
+    flex: 8,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentText: {
+    fontSize: 24,
+    color: 'black',
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+});
 ```
 
 ทดสอบการทำงาน **เราน่าจะเห็น Error แดงเถือก ประมาณว่า "หา SafeAreaView" ไม่เจอ **
@@ -263,10 +305,70 @@ export default function App() {
 ขึ้นมาด้านบนในส่วนคำสั่ง import และเขียนคำสั่ง import ที่ 3 ลงไป
 
 ```js
-import React from 'react';
+// app/index.tsx
 
-// เพิ่มส่วนนี้ เป็นการเรียกใช้ SafeAreaView component จาก module ชื่อ react-native
-import { StyleSheet, Text, View,SafeAreaView  } from 'react-native';
+import React from "react";
+// เรียกใช้ SafeAreaView จาก react-native
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+
+export default function Index() {
+  return (
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Header</Text>
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.contentText}>Content</Text>
+          </View>
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>Footer</Text>
+          </View>
+        </SafeAreaView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  header: {
+    flex: 1,
+    backgroundColor: 'purple',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+  content: {
+    flex: 8,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentText: {
+    fontSize: 24,
+    color: 'black',
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+});
 ```
 
 ### 4.2 Button
@@ -274,45 +376,80 @@ import { StyleSheet, Text, View,SafeAreaView  } from 'react-native';
 เพิ่ม `Button` Component ลงใน JSX ของ App Component 
 
 ```jsx
-export default function App() {
-  return (
-    return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeAreaTop}>
-        </SafeAreaView>
-        <SafeAreaView style={styles.safeAreaBottom}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Header</Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.contentText}>Content</Text>
+// app/index.tsx
 
-            {/* เพิ่มปุ่มในส่วน content */}
-            <Button title="ลงชื่อเข้าใช้"/>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Footer</Text>
-          </View>
-        </SafeAreaView>
-      </View>
-    );
+import React from "react";
+
+// เรียกใช้ Button และ ButtonText จาก '@/components/ui/button'
+import { Button, ButtonText } from '@/components/ui/button';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+
+export default function Index() {
+  return (
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Header</Text>
+        </View>
+        <View style={styles.content}>
+          <Text style={styles.contentText}>Content</Text>
+
+          {/* เพิ่ม Button Component ลงไป */}
+          <Button size="md" variant="solid" action="primary">
+            <ButtonText>Hello World!</ButtonText>
+          </Button>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Footer</Text>
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  header: {
+    flex: 1,
+    backgroundColor: 'purple',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+  content: {
+    flex: 8,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentText: {
+    fontSize: 24,
+    color: 'black',
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+});
 ```
 
-ทดสอบการทำงาน **เราน่าจะเห็น Error แดงเถือก ประมาณว่า "หา Button" ไม่เจอ **
 
-ขึ้นมาด้านบนในส่วนคำสั่ง import และเขียนคำสั่ง import ที่ 3 ลงไป
-
-```js
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-
-// เพิ่มส่วนนี้ เป็นการเรียกใช้ Button component จาก module ชื่อ react-native
-import { Button } from 'react-native';
-```
-
-บันทึกไฟล์ และทดสอบการทำงาน จะเห็นว่าเรามีปุ่มแล้ว 
 
 ### Tips
 
@@ -323,108 +460,78 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 ```
 
-## 5. ใช้ StyleSheet กับปุ่ม Button component 
 
-เพิ่มค่า **signInButton** ลงไปใน `StyleSheet.create({})` ดังด้านล่าง
-
-```js
-const styles = StyleSheet.create({
-  //...
-  signInButton: {
-    color: 'orange'
-  }
-});
-```
-
-จากนั้นเอาค่า `styles.signInButton.color` มาใช้กับ `<Button ... color={}/>`
-
-```jsx
-<Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}/>
-```
-
-จากนั้นทดสอบการใช้งาน
 
 
 ## A. ไฟล์สมบูรณ์ App.js 
 
 ```jsx
-  import React from 'react';
-  import { View, Text, StyleSheet, SafeAreaView, Button} from 'react-native';
+ // app/index.tsx
 
-  export default function App() {
-    return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.safeAreaTop}>
-        </SafeAreaView>
-        <SafeAreaView style={styles.safeAreaBottom}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Header</Text>
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.contentText}>Content</Text>
+import { Button, ButtonText } from '@/components/ui/button';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 
-            {/* เพิ่มปุ่มในส่วน content */}
-            <Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color} />
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Footer</Text>
-          </View>
-        </SafeAreaView>
-      </View>
-    );
-  };
+export default function Index() {
+  return (
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Header</Text>
+        </View>
+        <View style={styles.content}>
+          <Text style={styles.contentText}>Content</Text>
+          <Button size="md" variant="solid" action="primary">
+            <ButtonText>Hello World!</ButtonText>
+          </Button>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Footer</Text>
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+}
 
-  const styles = StyleSheet.create({
-    // เพิ่ม Stylesheet สำหรับ SafeArea ด้านบน กำหนด flex เป็น 0 เพื่อไม่ให้กินพื้นที่ลงมาด้านล่าง
-    safeAreaTop: {
-      flex: 0,
-      backgroundColor: 'red',
-    },
-    // เพิ่ม Stylesheet สำหรับ SafeArea ด้านล่าง กำหนด flex เป็น 1 เพื่อให้กินพื้นที่ด้านล่างทั้งหมด
-    safeAreaBottom: {
-      flex: 1,
-      backgroundColor: 'green',
-    },
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-    },
-    header: {
-      flex: 1,
-      backgroundColor: 'red',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headerText: {
-      fontSize: 24,
-      color: 'white',
-    },
-    content: {
-      flex: 18,
-      backgroundColor: 'white',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-    },
-    contentText: {
-      fontSize: 24,
-      color: 'black',
-    },
-    footer: {
-      flex: 1,
-      backgroundColor: 'green',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    footerText: {
-      fontSize: 24,
-      color: 'white',
-    },
-    signInButton: {
-      color: 'orange'
-    }
-  });
-
-  export default App;
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  header: {
+    flex: 1,
+    backgroundColor: 'purple',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+  content: {
+    flex: 8,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentText: {
+    fontSize: 24,
+    color: 'black',
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 24,
+    color: 'white',
+  },
+});
 
 
 ```

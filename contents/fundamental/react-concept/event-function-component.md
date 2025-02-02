@@ -3,69 +3,48 @@
 
 - การใช้งาน User Interface จะทำให้เกิด event และเราสามารถนำ function มารับ event พวกนี้ได้
 
-## 1. สร้าง Function สำหรับใช้กับ Event 
+## สร้าง Function สำหรับใช้กับ Event 
 
-เปิดไฟล์ `App.js` และเขียน function ชื่อ `popUpAlert`
-
-```js
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-
-const popUpAlert = () => {
-  Alert.alert('oops...','you do something');
-}
-```
-
-## 2. กำหนด function ให้กับ event ของปุ่มชื่อ onPress
+เปิดไฟล์ `app\index.tsx` และเขียน function ชื่อ `showAlert`
 
 ```jsx
-<Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}
-        onPress={popUpAlert}
-      />
-```
+// app/index.tsx
 
-## A. ไฟล์เต็ม App.js
+import React from "react";
 
-```jsx
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+// import Alert มาจาก react-native
+import { View, Alert } from "react-native";
 import Hello from "./Hello";
-import Goodbye from "./Goodbye";
 
-const popUpAlert = () => {
-  Alert.alert('oops...','you do something');
-}
+// import Button และ ButtonText มาจาก ui/button
+import { Button, ButtonText } from "@/components/ui/button";
 
-export default function App() {
+export default function Index() {
 
-  let username = 'พล';
-  let website = 'nextflow.in.th'
-  
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Hello name="พล" website="nextflow.in.th"/>
-      <Goodbye name={username} website={website}/>
-      <Button title="ลงชื่อเข้าใช้" color={styles.signInButton.color}
-        onPress={popUpAlert}
-      />
-    </View>
-  );
-}
+  // สร้าง function ชื่อ showAlert ที่ใช้ Alert แสดงข้อความ
+  const showAlert = () => {
+    Alert.alert("Welcome", "Hello, Nextflow!");
+  };
 
-const styles = StyleSheet.create({
-  container: {
+  return <View style={{
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  helloText: {
-    fontSize: 30,
-    color: 'green'
-  },
-  signInButton: {
-    color: 'orange'
-  }
-});
+    justifyContent: "center",
+    alignItems: "center"
+  }}>
+    <Hello name="Nextflow" />
+
+    {/* สร้าง Button ที่เมื่อกดจะเรียก function showAlert */}
+    {/* สามารถใช้ snippet `gs-button` */}
+    {/* และกำหนด event handler โดยใช้การกำหนด function ลงไปใน prop 'onPress' [onPress={showAlert}]*/}
+    <Button action={"primary"} variant={"solid"} size={"lg"} onPress={showAlert}>
+      <ButtonText>
+         Show Alert
+      </ButtonText>
+    </Button>
+  </View>;
+}
 
 ```
+
+2. บันทึกไฟล์
+3. รันโปรเจคด้วยคำสั่ง `npx expo start` และเปิดโปรแกรม Expo Go บนมือถือเพื่อดูผลลัพธ์

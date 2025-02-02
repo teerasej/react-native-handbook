@@ -4,33 +4,68 @@
 สามารถดาวน์โหลดไฟล์โปรเจค [มาจาก Github repository ที่นี่](https://github.com/teerasej/temp-counterapp/tree/master) เพื่อนำมาใช้งานต่อได้
 
 
-## 1. สร้างไฟล์ `CounterView.js`
+## 1. สร้างไฟล์ `CounterView.tsx`
 
-สร้างไฟล์ `CounterView.js` ตามด้านล่าง และเอามาวางใน `App.js`
+สร้างไฟล์ `app/CounterView.tsx` ตามด้านล่าง และเอามาวางใน `app/index.tsx`
 
 ```jsx
-// CounterView.js
 
-import React from 'react'
-import { View, Text, Button } from 'react-native'
+
+// app/CounterView.tsx
+import React from 'react';
+import { Box } from '@/components/ui/box';
+import { Button, ButtonText } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+
 
 export default function CounterView() {
-
-    let count = 0
+    let count = 0;
 
     const increase = () => {
-        count++
-        console.log('count:', count)
-    }
+        count++;
+        console.log('count:', count);
+    };
 
-    return (
-        <View>
-            <Text>{count}</Text>
-            <Button title="เพิ่ม" onPress={increase}></Button>
-        </View>
-    )
+    return <Box>
+        <Text>{count}</Text>  
+        <Button action={"primary"} variant={"solid"} size={"lg"} >
+            <ButtonText>
+                เพิ่ม
+            </ButtonText>
+        </Button>
+    </Box>;
 }
+```
 
+```jsx
+// app/index.tsx
+
+import React from "react";
+import { View, Alert } from "react-native";
+import Hello from "./Hello";
+
+// import CounterView จากไฟล์ CounterView.tsx
+import CounterView from "./CounterView";
+
+// ใช้ VStack ในการเรียง Layout
+import { VStack } from "@/components/ui/vstack";
+
+export default function Index() {
+  
+  return <View style={{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }}>
+    {/* ใช้ VStack ในการเรียง component แนวดิ่ง */}
+    <VStack space="md">
+      <Hello name="Nextflow" />
+
+      {/* เรียกใช้ Component CounterView */}
+      <CounterView />
+    </VStack>
+  </View>;
+}
 ```
 
 - ทดสอบกดปุ่ม จะเห็นว่า ค่าตัวแปร count ถูกบวกเพิ่มขึ้นทุกครั้งที่กดปุ่ม แต่หน้าแอพยังเป็นเลข 0 อยู่
@@ -38,87 +73,78 @@ export default function CounterView() {
 - การควบคุมให้ Component render ตัวเองใหม่ จะใช้แนวคิดที่เรียกว่า **state**
 
 
-## 2. import react hook `useState`
+## 2. ใช้งาน React Hook `useState` สร้าง State
 
-react hook เป็น module หนึ่งที่ติดมากับ react 16.8 เป็นต้นมา เราสามารถนำ react hook ที่ต้องการมาใช้ได้ผ่านคำสั่ง import 
+- react hook เป็น module หนึ่งที่ติดมากับ react 16.8 เป็นต้นมา เราสามารถนำ react hook ที่ต้องการมาใช้ได้ผ่านคำสั่ง import 
 
-```js
-import { useState } from 'react';
-```
-
-## 3. ใช้ useState สร้างตัวแปร State
-
-useState สามารถใช้สร้าง **ตัวแปร** และ **setter function** ที่ใช้อัพเดตตัวแปรนั้น การกำหนดค่าให้ตัวแปรผ่าน function ดังกล่าว เทียบเท่าการใช้คำสั่ง `setState()`
-
-รูปแบบการใช้งาน react hook **useState** จะเป็นดังนี้ 
-
-```
-const [ชื่อตัวแปร, function ที่ใช้อัพเดตตัวแปร] = useState(ค่าเริ่มต้นของตัวแปร);
-```
-
-
-## 4. เรียกใช้งาน function เพื่ออัพเดตค่าในตัวแปร state
-
-ดังนั้นหากต้องการ อัพเดตค่าให้ตัวแปร state เราจะทำผ่าน function ที่สร้างขึ้นมาโดยเฉพาะ
-
-เช่น
-
-```js
-export default function CounterView() {
-
-    // สร้าง log เพื่อเช็คการ render ของ component
-    // FYI: อาจจะเป็น log แสดงขึ้น 2 ครั้ง เพราะ <React.StrictMode> ในไฟล์ src/index.js ใน production จะไม่มีการทำงานแบบเบิ้ลแบบนี้
-    console.log('Render counter component...')
-
-    // ในที่นี้เราจะประกาศ ตัวแปร state ขึ้นมา นั่นคือ `counter` และกำหนดค่าเริ่มต้นเป็น 0
-    const [counter, setCounter] = useState(0)
-
-    // ไม่ใช้แล้ว เราจะใช้ตัวแปร state ที่ชื่อ counter แทน
-    // let count = 0
-
-    const increase = () => {
-
-        // เราจะอัพเดตค่าของตัวแปร state ที่ชื่อ `counter` ด้วย `setCounter()` function ที่ถูกสร้างขึ้นมา
-        setCounter(counter + 1)
-        console.log('count:', counter)
-    }
-
-    return (
-        <View>
-          {/* นำตัวแปร state มาใช้ได้เหมือนตัวแปรทั่วไป*/}
-            <Text>{counter}</Text>
-            <Button title="เพิ่ม" onPress={increase}></Button>
-        </View>
-    )
-}
-```
-
-
-# ไฟล์เต็ม `CounterView.js`
+1. นำ useState มาใช้งานในไฟล์ `CounterView.tsx`
 
 ```jsx
+// app/CounterView.tsx
 
+import { Box } from '@/components/ui/box';
+import { Button, ButtonText } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
-import React, { useState } from 'react'
-import { View, Text, Button } from 'react-native'
+// นำ useState มาใช้งาน
+import React, { useState } from 'react';
 
 export default function CounterView() {
 
-    const [counter, setCounter] = useState(0)
-    
+    // สร้างตัวแปร state ที่ชื่อ count และกำหนดค่าเริ่มต้นเป็น 0
+    const [count, setCount] = useState(0);
 
     const increase = () => {
-        setCounter(counter + 1)
-        console.log('count:', counter)
-    }
+        // อัพเดตค่าของตัวแปร state ที่ชื่อ count ด้วย function setCount
+        setCount(count + 1);
+        // แสดงค่า count ใน console
+        console.log('count:', count + 1);
+    };
 
     return (
-        <View>
-            <Text>{counter}</Text>
-            <Button title="เพิ่ม" onPress={increase}></Button>
-        </View>
-    )
+        <Box>
+            <Text>{count}</Text>  
+            <Button action={"primary"} variant={"solid"} size={"lg"} onPress={increase}>
+                <ButtonText>
+                    เพิ่ม
+                </ButtonText>
+            </Button>
+        </Box>
+    );
 }
+```
 
+2. บันทึกไฟล์และทดสอบกดปุ่ม จะเห็นว่าค่า count ถูกบวกเพิ่มขึ้นทุกครั้งที่กดปุ่ม
+
+
+# ไฟล์เต็ม `app/CounterView.tsx`
+
+```tsx
+// app/CounterView.tsx
+
+import { Box } from '@/components/ui/box';
+import { Button, ButtonText } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import React, { useState } from 'react';
+
+export default function CounterView() {
+    const [count, setCount] = useState(0);
+
+    const increase = () => {
+        setCount(count + 1);
+        console.log('count:', count + 1);
+    };
+
+    return (
+        <Box>
+            <Text>{count}</Text>  
+            <Button action={"primary"} variant={"solid"} size={"lg"} onPress={increase}>
+                <ButtonText>
+                    เพิ่ม
+                </ButtonText>
+            </Button>
+        </Box>
+    );
+}
 ```
 
