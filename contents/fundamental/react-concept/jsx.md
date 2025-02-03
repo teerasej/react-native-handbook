@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
 
 ### 4.2 Button
 
-เพิ่ม `Button` Component ลงใน JSX ของ App Component 
+เพิ่ม [`Button` Component](https://gluestack.io/ui/docs/components/button) ลงใน JSX ของ Index Component 
 
 ```jsx
 // app/index.tsx
