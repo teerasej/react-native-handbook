@@ -5,84 +5,67 @@
 ## 1. สร้างไฟล์ `app/components/ChatBoxComponent.tsx`
 
 ใช้ snippet `rnfe` ได้
+และย้ายโค้ดมาจาก `app/index.tsx` ไปยังไฟล์ใหม่
 
 ```jsx
-import { View, Text } from 'react-native'
+// app/components/ChatBoxComponent.tsx
+
 import React from 'react'
 
-// Import component ที่จำเป็น
-import { HStack, Icon, IconButton, Input } from 'native-base'
-
-// Import icon จาก FontAwesome
-import { FontAwesome } from '@expo/vector-icons';
+import { HStack } from '@/components/ui/hstack';
+import { Input, InputField } from "@/components/ui/input";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { ChevronRightIcon } from '@/components/ui/icon'
 
 
 const ChatBoxComponent = () => {
 
     return (
-        <>
-            <HStack space={2} p={2}>
-                {/* สร้่างช่องแชท กินพื้นที่ใน hstack 7 ช่อง */}
-                <Input flex={7} placeholder="Talk to me..."  />
-                {/* สร้่างปุ่มส่งข้อความ กินพื้นที่ใน hstack 1 ช่อง */}
-                {/* กำหนด Icon FontAwesome ชื่อ send */}
-                <IconButton
-                    flex={1}
-                    borderRadius="sm"
-                    variant="solid"
-                    icon={<Icon as={FontAwesome} name="send" size="sm"
-                    />}
-                />
-            </HStack>
-        </>
+        <HStack space="md" className="mt-auto">
+            <Input style={{ flex: 1 }}>
+                <InputField placeholder="Enter text" />
+            </Input>
+            <Button>
+                <ButtonIcon as={ChevronRightIcon} />
+            </Button>
+        </HStack>
     )
 }
 
 export default ChatBoxComponent
 ```
 
-## 2. นำ ChatBoxComponent มาแสดงใน App.js
+## 2. นำ ChatBoxComponent มาแสดงใน `app/index.tsx`
 
 ```jsx
-// App.js
+// app/index.tsx
 
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
+import { Box } from "@/components/ui/box";
+import { SafeAreaView, KeyboardAvoidingView } from "react-native";
 
-// import KeyboardAvoidingView
-import { NativeBaseProvider, Box, HStack, Text, VStack, KeyboardAvoidingView } from "native-base";
+import { Link } from "expo-router";
+import { VStack } from "@/components/ui/vstack";
+import ChatHistory from "./components/ChatHistoryComponent";
 
-import ChatHistoryComponent from './components/ChatHistoryComponent';
+// import ChatBoxComponent จาก app/components/ChatBoxComponent
+import ChatBoxComponent from "./components/ChatBoxComponent";
 
-// import component chat box
-import ChatBoxComponent from './components/ChatBoxComponent';
 
-export default function App() {
-
+export default function Home() {
   return (
-    <NativeBaseProvider>
-     
-        <Box safeAreaTop bg Color="violet.800" />
-        <HStack bg="violet.800" px="3" py="3" w="100%">
-          <Text color="white" fontSize="20" fontWeight="bold">
-            Home
-          </Text>
-        </HStack>
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+        <Box className="flex-1 bg-white h-[100vh] p-4">
+          <VStack space="md" className="flex-1">
 
-        {/* ครอบ component เพื่อให้จัดการเรื่อง keyboard layout */}
-        <KeyboardAvoidingView behavior='padding' flex={1}>
-          <VStack w="100%" flex={1}>
-            <ChatHistoryComponent flex={1}/>
-
-            {/* แสดง chatbox โดยไม่กำหนดค่า flex เพื่อให้ ChatHistory กินพื้นที่ที่เหลือทั้งหมด */}
+            <ChatHistory style={{ flex: 1 }} />
             <ChatBoxComponent/>
-
           </VStack>
-        </KeyboardAvoidingView>
-        {/* กันพื้นที่ด้านล่างออกจากการตกขอบจอ */}
-        <Box safeAreaBottom />
-
-      <StatusBar style="auto" />
-    </NativeBaseProvider>
+        </Box>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
+
 ```

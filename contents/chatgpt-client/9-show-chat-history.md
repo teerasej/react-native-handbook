@@ -4,134 +4,107 @@
 ## 1. ใช้ useSelector เพื่อดึงข้อมูลจาก slice's state มาใช้กับ FlatList
 
 ```jsx
-// components/ChatHistoryComponent.js
+// app/components/ChatHistoryComponent.tsx
 
-import { View, Text } from 'react-native'
-import React from 'react'
-import { FlatList, HStack } from 'native-base'
-import { useSelector } from 'react-redux'
+import { ScrollView, StyleProp, ViewStyle } from 'react-native';
+import { VStack } from "@/components/ui/vstack";
+import ChatMessage from "./ChatMessageComponent";
 
-const ChatHistoryComponent = () => {
+// ใช้ useSelector เพื่อดึงข้อมูลจาก slice's state 
+import { useSelector } from 'react-redux';
 
-  const chatHistory = useSelector(state => state.chatroom.chatHistory)
+// ดึง type RootState มาใช้งานสำหรับ state ที่ได้จาก useSelector
+import { RootState } from '@/redux/store';
 
-  console.log('Showing chat history:');
-  console.log(chatHistory);
-
-  return (
-    <>
-      {/* กำหนด chatHistory เป็น data ของ FlatList */}
-      <FlatList data={chatHistory}
-        // กำหนด renderItem function ที่จะ return component ออกไปใน flat list
-        // item แต่ละตัวใน data property จะถูกส่งผ่านเข้ามาใน function นี้
-        renderItem={({ item }) => (
-          <HStack p={3} space={3} flexWrap={'wrap'} >
-            <Text>{item.sender}</Text>
-            <Text>{item.text}</Text>
-          </HStack>
-        )}
-      >
-
-      </FlatList>
-    </>
-  )
+interface Message {
+    text: string;
+    isSender: boolean;
 }
 
-export default ChatHistoryComponent
+interface ChatHistoryProps {
+    messages?: Message[];
+    style?: StyleProp<ViewStyle>;
+}
+
+export default function ChatHistory({ messages = [], style }: ChatHistoryProps) {
+
+    // ดึงข้อมูล chatHistory จาก chatroom reducer จาก slice's state มาใช้งาน
+    const chatHistory = useSelector((state: RootState) => state.chatroom.chatHistory)
+
+    // ถ้าไม่มีข้อมูลใน chatHistory ให้ใช้ข้อมูลที่ส่งเข้ามา
+    messages = chatHistory || [];
+
+    return (
+        <ScrollView style={style}>
+            <VStack space="md" className="p-2">
+                {messages.map((msg, index) => (
+                    <ChatMessage
+                        key={index}
+                        message={msg.text}
+                        isSender={msg.isSender}
+                    />
+                ))}
+            </VStack>
+        </ScrollView>
+    );
+}
+
 ```
 
-## 2. ควบคุมให้ FlatList เลื่อนลงมาล่างสุดเสมอ
+## 2. ควบคุมให้ ScrollView เลื่อนลงมาล่างสุดเสมอ
 
 ```jsx
-import { View, Text } from 'react-native'
+// app/components/ChatHistoryComponent.tsx
 
-// import useRef เพื่อสร้างตัวควบคุม flatList
-import React, { useRef } from 'react'
-import { FlatList, HStack } from 'native-base'
-import { useSelector } from 'react-redux'
+// ใช้ useEffect เพื่อทำงานหลังจาก render เสร็จ
+// ใช้ useRef เพื่อเก็บค่า ScrollView ไว้ในตัวแปร
+import React, { useRef } from 'react';
+import { ScrollView, StyleProp, ViewStyle } from 'react-native';
+import { VStack } from "@/components/ui/vstack";
+import ChatMessage from "./ChatMessageComponent";
 
-const ChatHistoryComponent = () => {
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
-  const chatHistory = useSelector(state => state.chatroom.chatHistory)
-
-  // สร้าง ref เพื่อเอาไปโยงกับ FlatList
-  const flatListRef = useRef();
-
-  console.log('Showing chat history:');
-  console.log(chatHistory);
-
-  return (
-    <>
-      <FlatList data={chatHistory}
-        renderItem={({ item }) => (
-          <HStack p={3} space={3} flexWrap={'wrap'} >
-            <Text>{item.sender}</Text>
-            <Text>{item.text}</Text>
-          </HStack>
-        )}
-
-        // กำหนด ref ให้ component
-        ref={flatListRef}
-        // เมื่อข้อมูล data มีการเปลี่ยนแปลง เราสั่ง flatList เลื่อนไปล่างสุด ผ่าน ref ที่กำหนด
-        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
-      >
-
-      </FlatList>
-    </>
-  )
+interface Message {
+    text: string;
+    isSender: boolean;
 }
 
-export default ChatHistoryComponent
-```
-
-## 3. กันปัญหาเรื่อง error: Invariant Violation
-
-อาจจะเจอปัญหา `error: Invariant Violation: Tried to get frame for out of range index -1` เพราะเราพยายามเลื่อน List ไปด้านล่างในขณะที่ยัง render ไม่เสร็จ
-
-```jsx
-import { View, Text } from 'react-native'
-
-// import useState เพื่อสร้างตัวควบคุม flatList
-import React, { useRef, useState } from 'react'
-import { FlatList, HStack } from 'native-base'
-import { useSelector } from 'react-redux'
-
-const ChatHistoryComponent = () => {
-
-  const chatHistory = useSelector(state => state.chatroom.chatHistory)
-  const flatListRef = useRef();
-
-  // สร้าง state เพื่อใช้เป็นกลไกยืนยันการ scroll ไปด้านล่างของ List
-  const [isListReady, setIsListReady] = useState(false)
-
-  console.log('Showing chat history:');
-  console.log(chatHistory);
-
-  return (
-    <>
-      <FlatList data={chatHistory}
-        renderItem={({ item }) => (
-          <HStack p={3} space={3} flexWrap={'wrap'} >
-            <Text>{item.sender}</Text>
-            <Text>{item.text}</Text>
-          </HStack>
-        )}
-
-        ref={flatListRef}
-        onContentSizeChange={() => {
-          // เช็คว่า FlatList render เสร็จแล้ว ค่อยสั่ง scroll ไปที่ท้าย list
-          if(isListReady) {
-            flatListRef.current.scrollToEnd({ animated: true })
-          }
-        }}
-
-        // event ท่ี่จะทำงานเมื่อ FlatList สร้าง Layout เสร็จ เราเอามาใช้ในการตั้งค่า เพื่อพิจารณาการเลื่อน List ไปด้านล่างสุด
-        onLayout={() => setIsListReady(true)}
-      >
-      </FlatList>
-    </>
-  )
+interface ChatHistoryProps {
+    messages?: Message[];
+    style?: StyleProp<ViewStyle>;
 }
 
-export default ChatHistoryComponent
+export default function ChatHistory({ messages = [], style }: ChatHistoryProps) {
+
+    // ใช้ useRef เพื่อเก็บค่า ScrollView component ไว้ในตัวแปร
+    const scrollViewRef = useRef<ScrollView>(null);
+
+    const chatHistory = useSelector((state: RootState) => state.chatroom.chatHistory);
+    messages = chatHistory || [];
+
+    // สร้าง function ที่จะใช้ในการเลื่อน ScrollView ไปด้านล่างสุด เวลาขนาดของ ScrollView มีการเปลี่ยนแปลงจากจำนวน component ที่เพิ่มขึ้น
+    const handleContentSizeChange = () => {
+        scrollViewRef.current?.scrollToEnd({ animated: true });
+    };
+
+    // ส่ง ref object ของ ScrollView ไปให้ ScrollView component เพื่อใช้ในการเลื่อน ScrollView ไปด้านล่างสุด
+    // ใช้ onContentSizeChange เพื่อทำงานเมื่อขนาดของ ScrollView มีการเปลี่ยนแปลง
+    return (
+        <ScrollView style={style} ref={scrollViewRef} onContentSizeChange={handleContentSizeChange}>
+            <VStack space="md" className="p-2">
+                {messages.map((msg, index) => (
+                    <ChatMessage
+                        key={index}
+                        message={msg.text}
+                        isSender={msg.isSender}
+                    />
+                ))}
+            </VStack>
+        </ScrollView>
+    );
+}
+
 ```
+

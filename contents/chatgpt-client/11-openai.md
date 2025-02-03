@@ -12,171 +12,225 @@
 - [เริ่มต้นเรียนรู้ ทำแอพ AI ด้วย Semantic Kernel ฉบับคนใช้ Python
 ](https://learn.nextflow.in.th/getting-started-with-semantic-kernel)
 
-## 1. สร้าง async thunk ชื่อ askAI
-
-สร้างไฟล์​ `src/redux/askAIThunk.js`
-
-```js
-// src/redux/askAIThunk.js
-
-// import createAsyncThunk 
-import { createAsyncThunk } from '@reduxjs/toolkit'
-// import axios ในการส่ง request
-import axios from 'axios';
-
-// นำ key ของ OpenAI มาใช้งาน
-const key = '';
-
-// สร้าง AsyncThunk ชื่อ askAI
-export const askAI = createAsyncThunk(
-  // ตั้งชื่อ async thunk
-  'user/askAI',
-
-  // รับค่าที่เข้ามาใช้่งาน ในที่นี้คือ prompt message
-  async (prompt) => {
-
-    console.log('fetching openAI')
-
-    // สร้าง JSON object ในการส่งไปที่ OpenAI API
-    const jsonPrompt = JSON.stringify({
-      "model": "gpt-3.5-turbo",
-      "messages": [{ "role": "user", "content": prompt }]
-    });
-
-    console.log('Sending prompt:')
-    console.log(jsonPrompt)
-
-    // ใช้ axios ส่ง request โดยการกำหนด key และ json 
-    const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
-      jsonPrompt,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${key}`
-        }
-      });
-
-    console.log('got response:')
-    console.log(response.data.choices[0].message.content);
-
-    // ดึงเฉพาะส่วนข้อความที่ API ตอบกลับมา
-    return response.data.choices[0].message.content;
-
-  }
-);
+## Key 
 
 ```
+98db6ffc7e3447678d4ee3ba4ec3d45a
+```
 
-## 2. กำหนด extraReducer ลงใน Slice ที่ต้องการให้รับข้อมูลจาก thunk ในกรณีต่างๆ 
+## 1. สร้าง async thunk ชื่อ askAI
+
+สร้างไฟล์​ `redux/askAIThunk.ts`
 
 ```js
-// redux/chatSlice.js
-import { createSlice } from '@reduxjs/toolkit'
+// src/redux/askAIThunk.ts
 
-// import askAI thunk เพื่อมากำหนด case ใน extraReducer
-import { askAI } from './askAIThunk';
 
-const initialState = {
-  chatHistory: []
+// import createAsyncThunk จาก redux toolkit
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+// import axios เพื่อใช้ส่ง request ไปยัง Azure OpenAI API
+import axios from 'axios';
+
+// กำหนด interface ของ request ที่จะส่งไปยัง API
+interface AskAIRequest {
+  prompt: string;
 }
 
-const chatSlice = createSlice({
-  name: 'chatroom',
-  initialState,
-  reducers: {
-    addUserMessage: (state, action) => {
+// กำหนด interface ของ JSON response ที่จะได้จาก API
+interface AskAIResponse {
+  // ในกรณีที่ API ส่งกลับมาเป็น JSON ที่มี key ชื่อ choices ซึ่งเป็น array ของ object
+  choices: {
+    message: {
+      content: string;
+    };
+  }[];
+}
 
-      let chatMessage = {
-        id: Math.floor(Math.random() * 1000),
-        sender: 'Me',
-        text: action.payload,
-      };
+// กำหนด interface ของ error ที่จะได้จาก API
+interface AskAIError {
+  message: string;
+}
 
-      console.log(chatMessage);
-      state.chatHistory.push(chatMessage);
+// API key
+const key = '';
+
+// สร้าง async thunk ชื่อ askAI โดยรับ prompt และส่ง request ไปยัง OpenAI API
+export const askAI = createAsyncThunk<string, AskAIRequest, { rejectValue: AskAIError }>(
+  // กำหนดชื่อ action thunk และรับ prompt 
+  'user/askAI',
+  async ({ prompt }, { rejectWithValue }) => {
+    console.log('Asking AI...');
+
+    // กำหนด JSON payload ที่จะส่งไปยัง API
+    const jsonPrompt = JSON.stringify({
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an AI assistant that helps people find information.',
+        },
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      top_p: 0.95,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      max_tokens: 800,
+      stop: null,
+    });
+
+    console.log('Sending prompt:');
+    console.log(jsonPrompt);
+
+    try {
+      // ส่ง request ไปยัง API โดยใช้ axios
+      const response = await axios.post<AskAIResponse>(
+        'https://openai-nextflow.openai.azure.com/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview',
+        jsonPrompt,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': key,
+          },
+        }
+      );
+
+      // แสดง response ที่ได้จาก API
+      console.log('Got response:');
+      console.log(response.data.choices[0].message.content);
+
+      // ส่งข้อความที่ได้จาก API กลับไปให้ component
+      return response.data.choices[0].message.content;
+
+     // ในกรณีที่เกิด error ในการส่ง request หรือได้ response ที่ไม่ถูกต้อง
+    } catch (error: any) {
+      console.error('Error fetching OpenAI:', error);
+      // Return a rejected value with a custom error message
+      return rejectWithValue({ message: error.message });
     }
-  },
-  // กำหนด reducer พิเศษ ที่จะทำงานตามกรณีของ AsyncThunk
-  extraReducers: (builder) => {
-    // กำหนด case ที่จะทำงานจากกลไกของ async thunk
-    builder
-      .addCase(askAI.fulfilled, (state, action) => {
-        console.log('succeeded');
+  }
+);
+```
 
-        // ถ้าได้การทำงานของ Async thunk สมบูรณ์ ค่าที่ return ออกมาจะอยู่ใน payload 
-        // ในที่นี้เราจะเอามาใส่เพิ่มในห้องแชท โดยกำหนดชื่อ sender เป็น GPT
-        state.chatHistory.push({ 
-          sender:'GPT', 
-          text: action.payload, 
-          id: Math.floor(Math.random() * 1000)
+## 2. กำหนด extraReducers ลงใน Slice ที่ต้องการให้รับข้อมูลจาก thunk ในกรณีต่างๆ 
+
+```js
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+// import async thunk ที่เราสร้างไว้
+import { askAI } from './askAIThunk';
+
+interface Message {
+    text: string;
+    isSender: boolean;
+}
+
+interface ChatState {
+    chatHistory: Message[];
+}
+
+const initialState: ChatState = {
+    chatHistory: [
+        { text: 'Hello!', isSender: true },
+        { text: 'Hi there!', isSender: false },
+        { text: 'How are you?', isSender: true },
+        { text: 'I am good, thanks!', isSender: false },
+    ],
+};
+
+const chatSlice = createSlice({
+    name: 'chatSlice',
+    initialState,
+    reducers: {
+        addNewMessageToChatHistory: (state: ChatState, action: PayloadAction<Message>) => {
+            console.log(`adding message to history: [${action.type}] ${action.payload}`);
+            state.chatHistory.push(action.payload);
+        }
+    },
+
+    // กำหนด extraReducers ในกรณีที่ thunk ส่งข้อมูลกลับมาเรียบร้อย ผ่าน builder
+    extraReducers: (builder) => {
+
+        // ในกรณีที่ thunk ส่งข้อมูลกลับมาเรียบร้อย
+        builder.addCase(askAI.fulfilled, (state, action: PayloadAction<string>) => {
+            console.log(`adding AI response to history: [${action.type}] ${action.payload}`);
+
+            // เพิ่มข้อความที่ได้จาก AI ลงใน chat history
+            state.chatHistory.push({ text: action.payload, isSender: false });
         });
-        
-      })
-      // ในกรณีที่ Async Thunk ล้มเหลวจะเข้าเคสนี้
-      .addCase(askAI.rejected, (state, action) => {
-        console.log('failed');
-        // แสดงข้อความ error ที่ได้
-        console.error(action.error.message);
-      });
-  },
+
+        // ในกรณีที่ thunk ส่งข้อมูลกลับมาแต่เกิด error
+        builder.addCase(askAI.rejected, (state, action) => {
+            console.error(`AI request failed: [${action.type}] ${action.error.message}`);
+
+            // เพิ่มข้อความแจ้งเตือนลงใน chat history
+            state.chatHistory.push({ text: 'AI request failed. Please try again.', isSender: false });
+        });
+    }
 });
 
-// export reducer สำหรับไปเรียกใช้ที่ component ที่ต้องการ
-export const { addUserMessage } = chatSlice.actions
+export const { addNewMessageToChatHistory } = chatSlice.actions;
 
-export default chatSlice.reducer
+export default chatSlice.reducer;
 ```
 
 ## 2. เรียกใช้ async thunk ใน ChatBoxComponent 
 
 ```jsx
-// components/ChatBoxComponent.js
+// app/components/ChatBoxComponent.tsx
 
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { HStack, Icon, IconButton, Input } from 'native-base'
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { HStack } from '@/components/ui/hstack';
+import { Input, InputField } from "@/components/ui/input";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { ChevronRightIcon } from '@/components/ui/icon';
 import { useDispatch } from 'react-redux';
-import { addUserMessage } from './../redux/chatSlice';
+import { AppDispatch } from '@/redux/store';
+import { addNewMessageToChatHistory } from '@/redux/chatSlice';
 
-// เรียกใช้ async thunk function ในการสร้าง action object เพื่อส่งให้กับ redux
-import { askAI } from '../../redux/askAIThunk';
+// import async thunk ที่เราสร้างไว้
+import { askAI } from '@/redux/askAIThunk';
 
 const ChatBoxComponent = () => {
+    const [message, setMessage] = useState('');
+    const dispatch: AppDispatch = useDispatch();
 
-    const [chatMessage, setChatMessage] = useState("")
-    const dispatch = useDispatch();
+    const handleTextChange = (text:string) => {
+        setMessage(text);
+    }
+
+    const handleSendMessage = () => {
+        if (message.trim()) {
+            const action = addNewMessageToChatHistory({ text: message, isSender: true });
+            dispatch(action);
+
+            // สร้าง action thunk สำหรับส่งข้อความไปให้ AI
+            const actionThunk = askAI({ prompt: message });
+            // ส่ง action thunk ไปยัง redux store
+            dispatch(actionThunk);
+            
+            setMessage(''); ]
+        }
+    };
 
     return (
-        <>
-            <HStack space={2} p={2}>
-                <Input flex={7} placeholder="Talk to me..."
-                    onChangeText={(text) => setChatMessage(text)}
-                    value={chatMessage}
+        <HStack space="md" className="mt-auto">
+            <Input style={{ flex: 1 }}>
+                <InputField 
+                    placeholder="Enter text" 
+                    value={message} 
+                    onChangeText={handleTextChange} 
                 />
-                <IconButton
-                    flex={1}
-                    borderRadius="sm"
-                    variant="solid"
-                    icon={<Icon as={FontAwesome} name="send" size="sm" />}
-                    onPress={() => {
-                        console.log(`Sending message: ${chatMessage}`);
+            </Input>
+            <Button onPress={handleSendMessage}>
+                <ButtonIcon as={ChevronRightIcon} />
+            </Button>
+        </HStack>
+    );
+};
 
-                        const action = addUserMessage(chatMessage);
-                        dispatch(action);
-
-                        // Dispatch Async thunk action โดยการส่งข้อความเป็น prompt
-                        const asyncThunkAction = askAI(chatMessage);
-                        dispatch(asyncThunkAction);
-
-                        setChatMessage("");
-                    }}
-                />
-            </HStack>
-        </>
-    )
-}
-
-export default ChatBoxComponent
+export default ChatBoxComponent;
 ```

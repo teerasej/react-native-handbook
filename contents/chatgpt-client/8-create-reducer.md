@@ -2,22 +2,19 @@
 # 8. สร้าง Reducer Slice
 
 
-## 8.1 สร้าง Reducer Slice สำหรับเก็บ chat history และจัดการเกี่ยวกับ action ที่เกิดกับ chat feature ของแอพ
+## 1. สร้าง Reducer Slice สำหรับเก็บ chat history และจัดการเกี่ยวกับ action ที่เกิดกับ chat feature ของแอพ
 
-สร้างไฟล์ `src/redux/chatSlice.js`
+สร้างไฟล์ `redux/chatSlice.ts`
 
 ```jsx
-// src/redux/chatSlice.js
+// redux/chatSlice.js
 // ใช้ snippet rxslice
 
 import { createSlice } from '@reduxjs/toolkit'
 
-// กำหนดค่าเริ่มต้นของข้อมูลที่ชื่อ chatHistory เป็นค่า undefined
+// กำหนดค่าเริ่มต้นของข้อมูล
 const initialState = {
-    // สร้าง item ที่เป็นตัวแทนของข้อความ
-    chatHistory: [
-      { sender: 'Me', text:'Oh yeah!'}
-    ]
+    
 }
 
 // สร้าง slice จาก function 
@@ -26,7 +23,6 @@ const chatSlice = createSlice({
   name: 'chatSlice',
   // กำหนด state เริ่มต้นของ slice 
   initialState,
-
   // กำหนด reducer ที่ตอนนี้ยังไม่มีการกำหนด action อะไร
   reducers: {}
 });
@@ -37,21 +33,59 @@ export const {} = chatSlice.actions
 export default chatSlice.reducer
 ```
 
-
-## 8.2 เพิ่ม slice เข้าเป็น Reducer ของ Store
+## 2. เพิ่ม slice เข้าเป็น Reducer ของ Store
 
 ```jsx
-// src/redux/store.js
-
+// redux/store.ts
 import { configureStore } from '@reduxjs/toolkit'
-// import slice ที่ต้องการ
-import chatSlice from './chatSlice.js'
+import chatSlice from './chatSlice' // Import your chatSlice
 
-
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    // กำหนด slice ให้เป็น reducer ของ store โดยตั้งชื่อ slice นี้ ว่า chatroom 
+    // กำหนดชื่อของ slice และ reducer ที่เราสร้างไว้
     chatroom: chatSlice
   }
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 ```
+
+## 3. ย้ายข้อมูล chat history จาก ChatHistory component ไปเก็บใน Redux Store
+
+```jsx
+// redux/chatSlice.ts
+
+import { createSlice } from '@reduxjs/toolkit';
+
+// สร้าง interface สำหรับเก็บข้อมูลของข้อความแชท
+interface Message {
+    text: string;
+    isSender: boolean;
+}
+
+// กำหนดโครงสร้างของ state ของ slice
+interface ChatState {
+    messages: Message[];
+}
+
+// กำหนดค่าเริ่มต้นของ state โดยการกำหนด data type ของ state ให้เป็น ChatState
+const initialState: ChatState = {
+    messages: [
+        { text: 'Hello!', isSender: true },
+        { text: 'Hi there!', isSender: false },
+        { text: 'How are you?', isSender: true },
+        { text: 'I am good, thanks!', isSender: false },
+    ],
+};
+
+const chatSlice = createSlice({
+    name: 'chatSlice',
+    initialState,
+    reducers: {
+    },
+});
+
+export const { } = chatSlice.actions;
+
+export default chatSlice.reducer;

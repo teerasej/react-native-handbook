@@ -11,95 +11,117 @@
 
 ## 1. สร้าง Reducer function
 
-```js
-// redux/chatSlice.js
-import { createSlice } from '@reduxjs/toolkit'
+```ts
+// redux/chatSlice.ts
 
-const initialState = {
-    chatHistory: []
+// import PayloadAction จาก redux toolkit เพื่อกำหนด type ของ action payload
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface Message {
+    text: string;
+    isSender: boolean;
 }
- 
+
+interface ChatState {
+    chatHistory: Message[];
+}
+
+const initialState: ChatState = {
+    chatHistory: [
+        { text: 'Hello!', isSender: true },
+        { text: 'Hi there!', isSender: false },
+        { text: 'How are you?', isSender: true },
+        { text: 'I am good, thanks!', isSender: false },
+    ],
+};
+
 const chatSlice = createSlice({
-  name: 'chatroom',
-  initialState,
-  reducers: {
-    // กำหนด function ชื่อ addUserMessage เป็น reducer function
-    //   - โดยที่ตัว function จะทำงานเมื่อมีการเรียกใช้จากภายใน component
-    //   - ทุกครั้งที่ function reducer ทำงาน จะได้รับ state object ล่าสุด และ action ที่ส่งมาจาก component เสมอ
-    addUserMessage: (state, action) => {
-
-      let chatMessage = {
-        sender: 'Me',
-        text: action.payload
-      };
-
-      // แสดงข้อความใน console เพื่อเช็คความถูกต้อง
-      console.log(chatMessage);
-        
-      // เพิ่มข้อความลงไปใน chatHistory ของ slice's state เพื่อที่จะนำไปใช้ใน component
-      state.chatHistory.push(chatMessage);
-    }
-  }
+    name: 'chatSlice',
+    initialState,
+    reducers: {
+        // สร้าง reducer function สำหรับเพิ่มข้อความใหม่เข้าไปใน chat history
+        // โดยรับ action object ที่มี payload เป็นข้อความที่จะเพิ่มเข้าไปใน chat history
+        // PayloadAction จะทำการกำหนด type ของ payload ให้เป็น Message interface
+         addNewMessageToChatHistory: (state: ChatState, action: PayloadAction<Message>) => {
+            console.log(`adding message to history: [${action.type}] ${action.payload}`);
+        }
+    },
 });
 
-// export reducer สำหรับไปเรียกใช้ที่ component ที่ต้องการ
-export const { addUserMessage } = chatSlice.actions
+// export reducer function ที่สร้างไว้ เพื่อให้สามารถเรียกใช้งานจากส่วนอื่นของโปรเจค
+export const { addNewMessageToChatHistory } = chatSlice.actions;
 
-export default chatSlice.reducer
+export default chatSlice.reducer;
 ```
 
 ## 2. ส่งข้อมูล message ที่กดส่งจาก Input ไปที่ slice
 
-เปิดไฟล์ `components/ChatBoxComponent.js`
-
-
 ```jsx
-// components/ChatBoxComponent.js
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { HStack, Icon, IconButton, Input } from 'native-base'
-import { FontAwesome } from '@expo/vector-icons';
+// app/components/ChatBoxComponent.tsx
 
-// เรียกใช้ useDispatch hook
+import React, { useState } from 'react';
+import { HStack } from '@/components/ui/hstack';
+import { Input, InputField } from "@/components/ui/input";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { ChevronRightIcon } from '@/components/ui/icon';
+
+// import useDispatch เพื่อใช้ dispatch action ไปยัง redux store
 import { useDispatch } from 'react-redux';
-// เรียกใช้ reducer function ในการสร้าง action object เพื่อส่งให้กับ redux
-import { addUserMessage } from './../redux/chatSlice';
+
+// import AppDispatch จาก store เพื่อใช้ในการกำหนด type dispatch action
+import { AppDispatch } from '@/redux/store';
+
+// import action ที่สร้างไว้เพื่อส่งข้อความไปเก็บใน chat history
+import { addNewMessageToChatHistory } from '@/redux/chatSlice';
 
 const ChatBoxComponent = () => {
 
-    const [chatMessage, setChatMessage] = useState("")
+    // สร้าง state สำหรับเก็บข้อความที่ User พิมพ์เข้ามา
+    const [message, setMessage] = useState('');
 
-    // สร้าง dispatch function 
-    const dispatch = useDispatch();
+    // ใช้ dispatch เพื่อส่ง action ไปยัง redux store
+    const dispatch: AppDispatch = useDispatch();
+    
+    // สร้าง function สำหรับเปลี่ยนข้อความในตัวแปร message เมื่อ User พิมพ์ข้อความเข้ามา 
+    const handleTextChange = (text:string) => {
+        setMessage(text);
+    }
 
+    // สร้าง function สำหรับส่งข้อความไปเก็บใน chat history
+    const handleSendMessage = () => {
+
+        // ถ้าข้อความไม่ใช่่ค่าว่าง จากการ trim()
+        if (message.trim()) {
+
+            // สร้าง action สำหรับเพิ่มข้อความใหม่เข้าไปใน chat history
+            const action = addNewMessageToChatHistory({ text: message, isSender: true });
+
+            // ส่ง action ไปยัง redux store
+            dispatch(action);
+
+            // ล้างข้อความใน input field หลังจากส่งข้อความไปแล้ว
+            setMessage(''); 
+        }
+    };
+
+
+    // InputField: สร้าง input field สำหรับ User พิมพ์ข้อความ, ส่งข้อความไปที่ handleTextChange เมื่อ User พิมพ์ข้อความ
+    // Button: สร้างปุ่มสำหรับส่งข้อความ, ส่งข้อความไปที่ handleSendMessage เมื่อ User กดปุ่ม
     return (
-        <>
-            <HStack space={2} p={2}>
-                <Input flex={7} placeholder="Talk to me..."
-                    onChangeText={(text) => setChatMessage(text)}
-                    value={chatMessage}
+        <HStack space="md" className="mt-auto">
+            <Input style={{ flex: 1 }}>
+                <InputField 
+                    placeholder="Enter text" 
+                    value={message} 
+                    onChangeText={handleTextChange} 
                 />
-                <IconButton
-                    flex={1}
-                    borderRadius="sm"
-                    variant="solid"
-                    icon={<Icon as={FontAwesome} name="send" size="sm" />}
-                    onPress={() => {
-                        console.log(`Sending message: ${chatMessage}`);
+            </Input>
+            <Button onPress={handleSendMessage}>
+                <ButtonIcon as={ChevronRightIcon} />
+            </Button>
+        </HStack>
+    );
+};
 
-                        // ใส่ข้อความที่พิมพ์ลงไปใน action object โดยการเรียกใช้ reducer function
-                        const action = addUserMessage(chatMessage);
-
-                        // ส่ง action ไปที่ slice ผ่าน dispatch function
-                        dispatch(action);
-
-                        setChatMessage("");
-                    }}
-                />
-            </HStack>
-        </>
-    )
-}
-
-export default ChatBoxComponent
+export default ChatBoxComponent;
 ```
