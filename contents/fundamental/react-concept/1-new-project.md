@@ -6,6 +6,10 @@
 ```bash
 npm create gluestack@latest
 ```
+หรือ
+```bash
+ npx create-gluestack@latest
+```
 2. เลือก template **Expo**
 3. กำหนดชื่อโปรเจคเป็น
 
