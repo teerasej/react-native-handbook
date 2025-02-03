@@ -51,8 +51,13 @@ npm install @types/react @types/react-native --save-dev
 }
 ```
 
-npm config set legacy-peer-deps true  
 
+### Troubleshooting
+
+1. ถ้าเจอปัญหาเกี่ยวกับ peer dependency ให้ใช้คำสั่ง
+```bash
+npm config set legacy-peer-deps true  
+```
 2. ติดตั้ง Node Module ด้วยคำสั่ง
 ```bash
 npm install @react-navigation/native @react-navigation/native-stack native-base

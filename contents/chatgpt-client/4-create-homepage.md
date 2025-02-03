@@ -1,43 +1,118 @@
 
 # 4. สร้าง UI หน้า HomePage
 
+## 1. เตรียมไฟล์หน้า Home
 
-เปิดไฟล์ `App.js` และสร้าง UI ตามด้านล่าง
+เปิดไฟล์ `app/index.tsx` และสร้าง UI ตามด้านล่าง
 
 ```jsx
-// App.js
+// app/index.tsx
 
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-// Import component เพิ่มเติม
-import { NativeBaseProvider, Box, HStack, Text } from "native-base";
+import React from "react";
+import { Box } from "@/components/ui/box";
+import { ScrollView } from "react-native";
+import { Text } from "@/components/ui/text";
 
-export default function App() {
+import { Link } from "expo-router";
+
+
+export default function Home() {
   return (
-    <NativeBaseProvider>
-          {/* กำหนดพื้นที่ safe area และสี */}
-          <Box safeAreaTop bgColor="violet.800"/>
-            {/* กำหนดส่วนที่เป็น  header */}
-            <HStack bg="violet.800" px="3" py="3" w="100%">
-                {/* กำหนดข้อความ */}
-                <Text color="white" fontSize="20" fontWeight="bold">
-                    Home
-                </Text>
-            </HStack>
-      <StatusBar style="auto" />
-    </NativeBaseProvider>
+    <Box className="flex-1 bg-white h-[100vh]">
+      <ScrollView
+        style={{ height: "100%" }}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        
+      </ScrollView>
+    </Box>
   );
 }
 ```
 
-### ในกรณีที่ต้องการแก้ปัญหา Overlap status bar ใน Android
+บันทึกไฟล์และรีเฟรชหน้าเว็บ จะเห็นหน้า Home ว่างเปล่า
 
-เพิ่มส่วนนี้ลงไปใน Expo setting ของไฟล์ด้านล่าง
+## 2. วาง Layout และ ช่องพิมพ์ข้อความ
 
-```json
-// app.json
-"androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#C2185B"
+เพิ่ม UI ของ Chat box  ในไฟล์ `app/index.tsx`
+
+```jsx
+// app/index.tsx
+
+import React from "react";
+import { Box } from "@/components/ui/box";
+import { SafeAreaView, ScrollView } from "react-native";
+import { Text } from "@/components/ui/text";
+
+import { Link } from "expo-router";
+import { Input, InputField } from "@/components/ui/input";
+import { HStack } from "@/components/ui/hstack";
+import { Button, ButtonText } from "@/components/ui/button";
+
+
+export default function Home() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box className="flex-1 bg-white h-[100vh] p-4">
+        {/* จัดเรียง component ในแนวนอน */}
+        <HStack space="md" >
+        {/* Input box ที่กำหนดพื้นที่เต็มส่วน */}
+          <Input style={{flex:1}}>
+            <InputField placeholder="Enter text" />
+          </Input>
+        {/* ปุ่มส่งข้อความ */}
+          <Button>
+            <ButtonText>Send</ButtonText>
+          </Button>
+        </HStack>
+      </Box>
+    </SafeAreaView>
+  );
 }
 ```
+
+บันทึกไฟล์และรีเฟรชหน้าเว็บ จะเห็นหน้า Home มีช่องพิมพ์ข้อความและปุ่มส่งข้อความ
+
+## 3. ใช้ Button Icon 
+
+เพิ่ม Icon ในปุ่มส่งข้อความ
+
+```jsx
+// app/index.tsx
+
+import React from "react";
+import { Box } from "@/components/ui/box";
+import { SafeAreaView, ScrollView } from "react-native";
+import { Text } from "@/components/ui/text";
+
+import { Link } from "expo-router";
+import { Input, InputField } from "@/components/ui/input";
+import { HStack } from "@/components/ui/hstack";
+
+// import ButtonIcon
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+
+// import Icon
+import { ChevronRightIcon } from '@/components/ui/icon'
+
+
+export default function Home() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box className="flex-1 bg-white h-[100vh] p-4">
+        <HStack space="md" >
+          <Input style={{ flex: 1 }}>
+            <InputField placeholder="Enter text" />
+          </Input>
+          <Button>
+            {/* ใช้ Icon ในปุ่ม */}
+            <ButtonIcon as={ChevronRightIcon} />
+          </Button>
+        </HStack>
+      </Box>
+    </SafeAreaView>
+  );
+}
+```
+
+บันทึกไฟล์และรีเฟรชหน้าเว็บ จะเห็น Icon ในปุ่มส่งข้อความ

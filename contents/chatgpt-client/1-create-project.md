@@ -51,29 +51,6 @@ npm install @types/react @types/react-native --save-dev
 }
 ```
 
-npm config set legacy-peer-deps true  
-
-2. ติดตั้ง Node Module ด้วยคำสั่ง
-```bash
-npm install @react-navigation/native @react-navigation/native-stack native-base
-```
-
-หรือ
-
-```bash
-yarn add @react-navigation/native @react-navigation/native-stack native-base
-```
-
-### Reference
-
-- Nativebase
-
-## 3. ติดตั้ง package สำหรับใช้งาน Nativebase 
-
-```bash
-npx expo install react-native-svg react-native-safe-area-context expo-font react-native-screens
-```
-
 
 
 

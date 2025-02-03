@@ -2,7 +2,7 @@
 # 6. สร้าง Chat box UI
 
 
-## 1. สร้างไฟล์ `components/ChatBoxComponent.js`
+## 1. สร้างไฟล์ `app/components/ChatBoxComponent.tsx`
 
 ใช้ snippet `rnfe` ได้
 

@@ -8,7 +8,7 @@ by Teerasej Jiraphatchandej, [Nextflow.in.th](https://www.nextflow.in.th)
 # Setup
 
 - [Setup](setup.md)
-
+- [Expo account signup](https://expo.dev/signup)
 
 
 # Fundamental

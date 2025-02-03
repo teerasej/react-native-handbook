@@ -8,10 +8,9 @@
 
 ## User Interface
 
-3. [Setup NativeBase](3-setup-nativebase.md)
-4. [สร้าง UI หน้า HomePage](4-create-homepage.md)
-5. [สร้าง Chat history UI](5-create-chat-history.md)
-6. [สร้าง Chat box UI](6-create-chatbox.md)
+3. [สร้าง UI หน้า HomePage](4-create-homepage.md)
+4. [สร้าง Chat history UI](5-create-chat-history.md)
+5. [สร้าง Chat box UI](6-create-chatbox.md)
 
 ## Redux
 
