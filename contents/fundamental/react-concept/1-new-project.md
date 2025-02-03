@@ -8,7 +8,7 @@ npm create gluestack@latest
 ```
 หรือ
 ```bash
- npx create-gluestack@latest
+npx create-gluestack@latest
 ```
 หรือ ทำการ clone project จาก URL ด้านล่าง
 ```
