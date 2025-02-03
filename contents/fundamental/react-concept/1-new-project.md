@@ -10,6 +10,10 @@ npm create gluestack@latest
 ```bash
  npx create-gluestack@latest
 ```
+หรือ ทำการ clone project จาก URL ด้านล่าง
+```
+https://github.com/teerasej/nextflow-gluestack-react-native-my-app
+```
 2. เลือก template **Expo**
 3. กำหนดชื่อโปรเจคเป็น
 
