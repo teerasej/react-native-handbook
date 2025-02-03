@@ -14,6 +14,19 @@ npm create gluestack@latest
 ```
 https://github.com/teerasej/nextflow-gluestack-react-native-my-app
 ```
+
+### Error
+
+ถ้าเจอ error ประมาณนี้ บน Windows 
+
+```
+error: invalid path 'apps/templates/universal-with-nativewind/frontend/packages/modules/aux/components/PrivacyPolicy.tsx'
+```
+ให้รันคำสั่งนี้บน Terminal
+```
+git config core.protectNTFS false
+```
+
 2. เลือก template **Expo**
 3. กำหนดชื่อโปรเจคเป็น
 
