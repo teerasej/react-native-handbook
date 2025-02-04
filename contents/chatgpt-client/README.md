@@ -30,3 +30,7 @@
 14. [สร้าง Component ที่เกี่ยวกับการ Scan Barcode](14-create-barcode-scanner.md)
 15. [เรียกใช้งาน Expo Camera เพื่อสร้าง UI เพื่อ Scan Barcode](15-use-expo-camera.md)
 16. [นำข้อมูลมาแสดงในหน้า Barcode Page](16-show-data-in-barcode-page.md)
+
+## Image 
+
+1.  [การใช้งานรูปภาพ](17-image.md)
