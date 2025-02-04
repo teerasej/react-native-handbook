@@ -23,11 +23,5 @@ npm install react-redux @reduxjs/toolkit axios
 yarn add react-redux @reduxjs/toolkit axios
 ```
 
-## 2.2 ติดตั้ง package สำหรับใช้งาน Nativebase 
-
-```bash
-npx expo install react-native-svg react-native-safe-area-context expo-font react-native-screens
-```
-
 
 
