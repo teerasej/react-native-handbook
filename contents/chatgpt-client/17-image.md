@@ -50,3 +50,7 @@ export default function Home() {
 }
 
 ```
+
+## Reference 
+
+- เนื่องจาก Image ของ Gluestack ต่อยอดจาก Image ของ React native โดยตรง ลองไป[เช็คการใช้งานที่นี่ได้](https://reactnative.dev/docs/image)
