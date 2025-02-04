@@ -2,6 +2,7 @@
 # 1. สร้างโปรเจค
 
 ## 1. สร้างโปรเจค 
+
 1. คำสั่งสร้างโปรเจค
 ```bash
 npm create gluestack@latest
@@ -12,8 +13,15 @@ npm create gluestack@latest
 ```bash
 my-gpt-app
 ```
-
 4. รอให้โปรเจคสร้างเสร็จ
+
+### Troubleshooting 
+1. หากเกิดข้อผิดพลาดในการสร้างโปรเจค สามารถใช้การ clone จากคำสั่ง git ด้านล่างได้
+```bash
+git clone --branch template-ready-react-native https://github.com/teerasej/nextflow-gluestack-react-native-my-app.git
+```
+
+2. หรือจะทำการ [download zip file จาก branch นี้](https://github.com/teerasej/nextflow-gluestack-react-native-my-app/tree/template-ready-react-native)ก็ได้เช่นกัน
 
 
 ## 2. ติดตั้ง Node Module 
