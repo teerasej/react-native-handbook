@@ -52,7 +52,10 @@ import { useColorScheme } from "@/components/useColorScheme";
 import { Slot, Stack } from "expo-router";
 
 import "../global.css";
+
+// import Provider จาก react-redux
 import { Provider } from "react-redux";
+// import store ที่เราสร้างไว้
 import { store } from "@/redux/store";
 
 
@@ -115,8 +118,6 @@ function RootLayoutNav() {
     </GluestackUIProvider>
   );
 }
-
-
 ```
 
 ### Error? 
