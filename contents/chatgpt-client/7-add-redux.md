@@ -36,39 +36,86 @@ export type AppDispatch = typeof store.dispatch
 เราจะทำการ import ทั้ง store ที่เตรียมไว้ และ **Provider** มาใช้กับ **App** ของเรา
 
 ```jsx
-// app/index.tsx
+// app/_layout.tsx
 
-import React from "react";
-import { Box } from "@/components/ui/box";
-import { SafeAreaView, KeyboardAvoidingView } from "react-native";
-import { Link } from "expo-router";
-import { VStack } from "@/components/ui/vstack";
-import ChatHistory from "./components/ChatHistoryComponent";
-import ChatBoxComponent from "./components/ChatBoxComponent";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { useColorScheme } from "@/components/useColorScheme";
+import { Slot, Stack } from "expo-router";
 
-// import Provider component จาก react-redux
+import "../global.css";
 import { Provider } from "react-redux";
-// import store จาก redux/store.ts
 import { store } from "@/redux/store";
 
-export default function Home() {
-  return (
-    // ใส่ Provider รอบ component ที่เราต้องการให้เข้าถึง store ได้
-    <Provider store={store}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-          <Box className="flex-1 bg-white h-[100vh] p-4">
-            <VStack space="md" className="flex-1">
 
-              <ChatHistory style={{ flex: 1 }} />
-              <ChatBoxComponent />
-            </VStack>
-          </Box>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </Provider>
+
+export {
+  // Catch any errors thrown by the Layout component.
+  ErrorBoundary,
+} from "expo-router";
+
+// export const unstable_settings = {
+//   // Ensure that reloading on `/modal` keeps a back button present.
+//   initialRouteName: "gluestack",
+// };
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
+  const [loaded, error] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    ...FontAwesome.font,
+  });
+
+  const [styleLoaded, setStyleLoaded] = useState(false);
+  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  // useLayoutEffect(() => {
+  //   setStyleLoaded(true);
+  // }, [styleLoaded]);
+
+  // if (!loaded || !styleLoaded) {
+  //   return null;
+  // }
+
+  return <RootLayoutNav />;
+}
+
+function RootLayoutNav() {
+  const colorScheme = useColorScheme();
+
+  // กำหนด Provider และเชื่อมต่อ store กับ App ของเรา
+  return (
+    <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      
+        <Provider store={store}>
+          <Slot/>
+        </Provider>
+
+      </ThemeProvider>
+    </GluestackUIProvider>
   );
 }
+
 
 ```
 
