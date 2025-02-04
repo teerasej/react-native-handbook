@@ -2,6 +2,13 @@
 
 สมัคร Expo developer account ฟรี https://expo.dev/signup 
 
+## EAS System
+
+1. [การเตรียมโปรเจคสำหรับการ build](eas/1-prepare-publish.md)
+2. [การสร้างไฟล์สำหรับ Android (APK)](https://docs.expo.dev/build-reference/apk/)
+
+
+
 ## Expo Managed Workflow
 
 - [การเตรียมโปรเจค](1-prepare-publish.md)
