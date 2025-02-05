@@ -104,6 +104,31 @@ eas build:configure
 },
 ```
 
+## 6.กำหนดไฟล์ App Icon และ Splash 
+
+ไฟล์ App Icon และ Splash Screen จะอยู่ในโฟลเดอร์​ `/assets` ของโปรเจค
+
+- assets/images/icon.png (iOS)
+    - ควรมีขนาด 1024 x 1024 px 
+    - เป็นไฟล์ png
+- assets/images/adaptive-icon.png (Android)
+    - ควรมีขนาด 1024 x 1024 px 
+    - เป็นไฟล์ png
+- assets/image/splash.png 
+    - ควรมีขนาดเท่ากับภาพตัวอย่าง 
+    - เป็นไฟล์ png 
+
+> สามารถปรับเปลี่ยนที่อยู่ของไฟล์รูป App Icon และ Splash Screen ได้ในไฟล์ `app.json`
+
+### icon.png
+
+![icon](https://user-images.githubusercontent.com/85179/113394518-99e82b00-93c2-11eb-9193-c091d6ecfba6.png)
+
+### splash.png
+
+![splash](https://user-images.githubusercontent.com/85179/113394765-06632a00-93c3-11eb-9106-fac46fcf8b37.png)
+
+
 
 ## 6. รันคำสั่ง build
 
@@ -117,25 +142,8 @@ eas build -p android --profile preview
 
 
 
-## กำหนดไฟล์ App Icon และ Splash 
-
-ไฟล์ App Icon และ Splash Screen จะอยู่ในโฟลเดอร์​ `/assets` ของโปรเจค
-
-- assets/icon.png 
-    - ควรมีขนาด 1024 x 1024 px หรือ 192 x 192 px
-    - เป็นไฟล์ png
-- assets/splash.png 
-    - ควรมีขนาด 1242 x 2436 px 
-    - เป็นไฟล์ png 
-
-### icon.png
-
-![icon](https://user-images.githubusercontent.com/85179/113394518-99e82b00-93c2-11eb-9193-c091d6ecfba6.png)
-
-### splash.png
-
-![splash](https://user-images.githubusercontent.com/85179/113394765-06632a00-93c3-11eb-9106-fac46fcf8b37.png)
 
 ## ภาคผนวก
 
-การสร้างไฟล์ APK สำหรับ Android หรือไฟล์ IPA สำหรับ iOS เพื่ออัพขึ้น App Store ด้วย EAS สามารถอ่านเพิ่มเติมได้ที่ [https://docs.expo.dev/build/setup/#run-a-build](https://docs.expo.dev/build/setup/#run-a-build)
+- [Expo: status bar, app icon, and splash screen](https://docs.expo.dev/tutorial/configuration/)
+- การสร้างไฟล์ APK สำหรับ Android หรือไฟล์ IPA สำหรับ iOS เพื่ออัพขึ้น App Store ด้วย EAS สามารถอ่านเพิ่มเติมได้ที่ [https://docs.expo.dev/build/setup/#run-a-build](https://docs.expo.dev/build/setup/#run-a-build)
