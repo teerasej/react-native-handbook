@@ -1,13 +1,6 @@
 
 # 10. สร้าง action ที่จะส่งข้อความ User เข้าไปใน Chat history
 
-## ดาวน์โหลดโปรเจค
-
-1. สามารถใช้ project โดย[การดาวน์โหลด zip file จาก git repo](https://github.com/teerasej/nextflow-react-native-chatgpt-app/tree/finish-add-user-message-action) นี้
-2. เปิดโฟลเดอร์โปรเจคใน Visual Studio Code
-3. รันคำสั่ง `npm i` เพื่อ install package ที่จะใช้ในโปรเจค
-4. รันคำสั่ง `npx expo start` เพื่อเริ่มการทำงาน
-
 
 ## 1. สร้าง Reducer function
 
