@@ -1,6 +1,8 @@
 
 # ChatGPT client chat with React Native
 
+[whiteboard](https://miro.com/app/board/uXjVLjyP_gc=/?share_link_id=219404050106)
+
 ## Setup
 
 1. [สร้างโปรเจค](1-create-project.md)
